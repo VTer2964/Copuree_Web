@@ -1,0 +1,106 @@
+@page "/admin/don-hang/{id:int}"
+@using CoPuree.Web.Models
+@using CoPuree.Web.Pages.Admin
+@model CoPuree.Web.Pages.Admin.OrderDetailModel
+@{
+    ViewData["Title"] = $"Đơn hàng {Model.Order.OrderNumber}";
+    ViewData["Description"] = "Chi tiết đơn hàng CoPuree.";
+}
+
+<section class="admin-page">
+    <div class="admin-heading">
+        <div>
+            <p class="eyebrow">Chi tiết đơn hàng</p>
+            <h1>@Model.Order.OrderNumber</h1>
+        </div>
+        <div class="admin-actions">
+            <a class="btn btn-outline-dark" asp-page="/Admin/CustomerDetail" asp-route-phone="@Model.Order.Phone">Hồ sơ khách</a>
+            <a class="btn btn-outline-dark" asp-page="/Admin/Orders">Quay lại</a>
+        </div>
+    </div>
+
+    <div class="order-detail-grid">
+        <article class="detail-panel">
+            <h2>Khách hàng</h2>
+            <p><strong>@Model.Order.CustomerName</strong></p>
+            <p>@Model.Order.Phone</p>
+            @if (!string.IsNullOrWhiteSpace(Model.Order.Email))
+            {
+                <p>@Model.Order.Email</p>
+            }
+            <p>@Model.Order.ShippingAddress</p>
+            @if (!string.IsNullOrWhiteSpace(Model.Order.Note))
+            {
+                <p>Ghi chú: @Model.Order.Note</p>
+            }
+        </article>
+
+        <article class="detail-panel">
+            <h2>Trạng thái</h2>
+            <form method="post" asp-page-handler="UpdateStatus" class="admin-status-form detail-status-form">
+                <input type="hidden" name="OrderId" value="@Model.Order.Id" />
+                <label>
+                    Đơn hàng
+                    <select class="form-control" name="Status">
+                        @foreach (var status in Enum.GetValues<OrderStatus>())
+                        {
+                            <option value="@status" selected="@(Model.Order.Status == status)">
+                                @OrdersModel.GetOrderStatusLabel(status)
+                            </option>
+                        }
+                    </select>
+                </label>
+                <label>
+                    Thanh toán
+                    <select class="form-control" name="PaymentStatus">
+                        @foreach (var paymentStatus in Enum.GetValues<PaymentStatus>())
+                        {
+                            <option value="@paymentStatus" selected="@(Model.Order.PaymentStatus == paymentStatus)">
+                                @OrdersModel.GetPaymentStatusLabel(paymentStatus)
+                            </option>
+                        }
+                    </select>
+                </label>
+                <p>Phương thức: <strong>@OrdersModel.GetPaymentMethodLabel(Model.Order.PaymentMethod)</strong></p>
+                <p>Mã giao dịch: <strong>@Model.Order.TransactionCode</strong></p>
+                <button class="btn btn-dark" type="submit">Cập nhật trạng thái</button>
+            </form>
+        </article>
+
+        <article class="detail-panel detail-panel-wide">
+            <h2>Sản phẩm</h2>
+            <div class="detail-lines">
+                @foreach (var item in Model.Order.Items)
+                {
+                    <div>
+                        <span>@item.ProductName (@item.Size) x @item.Quantity</span>
+                        <strong>@item.LineTotal.ToString("N0") đ</strong>
+                    </div>
+                }
+                <div><span>Tạm tính</span><strong>@Model.Order.Subtotal.ToString("N0") đ</strong></div>
+                <div><span>Vận chuyển</span><strong>@Model.Order.ShippingFee.ToString("N0") đ</strong></div>
+                <div class="summary-total"><span>Tổng</span><strong>@Model.Order.Total.ToString("N0") đ</strong></div>
+            </div>
+        </article>
+
+        <article class="detail-panel detail-panel-wide">
+            <h2>Giao dịch</h2>
+            @if (!Model.Transactions.Any())
+            {
+                <p>Chưa có giao dịch.</p>
+            }
+            else
+            {
+                <div class="detail-lines">
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <div>
+                            <span>@transaction.Code - @transaction.Provider - @OrdersModel.GetPaymentStatusLabel(transaction.Status)</span>
+                            <strong>@transaction.Amount.ToString("N0") đ</strong>
+                        </div>
+                    }
+                </div>
+            }
+        </article>
+    </div>
+</section>

@@ -1,0 +1,50 @@
+@page "/san-pham/{slug}"
+@model ProductModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+    ViewData["Description"] = Model.Product.ShortDescription;
+}
+
+<section class="detail-layout">
+    <div class="detail-gallery">
+        <div class="detail-image">
+            <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" />
+        </div>
+        <div class="thumb-row" aria-label="Anh san pham">
+            <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" />
+            <img src="/images/brand/product-card.png" alt="Bao bi CoPuree" />
+            <img src="/images/brand/hero-product.png" alt="Dau dua CoPuree" />
+        </div>
+    </div>
+    <div class="detail-copy">
+        <p class="eyebrow">Bộ sưu tập CoPuree</p>
+        <h1>@Model.Product.Name</h1>
+        <p class="rating-line">★★★★★ 128 đánh giá</p>
+        <p class="detail-lead">@Model.Product.ShortDescription</p>
+        <div class="price-row detail-price">
+            <strong>@Model.Product.Price.ToString("N0") d</strong>
+            @if (Model.Product.CompareAtPrice is not null)
+            {
+                <del>@Model.Product.CompareAtPrice.Value.ToString("N0") d</del>
+            }
+        </div>
+        <p>@Model.Product.Description</p>
+        <form method="post" asp-page-handler="AddToCart" class="buy-box">
+            <input type="hidden" name="productId" value="@Model.Product.Id" />
+            <div class="size-selector" aria-label="Dung tich">
+                <button type="button" class="active">@Model.Product.Size</button>
+                <button type="button">100ml</button>
+            </div>
+            <label for="quantity">Số lượng</label>
+            <input id="quantity" class="form-control" type="number" name="quantity" value="1" min="1" max="@Math.Min(99, Model.Product.StockQuantity)" disabled="@(Model.Product.StockQuantity <= 0)" />
+            <button class="btn btn-primary btn-lg" type="submit" disabled="@(Model.Product.StockQuantity <= 0)">@(Model.Product.StockQuantity > 0 ? "Thêm vào giỏ hàng" : "Hết hàng")</button>
+            <a class="btn btn-outline-dark btn-lg" asp-page="/Checkout">Mua ngay</a>
+        </form>
+        <div class="trust-grid">
+            <span>🚚 Miễn phí vận chuyển theo chương trình</span>
+            <span>✺ Được chứng nhận 100% hữu cơ</span>
+            <span>♡ Tư vấn cách dùng miễn phí</span>
+            <span>↺ Hỗ trợ đổi trả theo chính sách</span>
+        </div>
+    </div>
+</section>

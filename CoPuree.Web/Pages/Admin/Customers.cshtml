@@ -1,0 +1,93 @@
+@page "/admin/khach-hang"
+@model CoPuree.Web.Pages.Admin.CustomersModel
+@{
+    ViewData["Title"] = "Admin khách hàng";
+    ViewData["Description"] = "Quản lý khách hàng CoPuree.";
+}
+
+<section class="admin-page">
+    <div class="admin-heading">
+        <div>
+            <p class="eyebrow">CoPuree admin</p>
+            <h1>Khách hàng</h1>
+        </div>
+        @if (Model.IsAuthenticated)
+        {
+            <div class="admin-actions">
+                <a class="btn btn-outline-dark" asp-page="/Admin/Orders">Đơn hàng</a>
+                <a class="btn btn-outline-dark" asp-page="/Admin/Products">Sản phẩm</a>
+                <form method="post" asp-page-handler="Logout">
+                    <button class="btn btn-outline-dark" type="submit">Đăng xuất</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    @if (!Model.IsAuthenticated)
+    {
+        <form method="post" asp-page-handler="Login" class="admin-login">
+            <h2>Đăng nhập admin</h2>
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+            <label for="password">Mật khẩu</label>
+            <input id="password" class="form-control" asp-for="Password" type="password" autocomplete="current-password" />
+            <button class="btn btn-primary" type="submit">Vào quản trị</button>
+        </form>
+    }
+    else if (!Model.Customers.Any())
+    {
+        <div class="empty-state">
+            <h2>Chưa có khách hàng</h2>
+            <p>Khách mua hàng sẽ xuất hiện tại đây.</p>
+        </div>
+    }
+    else
+    {
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Khách hàng</th>
+                        <th>Liên hệ</th>
+                        <th>Số đơn</th>
+                        <th>Tổng chi tiêu</th>
+                        <th>Điểm</th>
+                        <th>Ngày tạo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model.Customers)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@customer.FullName</strong>
+                                @if (customer.Id == 0)
+                                {
+                                    <br />
+                                    <span>Khách vãng lai</span>
+                                }
+                            </td>
+                            <td>
+                                @customer.Phone<br />
+                                @if (!string.IsNullOrWhiteSpace(customer.Email))
+                                {
+                                    <span>@customer.Email</span>
+                                }
+                            </td>
+                            <td>@customer.OrderCount</td>
+                            <td><strong>@customer.TotalSpent.ToString("N0") đ</strong></td>
+                            <td><strong>@customer.LoyaltyPoints</strong></td>
+                            <td>@customer.CreatedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <a class="btn btn-outline-dark" asp-page="/Admin/CustomerDetail" asp-route-phone="@customer.Phone">Chi tiết</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

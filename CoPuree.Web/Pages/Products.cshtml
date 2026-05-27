@@ -1,0 +1,61 @@
+@page "/san-pham"
+@model ProductsModel
+@{
+    ViewData["Title"] = "San pham CoPuree";
+    ViewData["Description"] = "Danh muc san pham CoPuree - dau dua tinh khiet ep lanh.";
+}
+
+<section class="catalog-header">
+    <h1>Sản phẩm của chúng tôi</h1>
+    <p>Khám phá độ tinh khiết của dừa hữu cơ ép lạnh cho nghi thức chăm sóc sức khỏe hằng ngày của bạn.</p>
+</section>
+
+<section class="catalog-toolbar" aria-label="Bo loc san pham">
+    <div class="filter-pills">
+        <button class="active" type="button">Tất cả sản phẩm</button>
+        <button type="button">Dầu Dừa Nguyên Chất</button>
+        <button type="button">Chăm sóc tóc</button>
+        <button type="button">Chăm sóc da</button>
+    </div>
+    <form class="catalog-search" method="get">
+        <span aria-hidden="true">⌕</span>
+        <input name="q" type="search" placeholder="Tìm kiếm sản phẩm..." />
+    </form>
+    <select class="catalog-sort" aria-label="Sap xep">
+        <option>Sắp xếp theo: Nổi bật</option>
+        <option>Giá thấp đến cao</option>
+        <option>Giá cao đến thấp</option>
+    </select>
+</section>
+
+<section class="product-grid catalog-grid">
+    @foreach (var product in Model.Products)
+    {
+        <article class="product-card">
+            <a asp-page="/Product" asp-route-slug="@product.Slug" class="product-image">
+                <img src="@product.ImageUrl" alt="@product.Name" />
+                <span>@product.Badge</span>
+            </a>
+            <div class="product-body">
+                <p class="rating-line">★ 4.9 (128 đánh giá)</p>
+                <p class="product-size">@product.Size</p>
+                <h3>@product.Name</h3>
+                <p>@product.ShortDescription</p>
+                <div class="price-row">
+                    <strong>@product.Price.ToString("N0") d</strong>
+                    @if (product.CompareAtPrice is not null)
+                    {
+                        <del>@product.CompareAtPrice.Value.ToString("N0") d</del>
+                    }
+                </div>
+                <div class="card-actions">
+                    <a asp-page="/Product" asp-route-slug="@product.Slug">Chi tiết</a>
+                    <form method="post" asp-page-handler="AddToCart">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <button class="cart-circle" type="submit" disabled="@(product.StockQuantity <= 0)" aria-label="Them vao gio">🛒</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    }
+</section>

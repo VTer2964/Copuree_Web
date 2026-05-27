@@ -1,0 +1,98 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Dau dua nguyen chat CoPuree";
+    ViewData["Description"] = "CoPuree - dau dua tinh khiet ep lanh, dat hang truc tiep voi hotline 0339818937.";
+}
+
+<section class="hero-section">
+    <div class="hero-copy">
+        <p class="hero-chip">✺ Dầu dừa ép lạnh 100% nguyên chất</p>
+        <h1>Tinh túy nguyên bản</h1>
+        <p class="hero-text">Khám phá dòng dầu dừa tinh khiết nhất từ CoPuree. Được chiết xuất bằng công nghệ ép lạnh, giữ trọn dưỡng chất thiên nhiên cho làn da và mái tóc.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#story">Khám phá câu chuyện</a>
+            <a class="btn btn-outline-dark btn-lg" asp-page="/Products">Xem sản phẩm</a>
+        </div>
+        <div class="hero-metrics">
+            <span><strong>100%</strong> nguyên chất</span>
+            <span><strong>149k</strong> giá tạm mở bán</span>
+            <span><strong>24h</strong> xác nhận đơn</span>
+        </div>
+    </div>
+    <div class="hero-visual" aria-label="CoPuree coconut oil">
+        <img src="/images/brand/hero-product.png" alt="Dau dua tinh khiet ep lanh CoPuree" />
+        <div class="hero-badge">
+            <span>CoPuree</span>
+            <strong>Dau Dua Tinh Khiet Ep Lanh</strong>
+        </div>
+    </div>
+</section>
+
+<section class="brand-strip" aria-label="Loi ich noi bat">
+    <span>Ép lạnh</span>
+    <span>Không pha trộn</span>
+    <span>Đóng gói sạch</span>
+    <span>Chăm sóc da & tóc</span>
+</section>
+
+<section class="section-grid" id="products">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Sản phẩm bán chạy</p>
+            <h2>Những lựa chọn yêu thích từ cộng đồng yêu làm đẹp tự nhiên.</h2>
+        </div>
+        <a class="section-link" asp-page="/Products">Xem tất cả →</a>
+    </div>
+    <div class="product-grid">
+        @foreach (var product in Model.FeaturedProducts)
+        {
+            <article class="product-card">
+                <a asp-page="/Product" asp-route-slug="@product.Slug" class="product-image">
+                    <img src="@product.ImageUrl" alt="@product.Name" />
+                    <span>@product.Badge</span>
+                </a>
+                <div class="product-body">
+                    <p class="product-size">@product.Size</p>
+                    <h3>@product.Name</h3>
+                    <p>@product.ShortDescription</p>
+                    <div class="price-row">
+                        <strong>@product.Price.ToString("N0") d</strong>
+                        @if (product.CompareAtPrice is not null)
+                        {
+                            <del>@product.CompareAtPrice.Value.ToString("N0") d</del>
+                        }
+                    </div>
+                    <form method="post" asp-page-handler="AddToCart">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <button class="cart-circle" type="submit" disabled="@(product.StockQuantity <= 0)" aria-label="Them vao gio">🛒</button>
+                    </form>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+
+<section class="story-band" id="story">
+    <div>
+        <p class="eyebrow">Triết lý thương hiệu</p>
+        <h2>Thuần khiết từ nguồn gốc, tử tế trong từng giọt dầu.</h2>
+        <p>CoPuree tin vào sức mạnh phục hồi của thiên nhiên. Mỗi giọt dầu được chọn lọc và xử lý cẩn trọng để giữ lại vẻ tinh khiết tự nhiên.</p>
+    </div>
+    <div class="story-cards">
+        <article><strong>Hiệu quả</strong><span>Nuôi dưỡng sâu từ bên trong.</span></article>
+        <article><strong>Tự nhiên</strong><span>Nguồn gốc thực vật, không pha trộn.</span></article>
+        <article><strong>An toàn</strong><span>Lành tính cho chăm sóc hằng ngày.</span></article>
+    </div>
+</section>
+
+<section class="contact-band">
+    <div>
+        <p class="eyebrow">Tu van nhanh</p>
+        <h2>Can hoi ve san pham? CoPuree co mat tren Facebook.</h2>
+    </div>
+    <div class="contact-actions">
+        <a class="btn btn-primary" href="tel:0339818937">Goi hotline</a>
+        <a class="btn btn-outline-dark" href="https://www.facebook.com/profile.php?id=61590463287738" target="_blank" rel="noopener">Nhan tin Facebook</a>
+    </div>
+</section>

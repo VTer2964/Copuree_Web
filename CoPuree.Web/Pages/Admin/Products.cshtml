@@ -1,0 +1,189 @@
+@page "/admin/san-pham"
+@model CoPuree.Web.Pages.Admin.ProductsModel
+@{
+    ViewData["Title"] = "Admin sản phẩm";
+    ViewData["Description"] = "Quản lý sản phẩm CoPuree.";
+}
+
+<section class="admin-page">
+    <div class="admin-heading">
+        <div>
+            <p class="eyebrow">CoPuree admin</p>
+            <h1>Sản phẩm</h1>
+        </div>
+        @if (Model.IsAuthenticated)
+        {
+            <div class="admin-actions">
+                <a class="btn btn-outline-dark" asp-page="/Admin/Orders">Đơn hàng</a>
+                <a class="btn btn-outline-dark" asp-page="/Admin/Customers">Khách hàng</a>
+                <a class="btn btn-outline-dark" asp-page="/Admin/PaymentSettings">Thanh toán</a>
+                <form method="post" asp-page-handler="Logout">
+                    <button class="btn btn-outline-dark" type="submit">Đăng xuất</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    @if (!Model.IsAuthenticated)
+    {
+        <form method="post" asp-page-handler="Login" class="admin-login">
+            <h2>Đăng nhập admin</h2>
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+            <label for="password">Mật khẩu</label>
+            <input id="password" class="form-control" asp-for="Password" type="password" autocomplete="current-password" />
+            <button class="btn btn-primary" type="submit">Vào quản trị</button>
+        </form>
+    }
+    else
+    {
+        <div class="admin-metrics">
+            <article>
+                <span>Đang hiển thị</span>
+                <strong>@Model.PublishedCount</strong>
+            </article>
+            <article>
+                <span>Đang ẩn</span>
+                <strong>@Model.HiddenCount</strong>
+            </article>
+            <article>
+                <span>Sắp hết hàng</span>
+                <strong>@Model.LowStockCount</strong>
+            </article>
+            <article>
+                <span>Tổng tồn kho</span>
+                <strong>@Model.TotalStockQuantity</strong>
+            </article>
+        </div>
+
+        <div class="admin-editor-layout">
+            <form method="post" asp-page-handler="Save" class="admin-product-form">
+                <h2>@(Model.Input.Id == 0 ? "Thêm sản phẩm" : "Sửa sản phẩm")</h2>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.Id" />
+
+                <label asp-for="Input.Name">Tên sản phẩm</label>
+                <input class="form-control" asp-for="Input.Name" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+
+                <label asp-for="Input.Slug">Slug URL</label>
+                <input class="form-control" asp-for="Input.Slug" placeholder="tu-dong-neu-bo-trong" />
+                <span asp-validation-for="Input.Slug" class="text-danger"></span>
+
+                <label asp-for="Input.ShortDescription">Mô tả ngắn</label>
+                <textarea class="form-control" asp-for="Input.ShortDescription" rows="3"></textarea>
+                <span asp-validation-for="Input.ShortDescription" class="text-danger"></span>
+
+                <label asp-for="Input.Description">Mô tả chi tiết</label>
+                <textarea class="form-control" asp-for="Input.Description" rows="4"></textarea>
+
+                <div class="form-two">
+                    <div>
+                        <label asp-for="Input.Size">Dung tích</label>
+                        <input class="form-control" asp-for="Input.Size" />
+                    </div>
+                    <div>
+                        <label asp-for="Input.Badge">Nhãn</label>
+                        <input class="form-control" asp-for="Input.Badge" />
+                    </div>
+                </div>
+
+                <div class="form-two">
+                    <div>
+                        <label asp-for="Input.Price">Giá bán</label>
+                        <input class="form-control" asp-for="Input.Price" type="number" min="0" step="1000" />
+                        <span asp-validation-for="Input.Price" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Input.CompareAtPrice">Giá gốc</label>
+                        <input class="form-control" asp-for="Input.CompareAtPrice" type="number" min="0" step="1000" />
+                        <span asp-validation-for="Input.CompareAtPrice" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-two">
+                    <div>
+                        <label asp-for="Input.StockQuantity">Tồn kho</label>
+                        <input class="form-control" asp-for="Input.StockQuantity" type="number" min="0" />
+                        <span asp-validation-for="Input.StockQuantity" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Input.LowStockThreshold">Cảnh báo khi còn</label>
+                        <input class="form-control" asp-for="Input.LowStockThreshold" type="number" min="0" />
+                        <span asp-validation-for="Input.LowStockThreshold" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <label asp-for="Input.ImageUrl">Ảnh sản phẩm URL</label>
+                <input class="form-control" asp-for="Input.ImageUrl" />
+
+                <label class="check-row">
+                    <input asp-for="Input.IsFeatured" />
+                    <span>Hiển thị nổi bật ở trang chủ</span>
+                </label>
+
+                <label class="check-row">
+                    <input asp-for="Input.IsPublished" />
+                    <span>Cho phép hiển thị và bán trên storefront</span>
+                </label>
+
+                <button class="btn btn-primary" type="submit">Lưu sản phẩm</button>
+                @if (Model.Input.Id != 0)
+                {
+                    <a class="btn btn-outline-dark" asp-page="/Admin/Products">Thêm mới</a>
+                }
+            </form>
+
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Tồn</th>
+                            <th>Cảnh báo</th>
+                            <th>Hiển thị</th>
+                            <th>Nổi bật</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model.Products)
+                        {
+                            var isLowStock = product.StockQuantity <= product.LowStockThreshold;
+                            <tr>
+                                <td>
+                                    <strong>@product.Name</strong><br />
+                                    <span>/san-pham/@product.Slug</span>
+                                </td>
+                                <td>@product.Price.ToString("N0") đ</td>
+                                <td>
+                                    <strong class="@(isLowStock ? "stock-danger" : null)">@product.StockQuantity</strong>
+                                </td>
+                                <td>
+                                    @if (isLowStock)
+                                    {
+                                        <span class="status-badge status-warning">Sắp hết</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Còn ổn</span>
+                                    }
+                                </td>
+                                <td>@(product.IsPublished ? "Đang bán" : "Đang ẩn")</td>
+                                <td>@(product.IsFeatured ? "Có" : "Không")</td>
+                                <td><a class="btn btn-outline-dark" asp-page="/Admin/Products" asp-route-editId="@product.Id">Sửa</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,182 @@
+@page "/admin/don-hang"
+@using CoPuree.Web.Models
+@using CoPuree.Web.Pages.Admin
+@model CoPuree.Web.Pages.Admin.OrdersModel
+@{
+    ViewData["Title"] = "Admin đơn hàng";
+    ViewData["Description"] = "Quản lý đơn hàng CoPuree.";
+}
+
+<section class="admin-page">
+    <div class="admin-heading">
+        <div>
+            <p class="eyebrow">CoPuree admin</p>
+            <h1>Đơn hàng</h1>
+        </div>
+        @if (Model.IsAuthenticated)
+        {
+            <div class="admin-actions">
+                <a class="btn btn-outline-dark" asp-page="/Admin/Customers">Khách hàng</a>
+                <a class="btn btn-outline-dark" asp-page="/Admin/Products">Sản phẩm</a>
+                <a class="btn btn-outline-dark" asp-page="/Admin/PaymentSettings">Thanh toán</a>
+                <a class="btn btn-primary"
+                   asp-page="/Admin/Orders"
+                   asp-page-handler="Export"
+                   asp-route-query="@Model.Query"
+                   asp-route-statusFilter="@Model.StatusFilter"
+                   asp-route-paymentStatusFilter="@Model.PaymentStatusFilter">Xuất CSV</a>
+                <form method="post" asp-page-handler="Logout">
+                    <button class="btn btn-outline-dark" type="submit">Đăng xuất</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    @if (!Model.IsAuthenticated)
+    {
+        <form method="post" asp-page-handler="Login" class="admin-login">
+            <h2>Đăng nhập admin</h2>
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+            <label for="password">Mật khẩu</label>
+            <input id="password" class="form-control" asp-for="Password" type="password" autocomplete="current-password" />
+            <button class="btn btn-primary" type="submit">Vào quản trị</button>
+        </form>
+    }
+    else
+    {
+        <div class="admin-metrics">
+            <article>
+                <span>Đơn theo bộ lọc</span>
+                <strong>@Model.TotalMatchingOrders</strong>
+            </article>
+            <article>
+                <span>Doanh thu theo bộ lọc</span>
+                <strong>@Model.TotalMatchingRevenue.ToString("N0") đ</strong>
+            </article>
+            <article>
+                <span>Chờ xác nhận</span>
+                <strong>@Model.PendingCount</strong>
+            </article>
+            <article>
+                <span>Đang xử lý/giao</span>
+                <strong>@Model.ShippingCount</strong>
+            </article>
+        </div>
+
+        <form method="get" class="admin-filter-bar">
+            <label>
+                Tìm đơn
+                <input class="form-control" asp-for="Query" placeholder="Mã đơn, tên, SĐT, email" />
+            </label>
+            <label>
+                Trạng thái đơn
+                <select class="form-control" asp-for="StatusFilter">
+                    <option value="">Tất cả</option>
+                    @foreach (var status in Enum.GetValues<OrderStatus>())
+                    {
+                        <option value="@status">@OrdersModel.GetOrderStatusLabel(status)</option>
+                    }
+                </select>
+            </label>
+            <label>
+                Thanh toán
+                <select class="form-control" asp-for="PaymentStatusFilter">
+                    <option value="">Tất cả</option>
+                    @foreach (var paymentStatus in Enum.GetValues<PaymentStatus>())
+                    {
+                        <option value="@paymentStatus">@OrdersModel.GetPaymentStatusLabel(paymentStatus)</option>
+                    }
+                </select>
+            </label>
+            <div class="admin-filter-actions">
+                <button class="btn btn-dark" type="submit">Lọc</button>
+                <a class="btn btn-outline-dark" asp-page="/Admin/Orders">Xóa lọc</a>
+            </div>
+        </form>
+
+        @if (!Model.Orders.Any())
+        {
+            <div class="empty-state">
+                <h2>Chưa có đơn hàng phù hợp</h2>
+                <p>Thử đổi từ khóa hoặc bỏ bộ lọc để xem toàn bộ đơn hàng.</p>
+            </div>
+        }
+        else
+        {
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Khách hàng</th>
+                            <th>Sản phẩm</th>
+                            <th>Thanh toán</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng</th>
+                            <th>Ngày tạo</th>
+                            <th>Cập nhật</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@order.OrderNumber</strong><br />
+                                    <a asp-page="/Admin/OrderDetail" asp-route-id="@order.Id">Chi tiết</a>
+                                </td>
+                                <td>
+                                    @order.CustomerName<br />
+                                    <span>@order.Phone</span><br />
+                                    <a asp-page="/Admin/CustomerDetail" asp-route-phone="@order.Phone">Hồ sơ khách</a><br />
+                                    <span>@order.ShippingAddress</span>
+                                </td>
+                                <td>
+                                    @foreach (var item in order.Items)
+                                    {
+                                        <span class="admin-line">@item.ProductName x @item.Quantity</span>
+                                    }
+                                </td>
+                                <td>
+                                    @OrdersModel.GetPaymentMethodLabel(order.PaymentMethod)<br />
+                                    <span>@OrdersModel.GetPaymentStatusLabel(order.PaymentStatus)</span>
+                                </td>
+                                <td>@OrdersModel.GetOrderStatusLabel(order.Status)</td>
+                                <td><strong>@order.Total.ToString("N0") đ</strong></td>
+                                <td>@order.CreatedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <form method="post" asp-page-handler="UpdateStatus" class="admin-status-form">
+                                        <input type="hidden" name="OrderId" value="@order.Id" />
+                                        <input type="hidden" name="Query" value="@Model.Query" />
+                                        <input type="hidden" name="StatusFilter" value="@Model.StatusFilter" />
+                                        <input type="hidden" name="PaymentStatusFilter" value="@Model.PaymentStatusFilter" />
+                                        <select class="form-control" name="Status" aria-label="Trạng thái đơn @order.OrderNumber">
+                                            @foreach (var status in Enum.GetValues<OrderStatus>())
+                                            {
+                                                <option value="@status" selected="@(order.Status == status)">
+                                                    @OrdersModel.GetOrderStatusLabel(status)
+                                                </option>
+                                            }
+                                        </select>
+                                        <select class="form-control" name="PaymentStatus" aria-label="Trạng thái thanh toán @order.OrderNumber">
+                                            @foreach (var paymentStatus in Enum.GetValues<PaymentStatus>())
+                                            {
+                                                <option value="@paymentStatus" selected="@(order.PaymentStatus == paymentStatus)">
+                                                    @OrdersModel.GetPaymentStatusLabel(paymentStatus)
+                                                </option>
+                                            }
+                                        </select>
+                                        <button class="btn btn-dark" type="submit">Lưu</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</section>

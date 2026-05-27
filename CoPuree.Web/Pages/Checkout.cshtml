@@ -1,0 +1,93 @@
+@page "/thanh-toan"
+@using CoPuree.Web.Models
+@model CheckoutModel
+@{
+    ViewData["Title"] = "Thanh toan";
+}
+
+<section class="checkout-header">
+    <p><a asp-page="/Cart">Giỏ hàng</a> / <strong>Thanh toán</strong></p>
+    <h1>Thanh toán</h1>
+</section>
+
+<section class="checkout-layout">
+    <form method="post" class="checkout-form">
+        <h2>🚚 Thông tin vận chuyển</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Input.CustomerName"></label>
+        <input class="form-control" asp-for="Input.CustomerName" />
+        <span asp-validation-for="Input.CustomerName" class="text-danger"></span>
+
+        <label asp-for="Input.Phone"></label>
+        <input class="form-control" asp-for="Input.Phone" />
+        <span asp-validation-for="Input.Phone" class="text-danger"></span>
+
+        <label asp-for="Input.Email"></label>
+        <input class="form-control" asp-for="Input.Email" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+        <label asp-for="Input.ShippingAddress"></label>
+        <textarea class="form-control" asp-for="Input.ShippingAddress" rows="3"></textarea>
+        <span asp-validation-for="Input.ShippingAddress" class="text-danger"></span>
+
+        <h2>💳 Phương thức thanh toán</h2>
+        <div class="payment-options">
+            <label>
+                <input asp-for="Input.PaymentMethod" type="radio" value="@PaymentMethod.CashOnDelivery" />
+                <span><strong>Thanh toán khi nhận hàng</strong><small>Kiểm tra trước, thanh toán sau</small></span>
+            </label>
+            <label>
+                <input asp-for="Input.PaymentMethod" type="radio" value="@PaymentMethod.BankTransfer" />
+                <span><strong>Chuyển khoản ngân hàng</strong><small>CoPuree xác nhận sau khi nhận chuyển khoản</small></span>
+            </label>
+        </div>
+
+        <div class="bank-transfer-box">
+            <div>
+                <p class="eyebrow">Chuyen khoan</p>
+                <h2>@Model.BankTransfer.BankName</h2>
+                <p class="bank-note">Thong tin ngan hang se duoc cap nhat khi CoPuree chot cong thanh toan/chuyen khoan chinh thuc.</p>
+                <p>Chu tai khoan: <strong>@Model.BankTransfer.AccountName</strong></p>
+                <p>So tai khoan: <strong>@Model.BankTransfer.AccountNumber</strong></p>
+                <p>Chi nhanh: <strong>@Model.BankTransfer.Branch</strong></p>
+                <p>Noi dung: <strong>COPUREE + so dien thoai dat hang</strong></p>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.BankTransfer.QrImageUrl))
+            {
+                <img src="@Model.BankTransfer.QrImageUrl" alt="QR chuyen khoan CoPuree" />
+            }
+            else
+            {
+                <div class="qr-placeholder">
+                    <span>QR</span>
+                    <small>Cap nhat BankTransfer:QrImageUrl khi co ma QR that</small>
+                </div>
+            }
+        </div>
+
+        <label asp-for="Input.Note"></label>
+        <textarea class="form-control" asp-for="Input.Note" rows="2"></textarea>
+
+        <button class="btn btn-primary btn-lg" type="submit">Đặt hàng →</button>
+    </form>
+
+    <aside class="order-summary">
+        <h2>Tóm tắt đơn hàng</h2>
+        @foreach (var item in Model.Cart.Items)
+        {
+            <div class="summary-item">
+                <img src="@item.Product.ImageUrl" alt="@item.Product.Name" />
+                <span>@item.Product.Name<br /><small>Số lượng: @item.Quantity</small></span>
+                <strong>@item.LineTotal.ToString("N0") d</strong>
+            </div>
+        }
+        <div><span>Van chuyen</span><strong>@Model.Cart.ShippingFee.ToString("N0") d</strong></div>
+        <div class="summary-total"><span>Tong</span><strong>@Model.Cart.Total.ToString("N0") d</strong></div>
+        <p class="summary-note">Bằng cách đặt hàng, bạn đồng ý với chính sách bảo mật và đổi trả của CoPuree.</p>
+    </aside>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

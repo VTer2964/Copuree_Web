@@ -1,0 +1,24 @@
+@page "/dat-hang-thanh-cong/{orderNumber}"
+@model OrderSuccessModel
+@{
+    ViewData["Title"] = "Dat hang thanh cong";
+}
+
+<section class="success-panel">
+    <p class="eyebrow">Dat hang thanh cong</p>
+    <h1>Cam on ban da dat hang CoPuree.</h1>
+    <p>Ma don hang: <strong>@Model.Order.OrderNumber</strong></p>
+    <p>Tong thanh toan: <strong>@Model.Order.Total.ToString("N0") d</strong></p>
+    <p>Trang thai thanh toan: <strong>@Model.Order.PaymentStatus</strong></p>
+    @if (Model.Order.PaymentMethod == CoPuree.Web.Models.PaymentMethod.BankTransfer)
+    {
+        <div class="success-bank-box">
+            <h2>Thong tin chuyen khoan</h2>
+            <p>Ngan hang: <strong>@Model.BankTransfer.BankName</strong></p>
+            <p>So tai khoan: <strong>@Model.BankTransfer.AccountNumber</strong></p>
+            <p>Chu tai khoan: <strong>@Model.BankTransfer.AccountName</strong></p>
+            <p>Noi dung: <strong>@Model.Order.OrderNumber</strong></p>
+        </div>
+    }
+    <a class="btn btn-primary" asp-page="/Products">Tiep tuc mua sam</a>
+</section>

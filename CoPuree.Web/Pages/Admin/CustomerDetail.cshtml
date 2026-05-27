@@ -1,0 +1,118 @@
+@page "/admin/khach-hang/{phone}"
+@using CoPuree.Web.Models
+@model CoPuree.Web.Pages.Admin.CustomerDetailModel
+@{
+    ViewData["Title"] = $"Khách hàng {Model.DisplayName}";
+    ViewData["Description"] = "Chi tiết khách hàng CoPuree.";
+    var totalSpent = Model.Orders.Sum(order => order.Total);
+}
+
+<section class="admin-page">
+    <div class="admin-heading">
+        <div>
+            <p class="eyebrow">Chi tiết khách hàng</p>
+            <h1>@Model.DisplayName</h1>
+        </div>
+        <div class="admin-actions">
+            <a class="btn btn-outline-dark" asp-page="/Admin/Customers">Khách hàng</a>
+            <a class="btn btn-outline-dark" asp-page="/Admin/Orders">Đơn hàng</a>
+        </div>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="order-detail-grid">
+        <article class="detail-panel">
+            <h2>Thông tin</h2>
+            <p><strong>@Model.DisplayName</strong></p>
+            <p>@Model.Phone</p>
+            @if (!string.IsNullOrWhiteSpace(Model.Email))
+            {
+                <p>@Model.Email</p>
+            }
+            <p>Số đơn: <strong>@Model.Orders.Count</strong></p>
+            <p>Tổng chi tiêu: <strong>@totalSpent.ToString("N0") đ</strong></p>
+        </article>
+
+        <article class="detail-panel">
+            <h2>Điểm tích lũy</h2>
+            <p>Điểm hiện tại: <strong>@Model.LoyaltyPoints</strong></p>
+            <form method="post" asp-page-handler="AdjustPoints" class="admin-status-form">
+                <input class="form-control" asp-for="Points" type="number" placeholder="+10 hoặc -10" />
+                <input class="form-control" asp-for="Note" placeholder="Ghi chú điều chỉnh" />
+                <button class="btn btn-primary" type="submit">Cập nhật điểm</button>
+            </form>
+        </article>
+
+        <article class="detail-panel detail-panel-wide">
+            <h2>Đơn hàng</h2>
+            @if (!Model.Orders.Any())
+            {
+                <p>Chưa có đơn hàng.</p>
+            }
+            else
+            {
+                <div class="detail-lines">
+                    @foreach (var order in Model.Orders)
+                    {
+                        <div>
+                            <span>
+                                <strong>@order.OrderNumber</strong> -
+                                @order.Status -
+                                @order.CreatedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")
+                            </span>
+                            <strong>@order.Total.ToString("N0") đ</strong>
+                        </div>
+                    }
+                </div>
+            }
+        </article>
+
+        <article class="detail-panel detail-panel-wide">
+            <h2>Địa chỉ giao hàng</h2>
+            @if (!Model.Addresses.Any())
+            {
+                <p>Chưa có địa chỉ đã lưu.</p>
+            }
+            else
+            {
+                <div class="detail-lines">
+                    @foreach (var address in Model.Addresses)
+                    {
+                        <div>
+                            <span>
+                                <strong>@address.ReceiverName</strong> - @address.Phone<br />
+                                @address.AddressLine, @address.Ward, @address.District, @address.Province
+                                @(address.IsDefault ? " - Mặc định" : "")
+                            </span>
+                        </div>
+                    }
+                </div>
+            }
+        </article>
+
+        <article class="detail-panel detail-panel-wide">
+            <h2>Lịch sử điểm</h2>
+            @if (!Model.LoyaltyTransactions.Any())
+            {
+                <p>Chưa có giao dịch điểm.</p>
+            }
+            else
+            {
+                <div class="detail-lines">
+                    @foreach (var transaction in Model.LoyaltyTransactions)
+                    {
+                        <div>
+                            <span>
+                                @transaction.CreatedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm") -
+                                @transaction.Type -
+                                @transaction.Note
+                            </span>
+                            <strong>@(transaction.Points > 0 ? "+" : "")@transaction.Points</strong>
+                        </div>
+                    }
+                </div>
+            }
+        </article>
+    </div>
+</section>
