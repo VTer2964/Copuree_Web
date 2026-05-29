@@ -111,59 +111,42 @@ export default async function Home() {
     <main className="min-h-screen bg-[#fbfaf6] text-[#12392d]">
       <SiteHeader />
 
-      <section className="relative isolate overflow-hidden bg-[#f2dfbd]">
-        <div className="absolute inset-y-0 right-0 hidden w-[56%] lg:block">
-          <Image
-            src={asset.skin}
-            alt="CoPuree trong không gian chăm sóc da tự nhiên"
-            fill
-            priority
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#f2dfbd] via-[#f2dfbd]/35 to-transparent" />
-        </div>
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:px-8 sm:py-16 lg:min-h-[720px] lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="relative z-10 max-w-3xl">
+      <section className="relative isolate min-h-[calc(100vh-96px)] overflow-hidden bg-[#f2dfbd]">
+        <Image
+          src={asset.skin}
+          alt="CoPuree trong không gian chăm sóc da tự nhiên"
+          fill
+          priority
+          className="object-cover object-[62%_center]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fff7e7]/96 via-[#fff7e7]/68 to-[#fff7e7]/8" />
+        <div className="absolute inset-y-0 left-0 w-[58%] bg-[#fff7e7]/38 backdrop-blur-[3px]" />
+        <div className="relative z-10 flex min-h-[calc(100vh-96px)] items-start px-5 pb-12 pt-14 sm:px-10 sm:pt-20 lg:px-[7vw] lg:pt-24">
+          <div className="max-w-3xl bg-[#fff7e7]/42 p-0 backdrop-blur-[2px] sm:p-2">
             <Image src={brand.logo} alt="CoPuree" width={160} height={72} className="mb-5 h-auto w-32 sm:mb-8 sm:w-36" />
-            <h1 className="text-[38px] font-black leading-[0.96] text-[#12392d] sm:text-6xl lg:text-[82px]">
-              Dầu dừa nguyên chất cho nhịp sống tự nhiên hơn
-            </h1>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#425448] sm:mt-6 sm:text-lg sm:leading-8">
-              CoPuree chọn trái dừa Việt và phương pháp ép lạnh để giữ lại cảm giác tinh khiết, hương dịu và sự tối giản trong từng khoảnh khắc chăm sóc.
+            <p className="mb-4 text-xs font-black uppercase tracking-[0.22em] text-[#b4762f] sm:text-sm">
+              Pure by Nature, Modern by Choice
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
+            <h1 className="text-[42px] font-black leading-[0.95] text-[#12392d] sm:text-6xl lg:text-[86px]">
+              Hồn Việt trong chai dầu dừa
+            </h1>
+            <p className="mt-6 max-w-2xl text-[15px] leading-7 text-[#244638] sm:text-lg sm:leading-8">
+              CoPuree giữ lại sự nguyên chất từ trái dừa Việt bằng quy trình ép lạnh, minh bạch và nhẹ nhàng cho nhịp sống hiện đại.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href={featuredProduct ? `/thanh-toan?product=${featuredProduct.slug}` : "/thanh-toan"}
-                className="inline-flex items-center justify-center bg-[#12392d] px-8 py-3.5 text-base font-black text-white shadow-xl shadow-[#12392d]/20 transition hover:-translate-y-0.5 hover:bg-[#b4762f] sm:py-4"
+                className="inline-flex items-center justify-center rounded-full bg-[#064737] px-8 py-3.5 text-base font-black text-white shadow-xl shadow-[#12392d]/20 transition hover:-translate-y-0.5 hover:bg-[#b4762f] sm:py-4"
               >
-                Mua ngay
+                Khám phá sản phẩm
               </Link>
               <Link
-                href="#self-care"
-                className="inline-flex items-center justify-center border border-[#12392d]/25 bg-white/30 px-8 py-3.5 text-base font-black text-[#12392d] transition hover:border-[#b4762f] hover:text-[#b4762f] sm:py-4"
+                href="#cau-chuyen"
+                className="inline-flex items-center justify-center rounded-full border border-[#12392d]/35 bg-white/38 px-8 py-3.5 text-base font-black text-[#12392d] backdrop-blur-sm transition hover:border-[#b4762f] hover:text-[#b4762f] sm:py-4"
               >
-                Khám phá cách dùng
+                Xem câu chuyện
               </Link>
-            </div>
-          </div>
-
-          <div className="relative z-10 min-h-[340px] overflow-hidden bg-[#12392d] sm:min-h-[430px] lg:min-h-[560px]">
-            <div className="absolute inset-x-8 top-8 h-28 border border-[#f4d8a7]/35" />
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-[#e8c78e]" />
-            {featuredProduct ? (
-              <Image
-                src={featuredProduct.imageUrl}
-                alt={featuredProduct.name}
-                width={760}
-                height={760}
-                className="relative z-10 mx-auto h-[330px] w-full object-contain pt-8 drop-shadow-2xl sm:h-[520px] sm:pt-10"
-              />
-            ) : null}
-            <div className="absolute bottom-5 left-5 z-20 bg-[#fffaf0] px-4 py-3 warm-shadow sm:bottom-6 sm:left-6 sm:px-5 sm:py-4">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b4762f]">Cold-pressed</p>
-              <p className="mt-2 max-w-64 text-xl font-black leading-tight text-[#12392d]">
-                Dầu trong, hương dịu, dễ dùng mỗi ngày
-              </p>
             </div>
           </div>
         </div>
@@ -198,9 +181,9 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="self-care" className="bg-[#fbfaf6] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+      <section id="self-care" className="bg-[#fbfaf6] py-16 sm:py-24">
+        <div className="px-4 sm:px-8 lg:px-[4vw]">
+          <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b4762f]">
                 Shop by self-care category
@@ -217,7 +200,7 @@ export default async function Home() {
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {categories.map((category, index) => (
               <article key={category.title} className={index === 0 ? "md:col-span-2" : ""}>
-                <div className="group relative min-h-[360px] overflow-hidden bg-[#ead5b3] md:min-h-[440px]">
+                <div className="group relative min-h-[360px] overflow-hidden bg-[#ead5b3] md:min-h-[470px]">
                   <Image
                     src={category.image}
                     alt={category.title}
@@ -247,33 +230,38 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="cau-chuyen" className="bg-[#fff4df] py-20 sm:py-28">
-        <div className="mx-auto grid max-w-7xl overflow-hidden bg-[#fffaf0] shadow-[0_28px_90px_rgba(18,57,45,0.12)] lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="relative min-h-[540px]">
-            <Image
-              src={asset.ingredientMood}
-              alt="CoPuree và câu chuyện nguyên liệu"
-              fill
-              className="object-cover object-left"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#12392d]/15 to-transparent" />
-          </div>
+      <section id="cau-chuyen" className="relative isolate overflow-hidden bg-[#fff4df]">
+        <Image
+          src={asset.ingredientMood}
+          alt="CoPuree và câu chuyện nguyên liệu"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fff7e7]/96 via-[#fff7e7]/70 to-[#fff7e7]/18" />
+        <div className="absolute inset-y-0 left-0 w-[48%] bg-[#fff7e7]/36 backdrop-blur-[3px]" />
 
-          <div className="px-6 py-10 sm:px-10 lg:px-14 lg:py-14">
+        <div className="relative z-10 grid min-h-[760px] gap-10 px-5 py-16 sm:px-10 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-[6vw]">
+          <div className="self-center">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b4762f]">
               Câu chuyện nguyên liệu
             </p>
-            <h2 className="mt-4 text-4xl font-black leading-tight text-[#12392d] sm:text-6xl">
+            <h2 className="mt-4 max-w-2xl text-5xl font-black leading-[0.96] text-[#12392d] sm:text-7xl">
               Hồn Việt trong chai dầu dừa
             </h2>
-            <div className="mt-8 divide-y divide-[#d9c49d]">
+            <p className="mt-6 max-w-xl text-base leading-8 text-[#244638] sm:text-lg">
+              Từ trái dừa Việt đến chai dầu dừa trên kệ nhà bạn, CoPuree chọn cách giữ mọi thứ rõ ràng, tự nhiên và có cảm giác hiện đại hơn.
+            </p>
+          </div>
+
+          <div className="self-center bg-[#fffaf0]/72 p-5 shadow-[0_28px_90px_rgba(18,57,45,0.14)] backdrop-blur-md sm:p-8">
+            <div className="divide-y divide-[#d9c49d]">
               {ingredientNotes.map((item, index) => (
-                <article key={item.title} className="grid gap-5 py-7 sm:grid-cols-[72px_104px_1fr] sm:items-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#b4762f] font-serif text-2xl font-black text-white">
+                <article key={item.title} className="grid gap-5 py-6 first:pt-0 last:pb-0 sm:grid-cols-[64px_88px_1fr] sm:items-center">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#b4762f] font-serif text-xl font-black text-white">
                     0{index + 1}
                   </span>
-                  <span className="flex h-24 w-24 items-center justify-center rounded-full border border-[#d9c49d] text-[#12392d]">
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-[#d9c49d] text-[#12392d]">
                     <LineIcon type={item.icon} />
                   </span>
                   <div>
@@ -285,7 +273,7 @@ export default async function Home() {
             </div>
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {proofPoints.map((point) => (
-                <div key={point} className="border border-[#d9c49d] px-3 py-4 text-center">
+                <div key={point} className="border border-[#d9c49d] bg-white/35 px-3 py-4 text-center">
                   <p className="text-xs font-black uppercase leading-5 tracking-[0.08em] text-[#b4762f]">
                     {point}
                   </p>
@@ -297,8 +285,8 @@ export default async function Home() {
       </section>
 
       {featuredProduct ? (
-        <section id="san-pham" className="bg-[#fbfaf6] py-20 sm:py-28">
-          <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <section id="san-pham" className="bg-[#fbfaf6] py-16 sm:py-24">
+          <div className="grid gap-10 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:px-[4vw]">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b4762f]">
                 Sản phẩm nổi bật
@@ -331,18 +319,19 @@ export default async function Home() {
 
             <div className="relative min-h-[560px] overflow-hidden bg-[#e6d2b0]">
               <Image src={asset.oral} alt="CoPuree đặt trong phòng tắm" fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#fffaf0]/85 via-[#fffaf0]/15 to-transparent" />
-              <Image
-                src={featuredProduct.imageUrl}
-                alt={featuredProduct.name}
-                width={720}
-                height={720}
-                className="absolute bottom-0 left-0 h-[470px] w-full object-contain drop-shadow-2xl"
-              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#fffaf0]/82 via-[#fffaf0]/18 to-transparent" />
+              <div className="absolute bottom-8 left-8 max-w-sm bg-[#fffaf0]/68 p-5 backdrop-blur-md">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b4762f]">
+                  300ml - routine hằng ngày
+                </p>
+                <p className="mt-2 text-xl font-black leading-tight text-[#12392d]">
+                  Chai đặt đẹp trong phòng tắm, bàn trang điểm hoặc góc self-care.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-7xl gap-7 px-5 sm:px-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-14 grid gap-7 px-5 sm:px-8 md:grid-cols-2 lg:px-[4vw] xl:grid-cols-3">
             {products.map((item) => (
               <ProductCard key={item.slug} product={item} />
             ))}
