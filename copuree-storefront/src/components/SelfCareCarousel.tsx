@@ -45,7 +45,7 @@ export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[
 
       <div
         ref={railRef}
-        className="scrollbar-hide mx-auto flex max-w-[1540px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-2 py-2 sm:gap-5 sm:px-10 xl:px-0"
+        className="scrollbar-hide mx-auto flex max-w-[1540px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-2 py-2 sm:gap-5 sm:px-10 xl:justify-center xl:px-0"
       >
         {categories.map((category) => (
           <article
