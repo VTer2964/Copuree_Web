@@ -214,8 +214,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="cau-chuyen" className="grid bg-[#fff7e8] lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="px-5 py-14 sm:px-10 lg:px-[7vw]">
+      <section id="cau-chuyen" className="grid bg-[#fff7e8] lg:grid-cols-2">
+        <div className="px-5 py-14 sm:px-10 lg:px-[7vw] lg:py-16">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b4762f]">
             Câu chuyện nguyên liệu
           </p>
@@ -238,13 +238,13 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="relative min-h-[420px] overflow-hidden">
+        <div className="relative min-h-[420px] overflow-hidden lg:min-h-[560px]">
           <Image
             src={asset.productScene}
             alt="CoPuree dầu dừa ép lạnh cùng trái dừa Việt"
             fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 55vw, 100vw"
+            className="object-cover object-center"
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
           <div className="absolute left-8 top-1/2 hidden h-32 w-32 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c19b] bg-[#fff7e8]/72 text-center text-sm font-black uppercase leading-5 tracking-[0.08em] text-[#12392d] backdrop-blur-sm sm:flex">
             Ép lạnh<br />nguyên chất
@@ -252,8 +252,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="grid bg-[#fbfaf6] lg:grid-cols-[0.92fr_1.08fr]">
-        <div className="px-5 py-14 sm:px-10 lg:px-[7vw]">
+      <section className="grid bg-[#fbfaf6] lg:grid-cols-2">
+        <div className="px-5 py-14 sm:px-10 lg:px-[7vw] lg:py-16">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b4762f]">
             Về CoPuree
           </p>
@@ -264,8 +264,14 @@ export default async function Home() {
             CoPuree tin vào sức mạnh của thiên nhiên thuần khiết và lựa chọn sống hiện đại, tối giản. Chúng tôi mang đến những sản phẩm chất lượng cao, minh bạch và bền vững để đồng hành cùng bạn trong hành trình sống lành mạnh mỗi ngày.
           </p>
         </div>
-        <div className="relative min-h-[360px]">
-          <Image src={asset.story} alt="Câu chuyện thương hiệu CoPuree" fill className="object-cover" />
+        <div className="relative min-h-[420px] overflow-hidden lg:min-h-[560px]">
+          <Image
+            src={asset.story}
+            alt="Câu chuyện thương hiệu CoPuree"
+            fill
+            className="object-cover object-center"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
         </div>
       </section>
 

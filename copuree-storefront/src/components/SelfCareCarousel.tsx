@@ -51,7 +51,7 @@ export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[
           <article
             key={category.title}
             data-carousel-card
-            className="group min-w-[74vw] snap-center overflow-hidden rounded-[14px] bg-[#f3e4c8] shadow-[0_18px_50px_rgba(18,57,45,0.10)] sm:min-w-[330px] lg:min-w-[350px] xl:min-w-[370px]"
+            className="group flex shrink-0 basis-[74vw] snap-center flex-col overflow-hidden rounded-[14px] bg-[#f3e4c8] shadow-[0_18px_50px_rgba(18,57,45,0.10)] sm:basis-[330px] lg:basis-[350px] xl:basis-[370px]"
           >
             <div className="relative aspect-[1.1/1] overflow-hidden">
               <Image
@@ -69,11 +69,11 @@ export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[
                 </svg>
               </div>
             </div>
-            <div className="p-4 sm:p-5">
+            <div className="flex min-h-[210px] flex-1 flex-col p-4 sm:p-5">
               <h3 className="text-lg font-black leading-tight text-[#12392d] sm:text-xl">{category.title}</h3>
               <p className="mt-2 text-sm font-semibold italic text-[#0d2c74]">{category.subtitle}</p>
               <p className="mt-3 text-sm leading-6 text-[#526258]">{category.text}</p>
-              <a href="#san-pham" className="mt-5 inline-flex text-sm font-black text-[#12392d]">
+              <a href="#san-pham" className="mt-auto inline-flex pt-5 text-sm font-black text-[#12392d]">
                 Xem thêm
                 <span className="ml-2" aria-hidden="true">→</span>
               </a>
