@@ -34,6 +34,14 @@ body {
   box-shadow: 0 28px 70px rgba(29, 54, 42, 0.16);
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-width: 1023px) {
   body {
     padding-bottom: calc(84px + env(safe-area-inset-bottom));

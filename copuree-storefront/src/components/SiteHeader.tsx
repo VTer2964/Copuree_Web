@@ -20,11 +20,11 @@ const mobileItems = [
 export function SiteHeader() {
   return (
     <>
-      <div className="hidden bg-[#163d2f] px-5 py-2 text-center text-xs font-bold uppercase tracking-[0.16em] text-[#f7e1aa] sm:block">
+      <div className="hidden bg-[#163d2f] px-5 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.16em] text-[#f7e1aa] sm:block">
         Dầu dừa tinh khiết ép lạnh - đặt trực tiếp từ CoPuree
       </div>
       <header className="sticky top-0 z-50 border-b border-[#173d2f]/10 bg-[#fbfaf6]/92 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <Link href="/" className="flex items-center gap-3" aria-label="CoPuree">
             <Image
               src={brand.logo}
@@ -32,7 +32,7 @@ export function SiteHeader() {
               width={136}
               height={52}
               priority
-              className="h-12 w-auto object-contain"
+              className="h-10 w-auto object-contain"
             />
           </Link>
 
@@ -57,7 +57,7 @@ export function SiteHeader() {
             </Link>
             <Link
               href="/thanh-toan"
-              className="rounded-sm bg-[#173d2f] px-5 py-3 text-sm font-black text-white shadow-lg shadow-[#173d2f]/15 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
+              className="rounded-sm bg-[#173d2f] px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-[#173d2f]/15 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
             >
               Mua ngay
             </Link>
