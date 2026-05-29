@@ -11,8 +11,29 @@ export const brand = {
 
 export const products = [
   {
-    name: "CoPuree - Dầu Dừa Tinh Khiết Ép Lạnh",
-    displayName: "CoPuree - Dầu Dừa Tinh Khiết Ép Lạnh",
+    name: "CoPuree - Dầu Dừa Ép Lạnh 100ml",
+    displayName: "Dầu dừa ép lạnh 100ml",
+    slug: "copuree-dau-dua-ep-lanh-100ml",
+    price: 59000,
+    size: "100ml",
+    origin: "Việt Nam",
+    image: "/images/catalog/catalog-page2-image2.png",
+    heroImage: "/images/catalog/catalog-page2-image2.png",
+    description:
+      "Dung tích gọn để dùng thử, mang theo khi đi làm hoặc đặt trong túi chăm sóc cá nhân.",
+    displayDescription:
+      "Dầu dừa ép lạnh nguyên chất 100%, hương dịu và dễ dùng trong những khoảnh khắc self-care hằng ngày.",
+    tags: ["Dùng thử", "Gọn nhẹ", "Ép lạnh", "Tự nhiên"],
+    benefits: [
+      "Phù hợp người mới bắt đầu dùng dầu dừa",
+      "Dễ mang theo khi đi làm hoặc du lịch",
+      "Dùng cho tóc, vùng da khô và massage nhẹ",
+      "Mức giá dễ tiếp cận để trải nghiệm CoPuree",
+    ],
+  },
+  {
+    name: "CoPuree - Dầu Dừa Tinh Khiết 300ml",
+    displayName: "Dầu dừa tinh khiết 300ml",
     slug: "copuree-dau-dua-tinh-khiet-ep-lanh",
     price: 159000,
     size: "300ml",
@@ -20,34 +41,55 @@ export const products = [
     image: "/images/catalog/catalog-page2-image2.png",
     heroImage: "/images/catalog/catalog-page2-image2.png",
     description:
-      "Dầu dừa ép lạnh từ trái dừa Việt Nam, giữ hương thơm dịu và độ trong tự nhiên cho những khoảnh khắc chăm sóc hằng ngày.",
+      "Dung tích chính cho routine hằng ngày: đủ đều đặn, đủ đẹp để đặt cạnh bàn trang điểm hoặc góc phòng tắm.",
     displayDescription:
-      "Dầu dừa ép lạnh từ trái dừa Việt Nam, giữ hương thơm dịu và độ trong tự nhiên cho những khoảnh khắc chăm sóc hằng ngày.",
-    tags: ["Ép lạnh", "Nguyên chất", "Chăm sóc da tóc", "Từ dừa Việt Nam"],
+      "Dầu dừa ép lạnh từ trái dừa Việt Nam, giữ độ trong, hương thơm dịu và cảm giác nguyên bản.",
+    tags: ["Bán chạy", "300ml", "Nguyên chất", "Không hóa chất"],
     benefits: [
       "Ép lạnh để giữ hương dừa tự nhiên",
       "Không pha trộn, không hương liệu",
-      "Dễ dùng cho tóc, da khô và massage nhẹ",
-      "Bao bì gọn đẹp, phù hợp dùng mỗi ngày hoặc làm quà",
+      "Vòi bơm sạch tay, dễ kiểm soát lượng dầu",
+      "Phù hợp chăm sóc tóc, da khô và làm quà tinh gọn",
+    ],
+  },
+  {
+    name: "CoPuree - Dầu Dừa Ép Lạnh 500ml",
+    displayName: "Dầu dừa ép lạnh 500ml",
+    slug: "copuree-dau-dua-ep-lanh-500ml",
+    price: 199000,
+    size: "500ml",
+    origin: "Việt Nam",
+    image: "/images/catalog/catalog-page2-image2.png",
+    heroImage: "/images/catalog/catalog-page2-image2.png",
+    description:
+      "Dung tích tiết kiệm cho gia đình, căn bếp hoặc những ai đã có thói quen dùng dầu dừa thường xuyên.",
+    displayDescription:
+      "Dầu dừa ép lạnh nguyên chất 100%, phù hợp dùng lâu dài cho nấu ăn, làm bánh và chăm sóc cá nhân.",
+    tags: ["Tiết kiệm", "Gia đình", "Farm to store", "Ép lạnh"],
+    benefits: [
+      "Tối ưu chi phí cho nhu cầu dùng đều",
+      "Phù hợp căn bếp, làm bánh và chăm sóc tóc",
+      "Một chai lớn cho nhiều khoảnh khắc chăm sóc",
+      "Giữ tinh thần tự nhiên, tối giản và gần gũi",
     ],
   },
 ];
 
 export const checkoutSteps = [
-  "Chọn dung tích bạn muốn dùng",
-  "Để lại thông tin nhận hàng",
-  "Chọn COD hoặc chuyển khoản",
-  "CoPuree xác nhận và gửi đơn",
+  "Chọn dung tích phù hợp với nhu cầu sử dụng",
+  "Điền thông tin nhận hàng hoặc dùng địa chỉ đã lưu",
+  "Chọn COD hoặc chuyển khoản theo hướng dẫn",
+  "CoPuree xác nhận đơn và chuẩn bị giao hàng",
 ];
 
 export const testimonials = [
   {
     name: "Khách hàng tại TP.HCM",
-    text: "Dầu thơm nhẹ, chất trong, dùng dưỡng tóc sau vài lần thấy tóc mềm hơn. Đặt trên web nhanh và dễ theo dõi đơn.",
+    text: "Dầu thơm nhẹ, chất trong, dùng dưỡng tóc thấy mềm hơn. Mình thích nhất là chai có vòi bơm, lấy dầu vừa đủ và sạch tay.",
   },
   {
     name: "Khách hàng mua lại",
-    text: "Bao bì sạch, nhìn có thiện cảm. Mình thích chai có vòi bơm vì dùng gọn, không bị lấy quá nhiều.",
+    text: "Bao bì xanh trắng nhìn sạch và có thiện cảm. Đặt trên web nhanh, lần sau nhập số điện thoại là địa chỉ tự hiện lại.",
   },
 ];
 
