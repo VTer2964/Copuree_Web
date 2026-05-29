@@ -59,12 +59,12 @@ export function OrderLookupForm() {
     <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
       <form
         onSubmit={handleSubmit}
-        className="rounded-[28px] bg-white p-6 shadow-sm sm:p-8"
+        className="border border-[#173d2f]/10 bg-white p-6 shadow-sm sm:p-8"
       >
-        <h2 className="text-3xl font-black text-[#102139]">
+        <h2 className="text-3xl font-black text-[#173d2f]">
           Nhập thông tin đơn hàng
         </h2>
-        <p className="mt-3 text-sm leading-6 text-[#59677d]">
+        <p className="mt-3 text-sm leading-6 text-[#5d675f]">
           Mã đơn hàng nằm trên trang đặt hàng thành công. CoPuree yêu cầu thêm
           số điện thoại để bảo vệ thông tin khách hàng.
         </p>
@@ -81,7 +81,7 @@ export function OrderLookupForm() {
             <input
               value={orderNumber}
               onChange={(event) => setOrderNumber(event.target.value)}
-              className="h-12 rounded-2xl border border-[#d7dde5] bg-[#f9f4ed] px-4 uppercase outline-none transition focus:border-[#0d2c74]"
+              className="h-12 border border-[#d7c6a8] bg-[#fbfaf6] px-4 uppercase outline-none transition focus:border-[#173d2f]"
               placeholder="CP260526120632"
             />
           </label>
@@ -90,7 +90,7 @@ export function OrderLookupForm() {
             <input
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
-              className="h-12 rounded-2xl border border-[#d7dde5] bg-[#f9f4ed] px-4 outline-none transition focus:border-[#0d2c74]"
+              className="h-12 border border-[#d7c6a8] bg-[#fbfaf6] px-4 outline-none transition focus:border-[#173d2f]"
               placeholder="0339818937"
             />
           </label>
@@ -99,13 +99,13 @@ export function OrderLookupForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="mt-8 w-full rounded-full bg-[#0d2c74] px-7 py-4 text-base font-black text-white shadow-xl shadow-[#0d2c74]/20 transition hover:-translate-y-0.5 hover:bg-[#123a91] disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-8 w-full bg-[#173d2f] px-7 py-4 text-base font-black text-white shadow-xl shadow-[#173d2f]/18 transition hover:-translate-y-0.5 hover:bg-[#b8752a] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isLoading ? "Đang tra cứu..." : "Tra cứu đơn hàng"}
         </button>
       </form>
 
-      <div className="rounded-[28px] bg-[#102139] p-6 text-white shadow-xl shadow-[#102139]/20 sm:p-8">
+      <div className="bg-[#173d2f] p-6 text-white shadow-xl shadow-[#173d2f]/18 sm:p-8">
         {order ? (
           <OrderResult order={order} />
         ) : (
@@ -136,7 +136,7 @@ function OrderResult({ order }: { order: OrderLookupResponse }) {
       <h3 className="mt-4 text-4xl font-black leading-tight">
         {statusLabels[order.status] ?? order.status}
       </h3>
-      <div className="mt-6 grid gap-3 rounded-3xl bg-white/10 p-5 text-sm">
+      <div className="mt-6 grid gap-3 bg-white/10 p-5 text-sm">
         <div className="flex justify-between gap-4">
           <span className="text-white/65">Thanh toán</span>
           <strong>{paymentLabels[order.paymentStatus] ?? order.paymentStatus}</strong>

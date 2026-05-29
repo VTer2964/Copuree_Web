@@ -187,11 +187,11 @@ export default async function Home() {
                   <span className="mt-2 inline-flex text-lg text-[#12392d]">→</span>
                 </div>
                 <Image
-                  src={product.imageUrl}
+                  src={getProductScene(product.size)}
                   alt={product.name}
                   width={220}
                   height={260}
-                  className="h-36 w-full object-contain drop-shadow-md"
+                  className="h-36 w-full object-cover shadow-sm"
                 />
               </Link>
             ))}
@@ -369,4 +369,16 @@ export default async function Home() {
       <SiteFooter />
     </main>
   );
+}
+
+function getProductScene(size: string) {
+  if (size.includes("100")) {
+    return "/images/copuree-pdf/pdf-page6-image1.png";
+  }
+
+  if (size.includes("500")) {
+    return "/images/copuree-pdf/pdf-page5-image2.png";
+  }
+
+  return "/images/copuree-pdf/pdf-page8-image1.png";
 }

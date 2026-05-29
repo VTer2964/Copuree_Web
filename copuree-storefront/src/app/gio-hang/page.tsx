@@ -12,36 +12,50 @@ export default async function CartPage() {
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
       <SiteHeader />
-      <section className="grain-surface bg-[#f0dfc0] px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b8752a]">
-              Giỏ hàng
-            </p>
-            <h1 className="mt-5 text-5xl font-black leading-[0.98] text-[#173d2f] sm:text-7xl">
-              Xem lại chai dầu dừa bạn sắp đặt
+      <section className="relative overflow-hidden border-b border-[#173d2f]/10">
+        <Image
+          src="/images/copuree-pdf/pdf-page11-image1.png"
+          alt="Không gian thương hiệu CoPuree"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf6] via-[#fbfaf6]/90 to-[#fbfaf6]/35" />
+        <div className="relative mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl font-black leading-[1.03] text-[#173d2f] sm:text-6xl">
+              Xem lại đơn trước khi CoPuree giao đến bạn
             </h1>
-          </div>
-          <p className="max-w-2xl text-lg leading-8 text-[#46544b]">
+            <p className="mt-5 text-base leading-7 text-[#46544b] sm:text-lg sm:leading-8">
             CoPuree sẽ xác nhận đơn trước khi giao, nên bạn luôn có thể đổi địa
             chỉ, ghi chú thời gian nhận hoặc hỏi thêm về cách dùng.
-          </p>
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
         {product ? (
           <div className="grid gap-8 lg:grid-cols-[1fr_420px]">
-            <div className="grid gap-6 bg-[#fffdf8] p-5 sm:grid-cols-[220px_1fr] sm:p-7">
-              <div className="relative min-h-[300px] overflow-hidden bg-[#eef2e7]">
-                <div className="absolute bottom-0 left-0 right-0 h-24 bg-[#f0dfc0]" />
+            <div className="grid gap-6 border border-[#173d2f]/10 bg-[#fffdf8] p-5 sm:grid-cols-[240px_1fr] sm:p-7">
+              <div className="relative min-h-[280px] overflow-hidden bg-[#f0dfc0]">
                 <Image
-                  src={product.imageUrl}
+                  src="/images/copuree-pdf/pdf-page8-image1.png"
                   alt={product.name}
-                  width={320}
-                  height={360}
-                  className="relative z-10 h-[300px] w-full object-contain pt-6"
+                  fill
+                  sizes="240px"
+                  className="object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#f0dfc0]/80 to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 bg-[#fbfaf6]/88 p-4 backdrop-blur-sm">
+                  <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#b8752a]">
+                    CoPuree
+                  </p>
+                  <p className="mt-1 text-lg font-black leading-tight text-[#173d2f]">
+                    Dầu dừa ép lạnh {product.size}
+                  </p>
+                </div>
               </div>
               <div className="flex flex-col justify-between">
                 <div>

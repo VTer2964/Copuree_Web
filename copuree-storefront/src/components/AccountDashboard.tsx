@@ -161,14 +161,14 @@ export function AccountDashboard() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[380px_1fr]">
-      <aside className="rounded-[28px] bg-white p-6 shadow-sm sm:p-8">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-[#0d2c74]">
+      <aside className="border border-[#173d2f]/10 bg-white p-6 shadow-sm sm:p-8">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-[#b8752a]">
           Tài khoản CoPuree
         </p>
-        <h2 className="mt-3 text-3xl font-black text-[#102139]">
+        <h2 className="mt-3 text-3xl font-black text-[#173d2f]">
           Đăng nhập bằng số điện thoại
         </h2>
-        <p className="mt-3 text-sm leading-6 text-[#59677d]">
+        <p className="mt-3 text-sm leading-6 text-[#5d675f]">
           Khách hàng xác minh bằng OTP để xem lịch sử mua hàng, địa chỉ giao
           hàng và điểm tích lũy. Hiện tại OTP là bản demo, sẵn sàng thay bằng
           SMS hoặc Zalo ZNS khi triển khai thật.
@@ -181,7 +181,7 @@ export function AccountDashboard() {
               <input
                 value={phone}
                 readOnly
-                className="h-12 rounded-2xl border border-[#d7dde5] bg-[#f9f4ed] px-4 text-[#59677d] outline-none"
+                className="h-12 border border-[#d7c6a8] bg-[#fbfaf6] px-4 text-[#5d675f] outline-none"
               />
             </label>
             <label className="grid gap-2 text-sm font-bold">
@@ -191,12 +191,12 @@ export function AccountDashboard() {
                 onChange={(event) => setOtp(event.target.value)}
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                className="h-12 rounded-2xl border border-[#d7dde5] bg-[#f9f4ed] px-4 outline-none transition focus:border-[#0d2c74]"
+                className="h-12 border border-[#d7c6a8] bg-[#fbfaf6] px-4 outline-none transition focus:border-[#173d2f]"
                 placeholder="123456"
               />
             </label>
             {devOtp ? (
-              <div className="rounded-2xl border border-[#0d2c74]/15 bg-[#eef4ff] px-4 py-3 text-sm font-bold text-[#0d2c74]">
+              <div className="border border-[#173d2f]/15 bg-[#eef2e7] px-4 py-3 text-sm font-bold text-[#173d2f]">
                 OTP demo: {devOtp}
               </div>
             ) : null}
@@ -204,7 +204,7 @@ export function AccountDashboard() {
             <button
               type="submit"
               disabled={isLoading}
-              className="rounded-full bg-[#0d2c74] px-7 py-4 text-base font-black text-white shadow-xl shadow-[#0d2c74]/20 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              className="bg-[#173d2f] px-7 py-4 text-base font-black text-white shadow-xl shadow-[#173d2f]/18 transition hover:-translate-y-0.5 hover:bg-[#b8752a] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLoading ? "Đang xác minh..." : "Xác minh OTP"}
             </button>
@@ -215,7 +215,7 @@ export function AccountDashboard() {
                 setOtp("");
                 setError("");
               }}
-              className="rounded-full border border-[#0d2c74]/20 bg-white px-7 py-4 text-base font-black text-[#0d2c74]"
+              className="border border-[#173d2f]/20 bg-white px-7 py-4 text-base font-black text-[#173d2f]"
             >
               Nhập số khác
             </button>
@@ -229,7 +229,7 @@ export function AccountDashboard() {
                 onChange={(event) => setPhone(event.target.value)}
                 inputMode="tel"
                 autoComplete="tel"
-                className="h-12 rounded-2xl border border-[#d7dde5] bg-[#f9f4ed] px-4 outline-none transition focus:border-[#0d2c74]"
+                className="h-12 border border-[#d7c6a8] bg-[#fbfaf6] px-4 outline-none transition focus:border-[#173d2f]"
                 placeholder="0339818937"
               />
             </label>
@@ -237,7 +237,7 @@ export function AccountDashboard() {
             <button
               type="submit"
               disabled={isLoading}
-              className="rounded-full bg-[#0d2c74] px-7 py-4 text-base font-black text-white shadow-xl shadow-[#0d2c74]/20 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              className="bg-[#173d2f] px-7 py-4 text-base font-black text-white shadow-xl shadow-[#173d2f]/18 transition hover:-translate-y-0.5 hover:bg-[#b8752a] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLoading ? "Đang gửi..." : "Nhận mã OTP"}
             </button>
@@ -245,7 +245,7 @@ export function AccountDashboard() {
               <button
                 type="button"
                 onClick={logout}
-                className="rounded-full border border-[#0d2c74]/20 bg-white px-7 py-4 text-base font-black text-[#0d2c74]"
+                className="border border-[#173d2f]/20 bg-white px-7 py-4 text-base font-black text-[#173d2f]"
               >
                 Đăng xuất
               </button>
@@ -270,8 +270,8 @@ export function AccountDashboard() {
             />
           </>
         ) : (
-          <div className="rounded-[28px] bg-[#102139] p-8 text-white shadow-xl shadow-[#102139]/20">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-white/60">
+          <div className="bg-[#173d2f] p-8 text-white shadow-xl shadow-[#173d2f]/18">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#f3c77a]">
               Khu vực khách hàng
             </p>
             <h2 className="mt-4 text-4xl font-black leading-tight">
@@ -292,7 +292,7 @@ export function AccountDashboard() {
 function FormMessage({ notice, error }: { notice: string; error: string }) {
   if (error) {
     return (
-      <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+      <div className="border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
         {error}
       </div>
     );
@@ -300,7 +300,7 @@ function FormMessage({ notice, error }: { notice: string; error: string }) {
 
   if (notice) {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">
+      <div className="border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">
         {notice}
       </div>
     );
@@ -311,28 +311,28 @@ function FormMessage({ notice, error }: { notice: string; error: string }) {
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-3xl border border-[#0d2c74]/10 bg-white p-6 shadow-sm">
-      <p className="text-xs font-black uppercase tracking-[0.16em] text-[#708096]">
+    <div className="border border-[#173d2f]/10 bg-white p-6 shadow-sm">
+      <p className="text-xs font-black uppercase tracking-[0.16em] text-[#7b877d]">
         {label}
       </p>
-      <p className="mt-3 text-2xl font-black text-[#0d2c74]">{value}</p>
+      <p className="mt-3 text-2xl font-black text-[#173d2f]">{value}</p>
     </div>
   );
 }
 
 function OrdersPanel({ orders }: { orders: CustomerOrder[] }) {
   return (
-    <div className="rounded-[28px] bg-white p-6 shadow-sm sm:p-8">
+    <div className="border border-[#173d2f]/10 bg-white p-6 shadow-sm sm:p-8">
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <div>
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-[#0d2c74]">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-[#b8752a]">
             Lịch sử đặt hàng
           </p>
-          <h2 className="mt-2 text-3xl font-black text-[#102139]">
+          <h2 className="mt-2 text-3xl font-black text-[#173d2f]">
             Các đơn đã đặt
           </h2>
         </div>
-        <Link href="/san-pham" className="font-black text-[#0d2c74]">
+        <Link href="/san-pham" className="font-black text-[#173d2f]">
           Đặt thêm
         </Link>
       </div>
@@ -342,26 +342,26 @@ function OrdersPanel({ orders }: { orders: CustomerOrder[] }) {
             <Link
               key={order.orderNumber}
               href="/tra-cuu-don-hang"
-              className="rounded-3xl border border-[#0d2c74]/10 bg-[#f9f4ed] p-5 transition hover:border-[#0d2c74]/30"
+              className="border border-[#173d2f]/10 bg-[#fbfaf6] p-5 transition hover:border-[#173d2f]/30"
             >
               <div className="flex flex-col justify-between gap-3 sm:flex-row">
                 <div>
-                  <p className="font-black text-[#0d2c74]">{order.orderNumber}</p>
-                  <p className="mt-1 text-sm font-bold text-[#59677d]">
+                  <p className="font-black text-[#173d2f]">{order.orderNumber}</p>
+                  <p className="mt-1 text-sm font-bold text-[#5d675f]">
                     {orderStatusLabels[order.status] ?? order.status}
                   </p>
                 </div>
-                <strong className="text-xl text-[#102139]">
+                <strong className="text-xl text-[#173d2f]">
                   {formatVnd(order.total)}
                 </strong>
               </div>
-              <p className="mt-3 text-sm text-[#59677d]">
+              <p className="mt-3 text-sm text-[#5d675f]">
                 {order.items.map((item) => item.productName).join(", ")}
               </p>
             </Link>
           ))
         ) : (
-          <p className="rounded-3xl bg-[#f9f4ed] p-5 text-sm font-bold text-[#59677d]">
+          <p className="bg-[#fbfaf6] p-5 text-sm font-bold text-[#5d675f]">
             Chưa có đơn hàng nào cho số điện thoại này.
           </p>
         )}
@@ -380,11 +380,11 @@ function AddressesPanel({
   onCreated: () => void;
 }) {
   return (
-    <div className="rounded-[28px] bg-white p-6 shadow-sm sm:p-8">
-      <p className="text-sm font-black uppercase tracking-[0.2em] text-[#0d2c74]">
+    <div className="border border-[#173d2f]/10 bg-white p-6 shadow-sm sm:p-8">
+      <p className="text-sm font-black uppercase tracking-[0.2em] text-[#b8752a]">
         Địa chỉ giao hàng
       </p>
-      <h2 className="mt-2 text-3xl font-black text-[#102139]">
+      <h2 className="mt-2 text-3xl font-black text-[#173d2f]">
         Địa chỉ đã lưu
       </h2>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -392,20 +392,20 @@ function AddressesPanel({
           addresses.map((address) => (
             <div
               key={address.id}
-              className="rounded-3xl border border-[#0d2c74]/10 bg-[#f9f4ed] p-5"
+              className="border border-[#173d2f]/10 bg-[#fbfaf6] p-5"
             >
               <div className="flex items-center justify-between gap-3">
-                <p className="font-black text-[#102139]">{address.receiverName}</p>
+                <p className="font-black text-[#173d2f]">{address.receiverName}</p>
                 {address.isDefault ? (
-                  <span className="rounded-full bg-[#0d2c74] px-3 py-1 text-xs font-black text-white">
+                  <span className="bg-[#173d2f] px-3 py-1 text-xs font-black text-white">
                     Mặc định
                   </span>
                 ) : null}
               </div>
-              <p className="mt-2 text-sm font-bold text-[#0d2c74]">
+              <p className="mt-2 text-sm font-bold text-[#173d2f]">
                 {address.phone}
               </p>
-              <p className="mt-3 text-sm leading-6 text-[#59677d]">
+              <p className="mt-3 text-sm leading-6 text-[#5d675f]">
                 {[address.addressLine, address.ward, address.district, address.province]
                   .filter(Boolean)
                   .join(", ")}
@@ -413,7 +413,7 @@ function AddressesPanel({
             </div>
           ))
         ) : (
-          <p className="rounded-3xl bg-[#f9f4ed] p-5 text-sm font-bold text-[#59677d] md:col-span-2">
+          <p className="bg-[#fbfaf6] p-5 text-sm font-bold text-[#5d675f] md:col-span-2">
             Chưa có địa chỉ lưu. Khách có thể thêm địa chỉ mặc định để lần sau
             thanh toán nhanh hơn.
           </p>
@@ -483,9 +483,9 @@ function AddAddressForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-7 rounded-3xl border border-[#0d2c74]/10 bg-[#f9f4ed] p-5"
+      className="mt-7 border border-[#173d2f]/10 bg-[#fbfaf6] p-5"
     >
-      <h3 className="text-xl font-black text-[#102139]">Thêm địa chỉ mới</h3>
+      <h3 className="text-xl font-black text-[#173d2f]">Thêm địa chỉ mới</h3>
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         <AccountInput
           label="Người nhận"
@@ -518,12 +518,12 @@ function AddAddressForm({
           onChange={setWard}
           autoComplete="address-level3"
         />
-        <label className="flex items-center gap-3 rounded-2xl border border-[#0d2c74]/10 bg-white px-4 py-3 text-sm font-bold text-[#102139]">
+        <label className="flex items-center gap-3 border border-[#173d2f]/10 bg-white px-4 py-3 text-sm font-bold text-[#173d2f]">
           <input
             type="checkbox"
             checked={isDefault}
             onChange={(event) => setIsDefault(event.target.checked)}
-            className="h-4 w-4 accent-[#0d2c74]"
+            className="h-4 w-4 accent-[#173d2f]"
           />
           Đặt làm địa chỉ mặc định
         </label>
@@ -533,20 +533,20 @@ function AddAddressForm({
             value={addressLine}
             onChange={(event) => setAddressLine(event.target.value)}
             autoComplete="street-address"
-            className="min-h-24 rounded-2xl border border-[#d7dde5] bg-white px-4 py-3 outline-none transition focus:border-[#0d2c74]"
+            className="min-h-24 border border-[#d7c6a8] bg-white px-4 py-3 outline-none transition focus:border-[#173d2f]"
             placeholder="Số nhà, đường, tòa nhà..."
           />
         </label>
       </div>
       {error ? (
-        <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+        <div className="mt-4 border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
           {error}
         </div>
       ) : null}
       <button
         type="submit"
         disabled={isSaving}
-        className="mt-5 rounded-full bg-[#0d2c74] px-7 py-4 text-sm font-black text-white shadow-lg shadow-[#0d2c74]/20 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-5 bg-[#173d2f] px-7 py-4 text-sm font-black text-white shadow-lg shadow-[#173d2f]/18 transition hover:bg-[#b8752a] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSaving ? "Đang lưu..." : "Lưu địa chỉ"}
       </button>
@@ -575,7 +575,7 @@ function AccountInput({
         onChange={(event) => onChange(event.target.value)}
         autoComplete={autoComplete}
         inputMode={inputMode}
-        className="h-12 rounded-2xl border border-[#d7dde5] bg-white px-4 outline-none transition focus:border-[#0d2c74]"
+        className="h-12 border border-[#d7c6a8] bg-white px-4 outline-none transition focus:border-[#173d2f]"
         placeholder={label}
       />
     </label>

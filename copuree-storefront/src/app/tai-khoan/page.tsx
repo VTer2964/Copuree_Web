@@ -1,25 +1,34 @@
+import Image from "next/image";
 import { AccountDashboard } from "@/components/AccountDashboard";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export default function AccountPage() {
   return (
-    <main className="min-h-screen bg-[#f9f4ed] text-[#102139]">
+    <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
       <SiteHeader />
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-[#0d2c74]">
-          Tài khoản khách hàng
-        </p>
-        <h1 className="mt-4 max-w-4xl text-5xl font-black leading-tight text-[#0d2c74] sm:text-7xl">
-          Lịch sử đặt hàng, địa chỉ và điểm tích lũy
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-[#59677d]">
-          Khách hàng xác minh bằng số điện thoại để xem lại đơn hàng, lưu địa
-          chỉ giao hàng và dùng điểm thành viên trong các lần mua sau.
-        </p>
-        <div className="mt-10">
-          <AccountDashboard />
+      <section className="relative overflow-hidden border-b border-[#173d2f]/10">
+        <Image
+          src="/images/copuree-pdf/pdf-page11-image1.png"
+          alt="Không gian tài khoản CoPuree"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf6] via-[#fbfaf6]/92 to-[#fbfaf6]/30" />
+        <div className="relative mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
+          <h1 className="max-w-3xl text-4xl font-black leading-[1.03] text-[#173d2f] sm:text-6xl">
+            Tài khoản CoPuree cho những lần mua sau gọn hơn
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[#46544b] sm:text-lg sm:leading-8">
+            Xác minh bằng số điện thoại để xem lại đơn hàng, lưu địa chỉ giao
+            hàng và sẵn sàng mở rộng điểm thành viên.
+          </p>
         </div>
+      </section>
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
+          <AccountDashboard />
       </section>
       <SiteFooter />
     </main>

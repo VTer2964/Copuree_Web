@@ -15,27 +15,27 @@ export default async function OrderSuccessPage({
   const transferContent = `${bank.transferContentPrefix} ${orderNumber}`;
 
   return (
-    <main className="min-h-screen bg-[#f9f4ed] text-[#102139]">
+    <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
       <SiteHeader />
       <section className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#0d2c74] text-3xl font-black text-white">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center bg-[#173d2f] text-2xl font-black text-white">
           ✓
         </div>
-        <p className="mt-8 text-center text-sm font-black uppercase tracking-[0.2em] text-[#0d2c74]">
+        <p className="mt-8 text-center text-sm font-black uppercase tracking-[0.2em] text-[#b8752a]">
           Đặt hàng thành công
         </p>
-        <h1 className="mx-auto mt-4 max-w-3xl text-center text-5xl font-black leading-tight text-[#0d2c74] sm:text-7xl">
+        <h1 className="mx-auto mt-4 max-w-3xl text-center text-4xl font-black leading-tight text-[#173d2f] sm:text-6xl">
           CoPuree đã nhận đơn của bạn
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-[#59677d]">
+        <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-7 text-[#5d675f] sm:text-lg sm:leading-8">
           Mã đơn hàng của bạn là{" "}
-          <strong className="text-[#0d2c74]">{orderNumber}</strong>. CoPuree sẽ
+          <strong className="text-[#173d2f]">{orderNumber}</strong>. CoPuree sẽ
           liên hệ xác nhận thông tin giao hàng trong thời gian sớm nhất.
         </p>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="grid gap-4 rounded-[28px] border border-[#0d2c74]/10 bg-white p-6 text-left shadow-sm sm:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#0d2c74]">
+          <div className="grid gap-4 border border-[#173d2f]/10 bg-white p-6 text-left shadow-sm sm:p-8">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#b8752a]">
               Thông tin liên hệ
             </p>
             <InfoRow label="Hotline" value={brand.hotline} href={brand.hotlineHref} />
@@ -43,8 +43,8 @@ export default async function OrderSuccessPage({
             <InfoRow label="Kho gửi hàng" value={brand.address} />
           </div>
 
-          <div className="rounded-[28px] bg-[#102139] p-6 text-white shadow-xl shadow-[#102139]/20 sm:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-white/60">
+          <div className="bg-[#173d2f] p-6 text-white shadow-xl shadow-[#173d2f]/18 sm:p-8">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#f3c77a]">
               Chuyển khoản
             </p>
             <h2 className="mt-3 text-2xl font-black">
@@ -56,7 +56,7 @@ export default async function OrderSuccessPage({
                 alt="QR chuyển khoản CoPuree"
                 width={220}
                 height={220}
-                className="mt-5 rounded-3xl bg-white p-3"
+                className="mt-5 bg-white p-3"
               />
             ) : null}
             <div className="mt-6 grid gap-3 text-sm">
@@ -72,19 +72,19 @@ export default async function OrderSuccessPage({
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/tra-cuu-don-hang"
-            className="inline-flex items-center justify-center rounded-full border border-[#0d2c74]/20 bg-white px-7 py-4 text-base font-extrabold text-[#0d2c74] transition hover:border-[#0d2c74]"
+            className="inline-flex items-center justify-center border border-[#173d2f]/20 bg-white px-7 py-4 text-base font-extrabold text-[#173d2f] transition hover:border-[#173d2f]"
           >
             Tra cứu đơn hàng
           </Link>
           <Link
             href="/san-pham"
-            className="inline-flex items-center justify-center rounded-full border border-[#0d2c74]/20 bg-white px-7 py-4 text-base font-extrabold text-[#0d2c74] transition hover:border-[#0d2c74]"
+            className="inline-flex items-center justify-center border border-[#173d2f]/20 bg-white px-7 py-4 text-base font-extrabold text-[#173d2f] transition hover:border-[#173d2f]"
           >
             Tiếp tục xem sản phẩm
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center justify-center rounded-full bg-[#0d2c74] px-7 py-4 text-base font-extrabold text-white shadow-xl shadow-[#0d2c74]/25 transition hover:-translate-y-0.5 hover:bg-[#123a91]"
+            className="inline-flex items-center justify-center bg-[#173d2f] px-7 py-4 text-base font-extrabold text-white shadow-xl shadow-[#173d2f]/18 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
           >
             Về trang chủ
           </Link>
@@ -106,13 +106,13 @@ function InfoRow({
 }) {
   return (
     <div className="flex flex-col justify-between gap-2 sm:flex-row">
-      <span className="font-bold text-[#59677d]">{label}</span>
+      <span className="font-bold text-[#5d675f]">{label}</span>
       {href ? (
-        <a href={href} className="font-black text-[#0d2c74]">
+        <a href={href} className="font-black text-[#173d2f]">
           {value}
         </a>
       ) : (
-        <span className="font-black text-[#0d2c74]">{value}</span>
+        <span className="font-black text-[#173d2f]">{value}</span>
       )}
     </div>
   );

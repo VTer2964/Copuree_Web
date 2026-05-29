@@ -6,44 +6,47 @@ import { fetchProducts } from "@/lib/api";
 
 export default async function ProductsPage() {
   const products = await fetchProducts();
-  const featuredProduct = products.find((item) => item.isFeatured) ?? products[0];
 
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
       <SiteHeader />
-      <section className="grain-surface bg-[#f0dfc0] px-5 py-20 sm:px-8 sm:py-28">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b8752a]">
-              Cửa hàng CoPuree
-            </p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-black leading-[0.96] text-[#173d2f] sm:text-7xl">
-              Chọn chai dầu dừa hợp với cách bạn chăm mình
+      <section className="relative min-h-[520px] overflow-hidden border-b border-[#173d2f]/10">
+        <Image
+          src="/images/copuree-pdf/pdf-page5-image2.png"
+          alt="Các dung tích dầu dừa ép lạnh CoPuree"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf6] via-[#fbfaf6]/86 to-[#fbfaf6]/22" />
+        <div className="relative mx-auto flex min-h-[520px] max-w-7xl items-center px-5 py-16 sm:px-8">
+          <div className="max-w-2xl">
+            <Image
+              src="/images/brand/logo-copuree.png"
+              alt="CoPuree"
+              width={138}
+              height={54}
+              className="h-auto w-32"
+            />
+            <h1 className="mt-8 text-4xl font-black leading-[1.02] text-[#173d2f] sm:text-6xl">
+              Chọn dung tích hợp với nhịp chăm sóc của bạn
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#445447]">
-              Chai nhỏ để thử, chai vừa để dùng mỗi ngày, chai lớn để tiết kiệm
-              hơn. Dù chọn dung tích nào, CoPuree vẫn giữ tinh thần đơn giản:
-              dầu dừa trong, hương dịu và dễ dùng.
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#445447] sm:text-lg sm:leading-8">
+              Từ chai nhỏ để thử đến chai lớn dùng lâu hơn, CoPuree giữ cùng
+              một tinh thần: dầu dừa ép lạnh trong, hương dịu, dễ dùng mỗi ngày.
             </p>
+            <a
+              href="#product-list"
+              className="mt-8 inline-flex bg-[#173d2f] px-6 py-3 text-sm font-black text-white shadow-lg shadow-[#173d2f]/18 transition hover:bg-[#b8752a]"
+            >
+              Xem sản phẩm
+            </a>
           </div>
-          {featuredProduct ? (
-            <div className="relative min-h-[520px] overflow-hidden bg-[#173d2f]">
-              <div className="absolute inset-x-10 top-10 h-36 border border-[#f7e1aa]/40" />
-              <div className="absolute bottom-0 left-0 right-0 h-36 bg-[#e7c894]" />
-              <Image
-                src={featuredProduct.imageUrl}
-                alt={featuredProduct.name}
-                width={780}
-                height={780}
-                priority
-                className="relative z-10 mx-auto h-[520px] w-full object-contain pt-10 drop-shadow-2xl"
-              />
-            </div>
-          ) : null}
         </div>
       </section>
 
-      <section className="px-5 py-16 sm:px-8 sm:py-24">
+      <section id="product-list" className="px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-4 border-b border-[#173d2f]/15 pb-6 sm:flex-row sm:items-end">
             <div>

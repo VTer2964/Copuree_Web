@@ -29,11 +29,11 @@ export function OrderSummary({
       <div className="p-6 sm:p-8">
         <div className="flex gap-4 border-b border-white/15 pb-6">
           <Image
-            src={product.imageUrl}
+            src="/images/copuree-pdf/pdf-page8-image1.png"
             alt={product.name}
             width={132}
             height={132}
-            className="h-28 w-28 bg-[#fbfaf6] object-contain p-2"
+            className="h-28 w-28 bg-[#fbfaf6] object-cover"
           />
           <div>
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f3c77a]">

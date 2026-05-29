@@ -40,32 +40,30 @@ export default async function ProductDetailPage({
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
       <SiteHeader />
-      <section className="grain-surface bg-[#f0dfc0] px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="relative min-h-[620px] overflow-hidden bg-[#173d2f]">
-            <div className="absolute inset-x-10 top-10 h-36 border border-[#f7e1aa]/45" />
-            <div className="absolute bottom-0 left-0 right-0 h-40 bg-[#e7c894]" />
-            <div className="absolute bottom-32 left-10 h-20 w-32 rotate-[-10deg] bg-[#fff7e7]" />
-            <div className="absolute left-10 top-10 bg-[#f7e1aa] px-4 py-3 text-xs font-black uppercase tracking-[0.18em] text-[#173d2f]">
-              {product.size}
-            </div>
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              width={860}
-              height={900}
-              priority
-              className="relative z-10 mx-auto h-[620px] w-full object-contain pt-12 drop-shadow-2xl"
-            />
-          </div>
+      <section className="relative overflow-hidden border-b border-[#173d2f]/10">
+        <Image
+          src="/images/copuree-pdf/pdf-page8-image1.png"
+          alt={`${product.name} trong góc chăm sóc`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf6] via-[#fbfaf6]/92 to-[#fbfaf6]/28" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:min-h-[620px] lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b8752a]">
-              Chi tiết sản phẩm
-            </p>
-            <h1 className="mt-5 text-5xl font-black leading-[0.98] text-[#173d2f] sm:text-7xl">
+            <Image
+              src="/images/brand/logo-copuree.png"
+              alt="CoPuree"
+              width={138}
+              height={54}
+              priority
+              className="h-auto w-32"
+            />
+            <h1 className="mt-8 text-4xl font-black leading-[1.02] text-[#173d2f] sm:text-6xl">
               {product.name}
             </h1>
-            <p className="mt-6 text-lg leading-8 text-[#445447]">
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#445447] sm:text-lg sm:leading-8">
               {product.description || product.shortDescription}
             </p>
             <div className="mt-7 flex flex-wrap gap-2">
@@ -103,6 +101,16 @@ export default async function ProductDetailPage({
               </Link>
             </div>
           </div>
+          <div className="relative hidden min-h-[420px] lg:block">
+            <div className="absolute right-0 top-8 w-[74%] border border-[#173d2f]/12 bg-[#fbfaf6]/80 p-6 backdrop-blur-sm">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#b8752a]">
+                Cold-pressed
+              </p>
+              <h2 className="mt-3 text-2xl font-black leading-tight text-[#173d2f]">
+                Dầu trong, hương dịu, dùng cho tóc, da và những phút chăm mình
+              </h2>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -134,19 +142,17 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      <section className="bg-[#173d2f] px-5 py-16 text-white sm:px-8 sm:py-24">
+      <section className="bg-[#173d2f] px-5 py-14 text-white sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <div className="relative min-h-[540px] overflow-hidden bg-[#dcecf0]">
-            <div className="absolute inset-x-0 top-0 h-44 bg-[#b8dce6]" />
-            <div className="absolute bottom-0 left-0 right-0 h-52 bg-[#9fcbd4]" />
-            <div className="absolute left-0 top-24 h-24 w-full skew-y-[-5deg] bg-white/35" />
+          <div className="relative min-h-[420px] overflow-hidden">
             <Image
-              src={product.imageUrl}
+              src="/images/copuree-pdf/pdf-page6-image1.png"
               alt={`${product.name} trong góc chăm sóc`}
-              width={760}
-              height={760}
-              className="relative z-10 mx-auto h-[520px] w-full object-contain pt-10 drop-shadow-2xl"
+              fill
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#173d2f]/20 to-transparent" />
           </div>
           <div>
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f7e1aa]">

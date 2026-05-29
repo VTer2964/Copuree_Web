@@ -71,7 +71,7 @@ export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[
             </div>
             <div className="flex min-h-[210px] flex-1 flex-col p-4 sm:p-5">
               <h3 className="text-lg font-black leading-tight text-[#12392d] sm:text-xl">{category.title}</h3>
-              <p className="mt-2 text-sm font-semibold italic text-[#0d2c74]">{category.subtitle}</p>
+              <p className="mt-2 text-sm font-semibold italic text-[#244d3b]">{category.subtitle}</p>
               <p className="mt-3 text-sm leading-6 text-[#526258]">{category.text}</p>
               <a href="#san-pham" className="mt-auto inline-flex pt-5 text-sm font-black text-[#12392d]">
                 Xem thêm
