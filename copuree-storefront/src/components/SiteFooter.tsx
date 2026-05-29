@@ -15,7 +15,7 @@ export function SiteFooter() {
             className="h-14 w-auto bg-white object-contain p-2"
           />
           <p className="mt-6 max-w-xl text-sm leading-7 text-white/72">
-            CoPuree - dầu dừa tinh khiết ép lạnh. Kho gửi hàng: {brand.address}.
+            CoPuree - dầu dừa ép lạnh. Kho gửi hàng: {brand.address}.
             Một điểm mua trực tiếp, rõ đơn, rõ chăm sóc sau mua.
           </p>
         </div>

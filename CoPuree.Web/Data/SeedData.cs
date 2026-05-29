@@ -148,6 +148,7 @@ public static class SeedData
             new
             {
                 Slug = "copuree-dau-dua-ep-lanh-100ml",
+                LegacySlug = string.Empty,
                 Name = "CoPuree - Dầu Dừa Ép Lạnh 100ml",
                 Size = "100ml",
                 Price = 59000m,
@@ -156,8 +157,9 @@ public static class SeedData
             },
             new
             {
-                Slug = "copuree-dau-dua-tinh-khiet-ep-lanh",
-                Name = "CoPuree - Dầu Dừa Tinh Khiết 300ml",
+                Slug = "copuree-dau-dua-ep-lanh-300ml",
+                LegacySlug = "copuree-dau-dua-tinh-khiet-ep-lanh",
+                Name = "CoPuree - Dầu Dừa Ép Lạnh 300ml",
                 Size = "300ml",
                 Price = 159000m,
                 Badge = "Sản phẩm chính",
@@ -166,6 +168,7 @@ public static class SeedData
             new
             {
                 Slug = "copuree-dau-dua-ep-lanh-500ml",
+                LegacySlug = string.Empty,
                 Name = "CoPuree - Dầu Dừa Ép Lạnh 500ml",
                 Size = "500ml",
                 Price = 199000m,
@@ -176,7 +179,8 @@ public static class SeedData
 
         foreach (var item in catalogProducts)
         {
-            var product = await db.Products.FirstOrDefaultAsync(product => product.Slug == item.Slug);
+            var product = await db.Products.FirstOrDefaultAsync(product =>
+                product.Slug == item.Slug || product.Slug == item.LegacySlug);
             if (product is null)
             {
                 product = new Product
@@ -188,6 +192,7 @@ public static class SeedData
                 db.Products.Add(product);
             }
 
+            product.Slug = item.Slug;
             product.Name = item.Name;
             product.ShortDescription = "Dầu dừa ép lạnh hương dịu, chất dầu trong, dễ dùng cho tóc, da khô và những phút chăm sóc hằng ngày.";
             product.Description = "CoPuree được làm từ trái dừa Việt Nam bằng phương pháp ép lạnh, giữ lại cảm giác nguyên chất và hương dừa nhẹ tự nhiên. Một chai dầu dừa gọn đẹp để bạn đặt cạnh bàn trang điểm, góc phòng tắm hoặc mang theo trong những ngày cần chăm mình nhiều hơn.";

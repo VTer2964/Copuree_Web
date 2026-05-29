@@ -69,7 +69,7 @@ Chua nen mo public rong hoac chay quang cao lon cho den khi hoan thien cac muc b
 
 ### Test Data Da Dung
 
-- San pham that: `copuree-dau-dua-tinh-khiet-ep-lanh`.
+- San pham that: `copuree-dau-dua-ep-lanh-300ml`.
 - Gia test: `149000`.
 - Don test moi gan day: `CP260526181848`.
 - So dien thoai test tai khoan: `0339818937`.

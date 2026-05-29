@@ -21,7 +21,7 @@ export function SiteHeader() {
   return (
     <>
       <div className="hidden bg-[#163d2f] px-5 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.16em] text-[#f7e1aa] sm:block">
-        Dầu dừa tinh khiết ép lạnh - đặt trực tiếp từ CoPuree
+        Dầu dừa ép lạnh - đặt trực tiếp từ CoPuree
       </div>
       <header className="sticky top-0 z-50 border-b border-[#173d2f]/10 bg-[#fbfaf6]/92 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">

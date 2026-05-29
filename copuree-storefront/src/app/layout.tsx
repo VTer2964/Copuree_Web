@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CoPuree | Dầu Dừa Tinh Khiết Ép Lạnh",
+  title: "CoPuree | Dầu Dừa Ép Lạnh",
   description:
-    "Website bán hàng CoPuree - dầu dừa tinh khiết ép lạnh, đặt hàng trực tiếp từ thương hiệu.",
+    "Website bán hàng CoPuree - dầu dừa ép lạnh, đặt hàng trực tiếp từ thương hiệu.",
 };
 
 export default function RootLayout({

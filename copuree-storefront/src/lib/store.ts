@@ -32,9 +32,9 @@ export const products = [
     ],
   },
   {
-    name: "CoPuree - Dầu Dừa Tinh Khiết 300ml",
-    displayName: "Dầu dừa tinh khiết 300ml",
-    slug: "copuree-dau-dua-tinh-khiet-ep-lanh",
+    name: "CoPuree - Dầu Dừa Ép Lạnh 300ml",
+    displayName: "Dầu dừa ép lạnh 300ml",
+    slug: "copuree-dau-dua-ep-lanh-300ml",
     price: 159000,
     size: "300ml",
     origin: "Việt Nam",
