@@ -17,7 +17,6 @@ public static class SeedData
         await EnsureArticleSchemaAsync(db);
 
         await EnsureCatalogProductsAsync(db);
-        await EnsureStarterArticlesAsync(db);
         await EnsureCleanArticleCopyAsync(db);
         await EnsureBankTransferSettingAsync(db);
         await RemoveLegacyDemoProductsAsync(db);
@@ -253,77 +252,6 @@ public static class SeedData
             TransferContentPrefix = "COPUREE",
             UpdatedAtUtc = DateTime.UtcNow
         });
-    }
-
-    private static async Task EnsureStarterArticlesAsync(AppDbContext db)
-    {
-        var starterArticles = new[]
-        {
-            new
-            {
-                Title = "Cách dùng dầu dừa ép lạnh cho tóc khô xơ",
-                Slug = "cach-dung-dau-dua-ep-lanh-cho-toc-kho-xo",
-                CategorySlug = "cham-soc-toc",
-                CategoryName = "Chăm sóc tóc",
-                Excerpt = "Một routine đơn giản với dầu dừa ép lạnh để tóc mềm hơn mà không tạo cảm giác nặng.",
-                ImageUrl = "/images/copuree-pdf/pdf-page9-image1.png",
-                Content = "Dầu dừa ép lạnh phù hợp nhất khi dùng với lượng nhỏ. Bạn có thể làm ấm dầu trong lòng bàn tay, thoa lên thân tóc trước khi gội hoặc dùng rất ít ở phần ngọn tóc sau khi tóc gần khô. Với tóc mỏng, nên bắt đầu từ một đến hai giọt để tránh cảm giác bết."
-            },
-            new
-            {
-                Title = "Dưỡng ẩm vùng da khô bằng dầu dừa như thế nào",
-                Slug = "duong-am-vung-da-kho-bang-dau-dua",
-                CategorySlug = "cham-soc-da",
-                CategoryName = "Chăm sóc da",
-                Excerpt = "Gợi ý dùng dầu dừa cho khuỷu tay, gót chân và những vùng da cần cảm giác mềm mại hơn.",
-                ImageUrl = "/images/copuree-pdf/pdf-page6-image1.png",
-                Content = "Sau khi tắm hoặc rửa tay, khi da còn hơi ẩm, lấy một lượng dầu nhỏ và thoa mỏng lên vùng da khô. Không cần dùng nhiều. Cách dùng đều đặn với lượng vừa phải giúp bề mặt da có cảm giác mềm hơn và dễ chịu hơn trong routine tối giản."
-            },
-            new
-            {
-                Title = "Oil pulling với dầu dừa ép lạnh cho người mới bắt đầu",
-                Slug = "oil-pulling-voi-dau-dua-ep-lanh",
-                CategorySlug = "cham-soc-rang-mieng",
-                CategoryName = "Chăm sóc răng miệng",
-                Excerpt = "Những lưu ý cơ bản khi đưa oil pulling vào thói quen chăm sóc răng miệng buổi sáng.",
-                ImageUrl = "/images/copuree-pdf/pdf-page8-image1.png",
-                Content = "Oil pulling là thói quen súc dầu trong khoang miệng theo routine cá nhân. Với người mới bắt đầu, nên dùng lượng nhỏ, thực hiện trong thời gian ngắn rồi tăng dần nếu thấy phù hợp. Không nuốt dầu sau khi dùng và vẫn duy trì đánh răng, vệ sinh răng miệng như bình thường."
-            },
-            new
-            {
-                Title = "Dùng dầu dừa trong nấu ăn và làm bánh hằng ngày",
-                Slug = "dung-dau-dua-trong-nau-an-va-lam-banh",
-                CategorySlug = "nau-an-lam-banh",
-                CategoryName = "Nấu ăn và làm bánh",
-                Excerpt = "Cách dùng dầu dừa để tạo hương béo nhẹ trong các món đơn giản tại nhà.",
-                ImageUrl = "/images/copuree-pdf/pdf-page5-image2.png",
-                Content = "Dầu dừa có hương béo nhẹ, phù hợp với một số món bánh, granola, món áp chảo nhẹ hoặc công thức cần mùi dừa tự nhiên. Khi dùng trong căn bếp, hãy bắt đầu với lượng nhỏ để kiểm soát hương vị và kết hợp với nguyên liệu có độ ngọt hoặc béo tự nhiên."
-            }
-        };
-
-        foreach (var item in starterArticles)
-        {
-            if (await db.Articles.AnyAsync(article => article.Slug == item.Slug))
-            {
-                continue;
-            }
-
-            db.Articles.Add(new Article
-            {
-                Title = item.Title,
-                Slug = item.Slug,
-                CategorySlug = item.CategorySlug,
-                CategoryName = item.CategoryName,
-                Excerpt = item.Excerpt,
-                Content = item.Content,
-                ImageUrl = item.ImageUrl,
-                ImageAlt = item.Title,
-                IsPublished = true,
-                IsFeatured = true,
-                CreatedAtUtc = DateTime.UtcNow,
-                UpdatedAtUtc = DateTime.UtcNow
-            });
-        }
     }
 
     private static async Task EnsureCleanArticleCopyAsync(AppDbContext db)
