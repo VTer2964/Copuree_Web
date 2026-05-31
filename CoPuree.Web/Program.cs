@@ -3,6 +3,7 @@ using CoPuree.Web.Models;
 using CoPuree.Web.Services;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Collections.Concurrent;
 using System.Text;
 using System.Threading.RateLimiting;
@@ -92,6 +93,17 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+var uploadsPath = app.Configuration["Storage:UploadsPath"];
+if (!string.IsNullOrWhiteSpace(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(uploadsPath),
+        RequestPath = "/uploads"
+    });
+}
 
 app.UseRouting();
 
@@ -202,6 +214,79 @@ app.MapGet("/api/products/{slug}", async (string slug, AppDbContext db) =>
         .FirstOrDefaultAsync();
 
     return product is null ? Results.NotFound() : Results.Ok(product);
+});
+
+app.MapGet("/api/articles/categories", async (AppDbContext db) =>
+{
+    var articles = await db.Articles
+        .AsNoTracking()
+        .Where(article => article.IsPublished)
+        .Select(article => new { article.CategorySlug, article.CategoryName })
+        .ToListAsync();
+
+    var categories = articles
+        .GroupBy(article => new { article.CategorySlug, article.CategoryName })
+        .Select(group => new ArticleCategoryResponse(
+            group.Key.CategorySlug,
+            group.Key.CategoryName,
+            group.Count()))
+        .OrderBy(category => category.Name)
+        .ToList();
+
+    return Results.Ok(categories);
+});
+
+app.MapGet("/api/articles", async (string? category, AppDbContext db) =>
+{
+    var query = db.Articles
+        .AsNoTracking()
+        .Where(article => article.IsPublished);
+
+    if (!string.IsNullOrWhiteSpace(category))
+    {
+        query = query.Where(article => article.CategorySlug == category.Trim());
+    }
+
+    var articles = await query
+        .OrderByDescending(article => article.IsFeatured)
+        .ThenByDescending(article => article.CreatedAtUtc)
+        .Select(article => new ArticleSummaryResponse(
+            article.Id,
+            article.Title,
+            article.Slug,
+            article.CategorySlug,
+            article.CategoryName,
+            article.Excerpt,
+            article.ImageUrl,
+            article.ImageAlt,
+            article.IsFeatured,
+            article.CreatedAtUtc))
+        .ToListAsync();
+
+    return Results.Ok(articles);
+});
+
+app.MapGet("/api/articles/{slug}", async (string slug, AppDbContext db) =>
+{
+    var article = await db.Articles
+        .AsNoTracking()
+        .Where(article => article.Slug == slug && article.IsPublished)
+        .Select(article => new ArticleDetailResponse(
+            article.Id,
+            article.Title,
+            article.Slug,
+            article.CategorySlug,
+            article.CategoryName,
+            article.Excerpt,
+            article.Content,
+            article.ImageUrl,
+            article.ImageAlt,
+            article.IsFeatured,
+            article.CreatedAtUtc,
+            article.UpdatedAtUtc))
+        .FirstOrDefaultAsync();
+
+    return article is null ? Results.NotFound() : Results.Ok(article);
 });
 
 app.MapGet("/api/payment-settings/bank-transfer", async (AppDbContext db) =>
@@ -687,6 +772,37 @@ public record ProductResponse(
     string ImageUrl,
     string Badge,
     bool IsFeatured);
+
+public record ArticleCategoryResponse(
+    string Slug,
+    string Name,
+    int Count);
+
+public record ArticleSummaryResponse(
+    int Id,
+    string Title,
+    string Slug,
+    string CategorySlug,
+    string CategoryName,
+    string Excerpt,
+    string ImageUrl,
+    string ImageAlt,
+    bool IsFeatured,
+    DateTime CreatedAtUtc);
+
+public record ArticleDetailResponse(
+    int Id,
+    string Title,
+    string Slug,
+    string CategorySlug,
+    string CategoryName,
+    string Excerpt,
+    string Content,
+    string ImageUrl,
+    string ImageAlt,
+    bool IsFeatured,
+    DateTime CreatedAtUtc,
+    DateTime UpdatedAtUtc);
 
 public record BankTransferSettingResponse(
     string BankName,

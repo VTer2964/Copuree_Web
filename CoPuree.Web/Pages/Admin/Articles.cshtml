@@ -1,0 +1,157 @@
+@page "/admin/bai-viet"
+@model CoPuree.Web.Pages.Admin.ArticlesModel
+@{
+    ViewData["Title"] = "Admin bài viết";
+    ViewData["Description"] = "Quản lý bài viết truyền thông CoPuree.";
+}
+
+<section class="admin-page">
+    <div class="admin-heading">
+        <div>
+            <p class="eyebrow">CoPuree content studio</p>
+            <h1>Bài viết</h1>
+            <p class="admin-heading-copy">Đăng bài truyền thông theo từng ứng dụng: chăm sóc tóc, chăm sóc da, răng miệng, nấu ăn và làm bánh.</p>
+        </div>
+        @if (Model.IsAuthenticated)
+        {
+            <div class="admin-actions">
+                <a class="btn btn-outline-dark" asp-page="/Admin/Products">Sản phẩm</a>
+                <a class="btn btn-outline-dark" href="http://localhost:3000/#ung-dung" target="_blank" rel="noopener">Xem website</a>
+                <form method="post" asp-page-handler="Logout">
+                    <button class="btn btn-outline-dark" type="submit">Đăng xuất</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    @if (!Model.IsAuthenticated)
+    {
+        <form method="post" asp-page-handler="Login" class="admin-login">
+            <h2>Đăng nhập admin</h2>
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+            <label for="password">Mật khẩu</label>
+            <input id="password" class="form-control" asp-for="Password" type="password" autocomplete="current-password" />
+            <button class="btn btn-primary" type="submit">Vào quản trị</button>
+        </form>
+    }
+    else
+    {
+        <div class="admin-metrics">
+            <article>
+                <span>Đang hiển thị</span>
+                <strong>@Model.PublishedCount</strong>
+            </article>
+            <article>
+                <span>Đang ẩn</span>
+                <strong>@Model.HiddenCount</strong>
+            </article>
+            <article>
+                <span>Nổi bật</span>
+                <strong>@Model.FeaturedCount</strong>
+            </article>
+            <article>
+                <span>Chuyên mục</span>
+                <strong>@Model.Categories.Count</strong>
+            </article>
+        </div>
+
+        <div class="admin-editor-layout">
+            <form method="post" asp-page-handler="Save" class="admin-product-form" enctype="multipart/form-data">
+                <h2>@(Model.Input.Id == 0 ? "Thêm bài viết" : "Sửa bài viết")</h2>
+                <p class="admin-form-note">Ảnh nên là JPG, PNG hoặc WEBP. Nội dung có thể xuống dòng để tách đoạn khi hiển thị trên website.</p>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.Id" />
+                <input type="hidden" asp-for="Input.ImageUrl" />
+
+                <label asp-for="Input.Title">Tiêu đề</label>
+                <input class="form-control" asp-for="Input.Title" />
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
+
+                <label asp-for="Input.Slug">Slug URL</label>
+                <input class="form-control" asp-for="Input.Slug" placeholder="tu-dong-neu-bo-trong" />
+                <span asp-validation-for="Input.Slug" class="text-danger"></span>
+
+                <label asp-for="Input.CategorySlug">Chuyên mục</label>
+                <select class="form-control" asp-for="Input.CategorySlug">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Slug">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.CategorySlug" class="text-danger"></span>
+
+                <label asp-for="Input.Excerpt">Mô tả ngắn</label>
+                <textarea class="form-control" asp-for="Input.Excerpt" rows="3"></textarea>
+                <span asp-validation-for="Input.Excerpt" class="text-danger"></span>
+
+                <label asp-for="Input.Content">Nội dung</label>
+                <textarea class="form-control" asp-for="Input.Content" rows="10" placeholder="Viết nội dung bài. Xuống dòng để tách đoạn."></textarea>
+                <span asp-validation-for="Input.Content" class="text-danger"></span>
+
+                <label asp-for="Input.ImageFile">Ảnh đại diện</label>
+                <input class="form-control" asp-for="Input.ImageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+                @if (!string.IsNullOrWhiteSpace(Model.Input.ImageUrl))
+                {
+                    <p class="admin-help">Ảnh hiện tại: @Model.Input.ImageUrl</p>
+                }
+
+                <label asp-for="Input.ImageAlt">Alt text cho ảnh</label>
+                <input class="form-control" asp-for="Input.ImageAlt" placeholder="Tự dùng tiêu đề nếu bỏ trống" />
+
+                <label class="check-row">
+                    <input asp-for="Input.IsFeatured" />
+                    <span>Đánh dấu nổi bật</span>
+                </label>
+
+                <label class="check-row">
+                    <input asp-for="Input.IsPublished" />
+                    <span>Cho phép hiển thị trên website</span>
+                </label>
+
+                <button class="btn btn-primary" type="submit">Lưu bài viết</button>
+                @if (Model.Input.Id != 0)
+                {
+                    <a class="btn btn-outline-dark" asp-page="/Admin/Articles">Thêm mới</a>
+                }
+            </form>
+
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Bài viết</th>
+                            <th>Chuyên mục</th>
+                            <th>Trạng thái</th>
+                            <th>Nổi bật</th>
+                            <th>Cập nhật</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var article in Model.Articles)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@article.Title</strong><br />
+                                    <span>/bai-viet/@article.CategorySlug/@article.Slug</span>
+                                </td>
+                                <td>@article.CategoryName</td>
+                                <td>@(article.IsPublished ? "Đang hiển thị" : "Đang ẩn")</td>
+                                <td>@(article.IsFeatured ? "Có" : "Không")</td>
+                                <td>@article.UpdatedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><a class="btn btn-outline-dark" asp-page="/Admin/Articles" asp-route-editId="@article.Id">Sửa</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

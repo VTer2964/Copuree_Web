@@ -17,4 +17,4 @@ EXPOSE 8080
 RUN mkdir -p /app/data
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "CoPuree.Web.dll"]
+CMD ["sh", "-c", "dotnet CoPuree.Web.dll --urls http://0.0.0.0:${PORT:-8080}"]

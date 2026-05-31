@@ -21,11 +21,20 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     public DbSet<BankTransferSetting> BankTransferSettings => Set<BankTransferSetting>();
 
+    public DbSet<Article> Articles => Set<Article>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>()
             .HasIndex(product => product.Slug)
             .IsUnique();
+
+        modelBuilder.Entity<Article>()
+            .HasIndex(article => article.Slug)
+            .IsUnique();
+
+        modelBuilder.Entity<Article>()
+            .HasIndex(article => article.CategorySlug);
 
         modelBuilder.Entity<Product>()
             .Property(product => product.Price)

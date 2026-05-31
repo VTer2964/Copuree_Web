@@ -4,14 +4,7 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { fetchProduct, fetchProducts } from "@/lib/api";
-import { formatVnd } from "@/lib/store";
-
-const benefits = [
-  "Ép lạnh để giữ hương dừa dịu tự nhiên",
-  "Không pha trộn, không hương liệu",
-  "Dễ dùng cho tóc, da khô và massage nhẹ",
-  "Vòi bơm sạch tay, lấy lượng dầu vừa đủ",
-];
+import { brand, formatVnd, getProductBySlug } from "@/lib/store";
 
 const usageSteps = [
   "Bơm một lượng nhỏ ra lòng bàn tay",
@@ -32,10 +25,18 @@ export default async function ProductDetailPage({
 }) {
   const { slug } = await params;
   const product = await fetchProduct(slug);
+  const localProduct = getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
+
+  const benefits = localProduct?.benefits ?? [
+    "Ép lạnh để giữ hương dừa dịu tự nhiên",
+    "Không pha trộn, không hương liệu",
+    "Dễ dùng cho tóc, da khô và massage nhẹ",
+    "Vòi bơm sạch tay, lấy lượng dầu vừa đủ",
+  ];
 
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
@@ -67,32 +68,32 @@ export default async function ProductDetailPage({
               {product.description || product.shortDescription}
             </p>
             <div className="mt-7 flex flex-wrap gap-2">
-              {[product.badge, product.size, product.stockQuantity > 0 ? "Còn hàng" : "Tạm hết hàng"]
-                .filter(Boolean)
-                .map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-[#173d2f]/18 bg-[#fffdf8] px-4 py-2 text-sm font-black text-[#173d2f]"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {[product.badge, product.size, "Dầu dừa ép lạnh"].filter(Boolean).map((tag) => (
+                <span
+                  key={tag}
+                  className="border border-[#173d2f]/18 bg-[#fffdf8] px-4 py-2 text-sm font-black text-[#173d2f]"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
             <div className="mt-9 border-y border-[#173d2f]/15 py-6">
               <p className="text-sm font-black uppercase tracking-[0.16em] text-[#7b877d]">
-                Giá bán
+                Giá tham khảo
               </p>
               <p className="mt-2 text-5xl font-black text-[#173d2f]">
                 {formatVnd(product.price)}
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href={`/thanh-toan?product=${product.slug}`}
+              <a
+                href={brand.facebook}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center justify-center bg-[#173d2f] px-8 py-4 text-base font-black text-white shadow-lg shadow-[#173d2f]/18 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
               >
-                Mua ngay
-              </Link>
+                Hỏi cách dùng
+              </a>
               <Link
                 href="/san-pham"
                 className="inline-flex items-center justify-center border border-[#173d2f]/25 px-8 py-4 text-base font-black text-[#173d2f] transition hover:border-[#b8752a] hover:text-[#b8752a]"
@@ -130,7 +131,7 @@ export default async function ProductDetailPage({
                 key={benefit}
                 className="grid gap-4 border-b border-[#173d2f]/15 py-5 last:border-b-0 sm:grid-cols-[72px_1fr]"
               >
-                <span className="font-serif text-4xl text-[#b8752a]">
+                <span className="font-mono text-3xl text-[#b8752a]">
                   0{index + 1}
                 </span>
                 <span className="text-xl font-black text-[#173d2f]">
@@ -167,7 +168,7 @@ export default async function ProductDetailPage({
                   key={step}
                   className="grid gap-4 border-b border-white/15 py-5 last:border-b-0 sm:grid-cols-[64px_1fr]"
                 >
-                  <span className="font-serif text-4xl text-[#f7e1aa]">
+                  <span className="font-mono text-3xl text-[#f7e1aa]">
                     {index + 1}
                   </span>
                   <p className="text-xl font-black">{step}</p>

@@ -3,28 +3,24 @@ import Link from "next/link";
 import { brand } from "@/lib/store";
 
 const navItems = [
-  { label: "Sản phẩm", href: "/san-pham" },
+  { label: "Trang chủ", href: "/" },
+  { label: "Nổi bật", href: "/#noi-bat" },
+  { label: "Sản phẩm", href: "/#san-pham" },
+  { label: "Ứng dụng", href: "/#ung-dung" },
   { label: "Câu chuyện", href: "/#cau-chuyen" },
-  { label: "Quy trình", href: "/#quy-trinh" },
-  { label: "Tra cứu đơn", href: "/tra-cuu-don-hang" },
-  { label: "Tài khoản", href: "/tai-khoan" },
+  { label: "Liên hệ", href: "/#lien-he" },
 ];
 
-const mobileItems = [
-  { label: "Sản phẩm", href: "/san-pham" },
-  { label: "Tài khoản", href: "/tai-khoan" },
-  { label: "Tra cứu", href: "/tra-cuu-don-hang" },
-  { label: "Mua ngay", href: "/thanh-toan", primary: true },
-];
+const mobileNavItems = navItems.filter((item) => item.label !== "Câu chuyện");
 
 export function SiteHeader() {
   return (
     <>
-      <div className="hidden bg-[#163d2f] px-5 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.16em] text-[#f7e1aa] sm:block">
-        Dầu dừa ép lạnh - đặt trực tiếp từ CoPuree
+      <div className="hidden bg-[#163d2f] px-5 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.14em] text-[#f7e1aa] sm:block">
+        Dầu dừa ép lạnh CoPuree - tinh gọn cho chăm sóc hằng ngày
       </div>
-      <header className="sticky top-0 z-50 border-b border-[#173d2f]/10 bg-[#fbfaf6]/92 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+      <header className="sticky top-0 z-50 border-b border-[#173d2f]/10 bg-[#fbfaf6]/94 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-[1840px] items-center justify-between px-5 sm:px-8 lg:px-[3vw]">
           <Link href="/" className="flex items-center gap-3" aria-label="CoPuree">
             <Image
               src={brand.logo}
@@ -36,45 +32,35 @@ export function SiteHeader() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-1 rounded-full border border-[#173d2f]/10 bg-white/55 p-1 shadow-sm shadow-[#173d2f]/5 lg:flex">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-bold text-[#314237] transition hover:text-[#b8752a]"
+                className="rounded-full px-4 py-2 text-sm font-black text-[#314237] transition hover:bg-[#f0e5cc] hover:text-[#12392d]"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Link
-              href="/gio-hang"
-              className="hidden border-b border-[#173d2f]/25 px-1 py-2 text-sm font-bold text-[#173d2f] transition hover:border-[#b8752a] hover:text-[#b8752a] sm:inline-flex"
-            >
-              Giỏ hàng
-            </Link>
-            <Link
-              href="/thanh-toan"
-              className="rounded-sm bg-[#173d2f] px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-[#173d2f]/15 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
-            >
-              Mua ngay
-            </Link>
-          </div>
+          <a
+            href={brand.facebook}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full bg-[#173d2f] px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-[#173d2f]/15 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
+          >
+            Nhắn tư vấn
+          </a>
         </div>
       </header>
 
-      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-4 gap-1 rounded-sm border border-[#173d2f]/10 bg-[#fbfaf6]/95 p-2 shadow-2xl shadow-[#173d2f]/20 backdrop-blur lg:hidden">
-        {mobileItems.map((item) => (
+      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 gap-1 rounded-[18px] border border-[#173d2f]/10 bg-[#fbfaf6]/96 p-2 shadow-2xl shadow-[#173d2f]/20 backdrop-blur lg:hidden">
+        {mobileNavItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className={
-              item.primary
-                ? "flex min-h-12 items-center justify-center rounded-sm bg-[#173d2f] px-2 text-center text-xs font-black text-white"
-                : "flex min-h-12 items-center justify-center rounded-sm px-2 text-center text-xs font-black text-[#173d2f]"
-            }
+            className="flex min-h-12 items-center justify-center rounded-[14px] px-2 text-center text-[11px] font-black leading-tight text-[#173d2f] transition active:bg-[#f0e5cc]"
           >
             {item.label}
           </Link>

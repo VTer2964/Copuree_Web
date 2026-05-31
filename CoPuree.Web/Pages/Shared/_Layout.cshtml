@@ -3,6 +3,7 @@
 @inject IOptions<BrandOptions> BrandOptions
 @{
     var brand = BrandOptions.Value;
+    var isAdmin = Context.Request.Path.StartsWithSegments("/admin");
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -10,22 +11,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @brand.Name</title>
-    <meta name="description" content="@(ViewData["Description"] ?? "CoPuree - dau dua nguyen chat ep lanh, dat hang truc tiep tren website chinh hang.")" />
+    <meta name="description" content="@(ViewData["Description"] ?? "CoPuree - dầu dừa ép lạnh, câu chuyện sản phẩm và nội dung chăm sóc hằng ngày.")" />
     <meta property="og:title" content="@ViewData["Title"] - @brand.Name" />
-    <meta property="og:description" content="@(ViewData["Description"] ?? "Mua dau dua CoPuree truc tiep tu thuong hieu.")" />
+    <meta property="og:description" content="@(ViewData["Description"] ?? "CoPuree - dầu dừa ép lạnh cho self-care và căn bếp.")" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/images/brand/hero-product.png" />
     <script type="importmap"></script>
-    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CoPuree.Web.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header class="site-header">
+<body class="@(isAdmin ? "admin-body" : null)">
+    <header class="site-header @(isAdmin ? "admin-site-header" : null)">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid site-shell">
-                <a class="brand-mark" asp-page="/Index">
+                <a class="brand-mark" asp-page="@(isAdmin ? "/Admin/Articles" : "/Index")">
                     @if (!string.IsNullOrWhiteSpace(brand.LogoUrl))
                     {
                         <img src="@brand.LogoUrl" alt="@brand.Name" />
@@ -39,52 +39,59 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="mainNav">
-                    <ul class="navbar-nav mx-auto nav-main">
-                        <li class="nav-item"><a class="nav-link" asp-page="/Index">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-page="/Products">Sản phẩm</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#story">Câu chuyện</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-page="/ShippingPolicy">Liên hệ</a></li>
-                    </ul>
-                    <form class="nav-search" asp-page="/Products" method="get" role="search">
-                        <span aria-hidden="true">⌕</span>
-                        <input name="q" type="search" placeholder="Search..." aria-label="Tim kiem san pham" />
-                    </form>
-                    <a class="nav-icon" href="tel:@brand.Hotline" aria-label="Goi CoPuree">☎</a>
-                    <a class="nav-cart" asp-page="/Cart" aria-label="Gio hang">🛒</a>
+                    @if (isAdmin)
+                    {
+                        <ul class="navbar-nav mx-auto nav-main">
+                            <li class="nav-item"><a class="nav-link" asp-page="/Admin/Articles">Bài viết</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-page="/Admin/Products">Sản phẩm</a></li>
+                            <li class="nav-item"><a class="nav-link" href="http://localhost:3000" target="_blank" rel="noopener">Xem website</a></li>
+                        </ul>
+                        <span class="admin-mode-pill">Content studio</span>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav mx-auto nav-main">
+                            <li class="nav-item"><a class="nav-link" asp-page="/Index">Trang chủ</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-page="/Products">Sản phẩm</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/#story">Câu chuyện</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-page="/ShippingPolicy">Liên hệ</a></li>
+                        </ul>
+                        <a class="nav-icon" href="tel:@brand.Hotline" aria-label="Gọi CoPuree">Gọi</a>
+                    }
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="site-shell">
+    <main class="site-shell @(isAdmin ? "admin-shell" : null)">
         @RenderBody()
     </main>
 
-    <footer class="site-footer">
-        <div class="site-shell footer-grid">
-            <div>
-                <a class="brand-mark" asp-page="/Index"><span>Co</span>Puree</a>
-                <p>Dau dua tinh khiet ep lanh cho nha bep va thoi quen cham soc moi ngay.</p>
+    @if (!isAdmin)
+    {
+        <footer class="site-footer">
+            <div class="site-shell footer-grid">
+                <div>
+                    <a class="brand-mark" asp-page="/Index"><span>Co</span>Puree</a>
+                    <p>Dầu dừa ép lạnh cho self-care, căn bếp và nhịp sống tự nhiên mỗi ngày.</p>
+                </div>
+                <div>
+                    <strong>Thương hiệu</strong>
+                    <p>CoPuree tập trung giới thiệu sản phẩm, câu chuyện nguyên liệu và nội dung chăm sóc hữu ích.</p>
+                </div>
+                <div>
+                    <strong>Liên hệ</strong>
+                    <p>Hotline: <a href="tel:@brand.Hotline">@brand.Hotline</a><br />Email: <a href="mailto:@brand.Email">@brand.Email</a><br />Địa chỉ: @brand.WarehouseAddress</p>
+                    <a class="footer-social" href="@brand.FacebookUrl" target="_blank" rel="noopener">Facebook CoPuree</a>
+                </div>
+                <div class="footer-links">
+                    <strong>Quản trị</strong>
+                    <a asp-page="/Admin/Articles">Bài viết</a>
+                    <a asp-page="/Admin/Products">Sản phẩm</a>
+                </div>
             </div>
-            <div>
-                <strong>Ban hang truc tiep</strong>
-                <p>Dat hang truc tiep tai website, CoPuree xac nhan don trong vong 24 gio lam viec.</p>
-            </div>
-            <div>
-                <strong>Lien he</strong>
-                <p>Hotline: <a href="tel:@brand.Hotline">@brand.Hotline</a><br />Email: <a href="mailto:@brand.Email">@brand.Email</a><br />Kho: @brand.WarehouseAddress</p>
-                <a class="footer-social" href="@brand.FacebookUrl" target="_blank" rel="noopener">Facebook CoPuree</a>
-            </div>
-            <div class="footer-links">
-                <strong>Chinh sach</strong>
-                <a asp-page="/Privacy">Bao mat</a>
-                <a asp-page="/ShippingPolicy">Van chuyen</a>
-                <a asp-page="/ReturnPolicy">Doi tra</a>
-                <a asp-page="/Admin/Orders">Admin</a>
-                <a asp-page="/Admin/Products">San pham</a>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    }
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

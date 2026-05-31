@@ -8,6 +8,7 @@ export type SelfCareCategory = {
   subtitle: string;
   text: string;
   image: string;
+  href?: string;
 };
 
 export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[] }) {
@@ -28,56 +29,47 @@ export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[
   }
 
   return (
-    <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#fbfaf6] to-transparent sm:w-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#fbfaf6] to-transparent sm:w-20" />
-
+    <div className="relative min-w-0">
       <button
         type="button"
         aria-label="Danh mục trước"
         onClick={() => scrollByCard("prev")}
-        className="absolute left-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c19b] bg-[#fffaf0]/85 text-[#12392d] shadow-lg backdrop-blur-md transition hover:bg-white sm:left-4"
+        className="absolute left-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c19b] bg-[#fffaf0]/92 text-[#12392d] shadow-lg backdrop-blur-md transition hover:bg-white lg:-left-5"
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-          <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <span aria-hidden="true" className="text-xl leading-none">‹</span>
       </button>
 
       <div
         ref={railRef}
-        className="scrollbar-hide mx-auto flex max-w-[1540px] snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-2 py-2 sm:gap-5 sm:px-10 xl:justify-center xl:px-0"
+        className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth py-2 pr-2 sm:gap-5 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pr-0"
       >
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <article
             key={category.title}
             data-carousel-card
-            className="group flex shrink-0 basis-[74vw] snap-center flex-col overflow-hidden rounded-[14px] bg-[#f3e4c8] shadow-[0_18px_50px_rgba(18,57,45,0.10)] sm:basis-[330px] lg:basis-[350px] xl:basis-[370px]"
+            className="group flex min-h-[430px] shrink-0 basis-[78vw] snap-center flex-col overflow-hidden rounded-[18px] bg-[#12392d] shadow-[0_20px_50px_rgba(18,57,45,0.12)] sm:basis-[330px] lg:min-h-[520px] lg:basis-auto]"
           >
-            <div className="relative aspect-[1.1/1] overflow-hidden">
+            <a href={category.href ?? "#san-pham"} className="relative flex h-full min-h-[430px] flex-col justify-end overflow-hidden lg:min-h-[520px]">
               <Image
                 src={category.image}
                 alt={category.title}
                 fill
                 className="object-cover transition duration-700 group-hover:scale-105"
-                sizes="(min-width: 1280px) 410px, (min-width: 640px) 360px, 78vw"
+                sizes="(min-width: 1280px) 22vw, (min-width: 640px) 330px, 78vw"
               />
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#f3e4c8] to-transparent" />
-              <div className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full border border-[#d6c19b] bg-[#fffaf0]/90 text-[#12392d] backdrop-blur-md">
-                <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-                  <path d="M12 20c4-4 7-8 7-12a7 7 0 0 0-14 0c0 4 3 8 7 12Z" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                  <path d="M12 12c2-2 3-4 3-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b3328] via-[#0b3328]/44 to-transparent" />
+              <div className="relative z-10 p-5 text-white sm:p-6">
+                <p className="text-xs font-black uppercase tracking-[0.14em] text-[#d9b26f]">
+                  0{index + 1}
+                </p>
+                <h3 className="mt-3 text-2xl font-black leading-tight sm:text-[28px]">{category.title}</h3>
+                <p className="mt-2 text-sm font-black text-white/92">{category.subtitle}</p>
+                <p className="mt-3 text-sm leading-6 text-white/78">{category.text}</p>
+                <span className="mt-5 inline-flex h-11 items-center rounded-full border border-white/30 px-4 text-sm font-black transition group-hover:bg-white group-hover:text-[#12392d]">
+                  Xem bài viết
+                </span>
               </div>
-            </div>
-            <div className="flex min-h-[210px] flex-1 flex-col p-4 sm:p-5">
-              <h3 className="text-lg font-black leading-tight text-[#12392d] sm:text-xl">{category.title}</h3>
-              <p className="mt-2 text-sm font-semibold italic text-[#244d3b]">{category.subtitle}</p>
-              <p className="mt-3 text-sm leading-6 text-[#526258]">{category.text}</p>
-              <a href="#san-pham" className="mt-auto inline-flex pt-5 text-sm font-black text-[#12392d]">
-                Xem thêm
-                <span className="ml-2" aria-hidden="true">→</span>
-              </a>
-            </div>
+            </a>
           </article>
         ))}
       </div>
@@ -86,11 +78,9 @@ export function SelfCareCarousel({ categories }: { categories: SelfCareCategory[
         type="button"
         aria-label="Danh mục tiếp theo"
         onClick={() => scrollByCard("next")}
-        className="absolute right-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c19b] bg-[#fffaf0]/85 text-[#12392d] shadow-lg backdrop-blur-md transition hover:bg-white sm:right-4"
+        className="absolute right-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6c19b] bg-[#fffaf0]/92 text-[#12392d] shadow-lg backdrop-blur-md transition hover:bg-white lg:-right-5"
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-          <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <span aria-hidden="true" className="text-xl leading-none">›</span>
       </button>
     </div>
   );

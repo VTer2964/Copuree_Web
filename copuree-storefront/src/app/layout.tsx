@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CoPuree | Dầu Dừa Ép Lạnh",
+  title: "CoPuree | Dầu dừa ép lạnh",
   description:
-    "Website bán hàng CoPuree - dầu dừa ép lạnh, đặt hàng trực tiếp từ thương hiệu.",
+    "CoPuree giới thiệu dầu dừa ép lạnh nguyên chất từ trái dừa Việt Nam cho chăm sóc tóc, da, răng miệng và căn bếp hằng ngày.",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="vi"
       className={`${beVietnam.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }
