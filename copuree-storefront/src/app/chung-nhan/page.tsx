@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Chứng Nhận Chất Lượng | Dầu Dừa Tinh Khiết CoPuree 100%",
     description:
       "Xem các chứng nhận chất lượng ISO 22000:2018, OCOP 3 sao và kết quả kiểm định lab test của dầu dừa ép lạnh nguyên chất CoPuree. Minh bạch tuyệt đối qua mã QR Smart-Tag truy xuất nguồn gốc.",
-    images: [{ url: "/images/certs/real-cert-iso22000-1.png" }],
+    images: [{ url: "/images/certs/real-cert-kn-1.png" }],
     type: "website",
     locale: "vi_VN",
   },
@@ -70,16 +70,16 @@ const certificates = [
   },
   {
     id: "labtest",
-    badge: "Lab Test",
-    title: "Kiểm Nghiệm Chất Lượng",
-    subtitle: "Mẫu dầu dừa được gửi kiểm định định kỳ tại Trung tâm Phân tích và Chứng nhận Độc lập (IACC), đảm bảo an toàn tuyệt đối.",
-    realImage: "/images/certs/cert-labtest.png",
-    illustImage: "/images/certs/cert-labtest.png",
-    imageAlt: "Phiếu kết quả thử nghiệm lab test dầu dừa CoPuree",
+    badge: "Eurofins Lab",
+    title: "Phiếu Kiểm Nghiệm Eurofins",
+    subtitle: "Kết quả thử nghiệm 36 chỉ tiêu — Mã mẫu 743-2024-00091629, thực hiện bởi Eurofins Sắc Ký Hải Đăng (VILAS 238), ngày 27/06/2024.",
+    realImage: "/images/certs/real-cert-kn-1.png",
+    illustImage: "/images/certs/real-cert-kn-1.png",
+    imageAlt: "Phiếu kết quả thử nghiệm Eurofins dầu dừa ép lạnh CoPuree 2024",
     points: [
-      "Hàm lượng Axit Lauric: 48.2% — ĐẠT",
-      "Kim loại nặng (As, Pb, Cd): ND — ĐẠT",
-      "Vi sinh vật (Coliforms, E.coli, nấm mốc): ND — ĐẠT",
+      "36 chỉ tiêu kiểm nghiệm: E.coli, Coliforms, kim loại nặng, aflatoxin... — tất cả ĐẠT",
+      "Chì (Pb), Arsen (As), Thủy ngân (Hg), Đồng (Cu): Không phát hiện — ĐẠT",
+      "Chỉ số acid: 0.17 mg KOH/g fat; Béo tổng: 99.9 g/100g — ĐẠT chuẩn",
     ],
     accentClass: "text-[#2a7a55]",
     badgeBg: "bg-[#e8f5ee] text-[#2a7a55]",
@@ -87,10 +87,10 @@ const certificates = [
 ];
 
 const labResults = [
-  { name: "Kiểm nghiệm độ tinh khiết", value: "100% Nguyên Chất", desc: "Không pha loãng, không chứa dầu khoáng hay phụ gia." },
-  { name: "Chỉ số Acid (AV)", value: "< 0.1 mg KOH/g", desc: "Mức acid tự do cực thấp, dừa tươi được ép ngay và bảo quản đúng cách." },
-  { name: "Hàm lượng Axit Lauric", value: "48.2%", desc: "Axit béo quý giá giúp kháng khuẩn và tái cấu trúc nang tóc." },
-  { name: "Kim loại nặng & Vi sinh", value: "ND (Không phát hiện)", desc: "Đạt chuẩn an toàn vệ sinh thực phẩm và mỹ phẩm của Bộ Y Tế." },
+  { name: "Vi sinh vật (E.coli, Coliforms, Salmonella)", value: "Không phát hiện", desc: "Tổng số vi khuẩn hiếu khí, nấm men, nấm mốc — tất cả dưới LOD." },
+  { name: "Kim loại nặng (As, Pb, Cd, Hg, Cu)", value: "Không phát hiện", desc: "Arsen, Chì, Thủy ngân, Đồng đều dưới giới hạn phát hiện của phương pháp." },
+  { name: "Chỉ số Acid & Béo tổng", value: "0.17 mg KOH/g fat", desc: "Béo tổng 99.9g/100g — xác nhận dầu nguyên chất, không pha loãng." },
+  { name: "Aflatoxin (B1, B2, G1, G2)", value: "Không phát hiện", desc: "Mycotoxin độc hại không phát hiện ở ngưỡng LOD = 0.5 µg/kg." },
 ];
 
 export default function CertificatesPage() {
@@ -211,14 +211,14 @@ export default function CertificatesPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
             <span className="text-xs font-black uppercase tracking-[0.24em] text-[#b8752a]">
-              Báo cáo kỹ thuật
+              Báo cáo kỹ thuật — Eurofins Sắc Ký Hải Đăng (VILAS 238)
             </span>
             <h2 className="mt-4 text-3xl font-black text-[#173d2f] sm:text-4xl">
-              Kết quả kiểm nghiệm chất lượng
+              Kết quả kiểm nghiệm 36 chỉ tiêu — 07/2024
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-[#5c6a60]">
-              CoPuree gửi mẫu kiểm định định kỳ tại các trung tâm đo lường
-              chất lượng uy tín để cam kết sự an toàn tuyệt đối cho người tiêu dùng.
+              Mã mẫu 743-2024-00091629. CoPuree gửi mẫu kiểm định định kỳ tại Eurofins
+              — tổ chức kiểm nghiệm quốc tế được công nhận VILAS, đảm bảo an toàn tuyệt đối.
             </p>
           </div>
 
@@ -242,6 +242,33 @@ export default function CertificatesPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Real Eurofins lab test document — pages 1, 2, 3 */}
+          <div className="mt-12">
+            <p className="mb-5 text-sm font-black uppercase tracking-[0.16em] text-[#b8752a]">
+              Phiếu kiểm nghiệm gốc — Eurofins Sắc Ký Hải Đăng (VILAS 238) — 07/2024
+            </p>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { src: "/images/certs/real-cert-kn-1.png", label: "Trang 1/3 — Chỉ tiêu vi sinh & hóa lý" },
+                { src: "/images/certs/real-cert-kn-2.png", label: "Trang 2/3 — Kim loại nặng & dinh dưỡng" },
+                { src: "/images/certs/real-cert-kn-3.png", label: "Trang 3/3 — Xác nhận kết quả" },
+              ].map((page) => (
+                <div key={page.src} className="group overflow-hidden rounded-[14px] border border-[#173d2f]/10 bg-white shadow-sm">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f0e8]">
+                    <Image
+                      src={page.src}
+                      alt={page.label}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover object-top transition duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <p className="px-4 py-3 text-xs font-black text-[#5c6a60]">{page.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
