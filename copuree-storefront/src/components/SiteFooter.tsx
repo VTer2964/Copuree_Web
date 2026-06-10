@@ -3,12 +3,12 @@ import Link from "next/link";
 import { brand } from "@/lib/store";
 
 const exploreLinks = [
-  { label: "Trang chủ", href: "/" },
-  { label: "Sản phẩm", href: "/san-pham" },
-  { label: "Về CoPuree", href: "/ve-copuree" },
-  { label: "Chứng nhận", href: "/chung-nhan" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Liên hệ", href: "/lien-he" },
+  { label: "Trang chủ", href: "/#top" },
+  { label: "Sản phẩm", href: "/#san-pham" },
+  { label: "Ứng dụng", href: "/#ung-dung" },
+  { label: "Câu chuyện", href: "/#cau-chuyen" },
+  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Liên hệ", href: "/#lien-he" },
 ];
 
 const articleLinks = [

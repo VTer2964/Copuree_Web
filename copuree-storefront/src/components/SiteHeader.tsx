@@ -3,21 +3,21 @@ import Link from "next/link";
 import { brand } from "@/lib/store";
 
 const navItems = [
-  { label: "Trang chủ", href: "/" },
-  { label: "Sản phẩm", href: "/san-pham" },
-  { label: "Về CoPuree", href: "/ve-copuree" },
-  { label: "Chứng nhận", href: "/chung-nhan" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Tin tức", href: "/tin-tuc" },
-  { label: "Liên hệ", href: "/lien-he" },
+  { label: "Trang chủ", href: "/#top" },
+  { label: "Nổi bật", href: "/#noi-bat" },
+  { label: "Sản phẩm", href: "/#san-pham" },
+  { label: "Ứng dụng", href: "/#ung-dung" },
+  { label: "Câu chuyện", href: "/#cau-chuyen" },
+  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Liên hệ", href: "/#lien-he" },
 ];
 
 const mobileNavItems = [
-  { label: "Trang chủ", href: "/" },
-  { label: "Sản phẩm", href: "/san-pham" },
-  { label: "Về CoPuree", href: "/ve-copuree" },
-  { label: "Tin tức", href: "/tin-tuc" },
-  { label: "Liên hệ", href: "/lien-he" },
+  { label: "Đầu trang", href: "/#top" },
+  { label: "Sản phẩm", href: "/#san-pham" },
+  { label: "Cách dùng", href: "/#ung-dung" },
+  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Liên hệ", href: "/#lien-he" },
 ];
 
 export function SiteHeader() {
@@ -28,7 +28,7 @@ export function SiteHeader() {
       </div>
       <header className="sticky top-0 z-50 border-b border-[#173d2f]/10 bg-[#fbfaf6]/94 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1840px] items-center justify-between px-5 sm:px-8 lg:px-[3vw]">
-          <Link href="/" className="flex items-center gap-3" aria-label="CoPuree">
+          <Link href="/#top" className="flex items-center gap-3" aria-label="CoPuree">
             <Image
               src={brand.logo}
               alt="CoPuree"

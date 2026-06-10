@@ -166,7 +166,7 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
   }
 
   return (
-    <section id="noi-bat" className="relative isolate overflow-hidden border-b border-[#e2d1b2] bg-[#fffaf1] px-5 py-12 sm:px-8 lg:px-[3vw] lg:py-16">
+    <section id="noi-bat" className="relative isolate scroll-mt-16 overflow-hidden border-b border-[#e2d1b2] bg-[#fffaf1] px-5 py-12 sm:px-8 lg:px-[3vw] lg:py-16">
       <div className="mx-auto max-w-[1840px] text-center">
         <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b4762f]">
           Điểm nổi bật từ CoPuree
