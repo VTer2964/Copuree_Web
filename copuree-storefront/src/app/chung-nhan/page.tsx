@@ -3,90 +3,202 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { brand } from "@/lib/store";
 
 export const metadata: Metadata = {
   title: "Chứng Nhận Chất Lượng | Dầu Dừa Tinh Khiết CoPuree 100%",
-  description: "Xem các chứng nhận chất lượng và kết quả kiểm định lab test của dầu dừa tinh khiết CoPuree. Minh bạch tuyệt đối qua mã QR Smart-Tag truy xuất nguồn gốc.",
+  description:
+    "Xem các chứng nhận chất lượng ISO 22000:2018, OCOP 3 sao và kết quả kiểm định lab test của dầu dừa ép lạnh nguyên chất CoPuree. Minh bạch tuyệt đối qua mã QR Smart-Tag truy xuất nguồn gốc.",
   openGraph: {
     title: "Chứng Nhận Chất Lượng | Dầu Dừa Tinh Khiết CoPuree 100%",
-    description: "Xem các chứng nhận chất lượng và kết quả kiểm định lab test của dầu dừa tinh khiết CoPuree. Minh bạch tuyệt đối qua mã QR Smart-Tag truy xuất nguồn gốc.",
-    images: [{ url: "/images/copuree-pdf/pdf-page8-image1.png" }],
+    description:
+      "Xem các chứng nhận chất lượng ISO 22000:2018, OCOP 3 sao và kết quả kiểm định lab test của dầu dừa ép lạnh nguyên chất CoPuree. Minh bạch tuyệt đối qua mã QR Smart-Tag truy xuất nguồn gốc.",
+    images: [{ url: "/images/certs/real-cert-iso22000-1.png" }],
     type: "website",
     locale: "vi_VN",
   },
 };
 
-export default function CertificatesPage() {
-  const labReports = [
-    { name: "Kiểm nghiệm độ tinh khiết", value: "100% Nguyên Chất, Không tạp chất", desc: "Chứng nhận dầu không pha loãng, không chứa dầu khoáng hay phụ gia." },
-    { name: "Chỉ số Acid (AV)", value: "< 0.1 mg KOH/g", desc: "Mức acid tự do cực thấp, chứng minh dừa tươi được ép ngay lập tức và bảo quản đúng cách." },
-    { name: "Hàm lượng Axit Lauric", value: "48.2% - 50.1%", desc: "Axit béo quý giá giúp kháng khuẩn và tái cấu trúc nang tóc, tương đương với sữa mẹ." },
-    { name: "Kim loại nặng & Vi sinh", value: "Không phát hiện (ND)", desc: "Đạt chuẩn an toàn vệ sinh thực phẩm và mỹ phẩm của Bộ Y Tế." },
-  ];
+const certificates = [
+  {
+    id: "iso22000",
+    badge: "ISO 22000:2018",
+    title: "ISO 22000:2018",
+    subtitle: "Hệ thống quản lý an toàn thực phẩm quốc tế — cấp bởi Guardian Independent Certification (GIC-G), có giá trị đến 29/03/2028.",
+    realImage: "/images/certs/real-cert-iso22000-1.png",
+    illustImage: "/images/certs/cert-iso22000.png",
+    imageAlt: "Giấy chứng nhận ISO 22000:2018 của Kim Long - đơn vị sản xuất CoPuree",
+    points: [
+      "Production of Coconut Oils & Coconut Soaps",
+      "Cấp bởi Guardian Independent Certification Ltd (GICG)",
+      "Hiệu lực: 25/03/2025 – 29/03/2028",
+    ],
+    accentClass: "text-[#1a4a8a]",
+    badgeBg: "bg-[#e8f0fa] text-[#1a4a8a]",
+  },
+  {
+    id: "ocop-ep-lanh",
+    badge: "OCOP 3★",
+    title: "OCOP — Dầu Dừa Ép Lạnh",
+    subtitle: "Giấy chứng nhận sản phẩm OCOP đạt hạng 3 sao — Ủy ban Nhân dân huyện Mỏ Cày Bắc, Bến Tre. Hiệu lực 36 tháng từ 12/11/2024.",
+    realImage: "/images/certs/real-cert-ocop-ep-lanh-1.png",
+    illustImage: "/images/certs/cert-ocop.png",
+    imageAlt: "Giấy chứng nhận OCOP 3 sao Dầu Dừa Ép Lạnh CoPuree năm 2024",
+    points: [
+      "Sản phẩm: Dầu Dừa Ép Lạnh — Công ty TNHH SX TM Nông sản Kim Long",
+      "Chương trình Mỗi xã một sản phẩm OCOP năm 2024",
+      "QĐ số: 4894/QĐ-UBND, ngày 12 tháng 11 năm 2024",
+    ],
+    accentClass: "text-[#b8752a]",
+    badgeBg: "bg-[#fdf3e3] text-[#b8752a]",
+  },
+  {
+    id: "ocop-truyen-thong",
+    badge: "OCOP 3★",
+    title: "OCOP — Dầu Dừa Truyền Thống",
+    subtitle: "Giấy chứng nhận sản phẩm OCOP đạt hạng 3 sao — Ủy ban Nhân dân huyện Mỏ Cày Bắc, Bến Tre. Hiệu lực 36 tháng từ 12/11/2024.",
+    realImage: "/images/certs/real-cert-ocop-truyen-thong-1.png",
+    illustImage: "/images/certs/cert-ocop.png",
+    imageAlt: "Giấy chứng nhận OCOP 3 sao Dầu Dừa Truyền Thống năm 2024",
+    points: [
+      "Sản phẩm: Dầu Dừa Truyền Thống — Công ty TNHH SX TM Nông sản Kim Long",
+      "Chương trình Mỗi xã một sản phẩm OCOP năm 2024",
+      "QĐ số: 4894/QĐ-UBND, ngày 12 tháng 11 năm 2024",
+    ],
+    accentClass: "text-[#b8752a]",
+    badgeBg: "bg-[#fdf3e3] text-[#b8752a]",
+  },
+  {
+    id: "labtest",
+    badge: "Lab Test",
+    title: "Kiểm Nghiệm Chất Lượng",
+    subtitle: "Mẫu dầu dừa được gửi kiểm định định kỳ tại Trung tâm Phân tích và Chứng nhận Độc lập (IACC), đảm bảo an toàn tuyệt đối.",
+    realImage: "/images/certs/cert-labtest.png",
+    illustImage: "/images/certs/cert-labtest.png",
+    imageAlt: "Phiếu kết quả thử nghiệm lab test dầu dừa CoPuree",
+    points: [
+      "Hàm lượng Axit Lauric: 48.2% — ĐẠT",
+      "Kim loại nặng (As, Pb, Cd): ND — ĐẠT",
+      "Vi sinh vật (Coliforms, E.coli, nấm mốc): ND — ĐẠT",
+    ],
+    accentClass: "text-[#2a7a55]",
+    badgeBg: "bg-[#e8f5ee] text-[#2a7a55]",
+  },
+];
 
+const labResults = [
+  { name: "Kiểm nghiệm độ tinh khiết", value: "100% Nguyên Chất", desc: "Không pha loãng, không chứa dầu khoáng hay phụ gia." },
+  { name: "Chỉ số Acid (AV)", value: "< 0.1 mg KOH/g", desc: "Mức acid tự do cực thấp, dừa tươi được ép ngay và bảo quản đúng cách." },
+  { name: "Hàm lượng Axit Lauric", value: "48.2%", desc: "Axit béo quý giá giúp kháng khuẩn và tái cấu trúc nang tóc." },
+  { name: "Kim loại nặng & Vi sinh", value: "ND (Không phát hiện)", desc: "Đạt chuẩn an toàn vệ sinh thực phẩm và mỹ phẩm của Bộ Y Tế." },
+];
+
+export default function CertificatesPage() {
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#173d2f]">
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative min-h-[500px] overflow-hidden border-b border-[#173d2f]/10">
+      <section className="relative min-h-[460px] overflow-hidden border-b border-[#173d2f]/10">
         <Image
-          src="/images/copuree-pdf/pdf-page8-image1.png"
-          alt="Xem tổng hợp các giấy chứng nhận chất lượng cho sản phẩm dầu dừa tinh khiết và dầu dừa ép lạnh nguyên chất uy tín từ CoPuree."
+          src="/images/copuree-pdf/pdf-page5-image2.png"
+          alt="Chứng nhận & tiêu chuẩn chất lượng dầu dừa ép lạnh CoPuree"
           fill
           priority
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf6] via-[#fbfaf6]/92 to-[#fbfaf6]/30" />
-        <div className="relative mx-auto flex min-h-[500px] max-w-7xl items-center px-5 py-16 sm:px-8">
-          <div className="max-w-3xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf6] via-[#fbfaf6]/90 to-[#fbfaf6]/18" />
+        <div className="relative mx-auto flex min-h-[460px] max-w-7xl items-center px-5 py-16 sm:px-8">
+          <div className="max-w-2xl">
             <p className="text-sm font-black uppercase tracking-[0.18em] text-[#b8752a]">
-              Độ uy tín & Kiểm định Lab
+              Độ uy tín & Kiểm định
             </p>
-            <h1 className="mt-6 text-4xl font-black leading-[1.02] text-[#173d2f] sm:text-6xl">
-              Cam Kết Dầu Dừa Tinh Khiết 100%.
+            <h1 className="mt-5 text-4xl font-black leading-[1.02] text-[#173d2f] sm:text-[56px]">
+              Chứng Nhận &amp; Tiêu Chuẩn Chất Lượng.
             </h1>
-            <p className="mt-6 text-base leading-7 text-[#445447] sm:text-lg sm:leading-8">
-              Minh bạch mọi chỉ số kiểm định. Quét mã QR Smart-Tag để tự kiểm tra kết quả lab test của hãng.
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#445447] sm:text-lg sm:leading-8">
+              CoPuree cam kết minh bạch tuyệt đối. Xem ngay các giấy chứng nhận
+              ISO 22000:2018, OCOP và kết quả kiểm nghiệm lab thực tế.
             </p>
-            <div className="mt-8">
-              <Link
-                href="/faq"
-                className="inline-flex rounded-[6px] bg-[#173d2f] px-6 py-3.5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#b8752a] shadow-lg shadow-[#173d2f]/10"
-              >
-                xem các câu hỏi thường gặp &rarr;
-              </Link>
-            </div>
+            <a
+              href="#chung-nhan"
+              className="mt-8 inline-flex items-center gap-2 rounded-[6px] bg-[#173d2f] px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-[#173d2f]/15 transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
+            >
+              Xem các chứng nhận &rarr;
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Lab Reports Section */}
-      <section className="px-5 py-16 sm:px-8 sm:py-24">
+      {/* Certificates — card grid with real document images */}
+      <section id="chung-nhan" className="px-5 py-16 sm:px-8 sm:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center mb-16">
+          <div className="mb-14 text-center">
             <span className="text-xs font-black uppercase tracking-[0.24em] text-[#b8752a]">
-              Báo cáo kỹ thuật
+              Giấy chứng nhận thực tế
             </span>
             <h2 className="mt-4 text-3xl font-black text-[#173d2f] sm:text-4xl">
-              Kết quả kiểm nghiệm chất lượng dầu dừa
+              {certificates.length} chứng nhận của CoPuree
             </h2>
-            <p className="mt-4 text-base text-[#5c6a60]">
-              CoPuree gửi mẫu kiểm định định kỳ tại các trung tâm đo lường chất lượng uy tín (như Quatest) để cam kết sự an toàn tuyệt đối cho người tiêu dùng.
+            <p className="mx-auto mt-4 max-w-xl text-base text-[#5c6a60]">
+              Tất cả giấy chứng nhận đều là tài liệu gốc, được cấp bởi các tổ
+              chức kiểm định uy tín trong nước và quốc tế.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {labReports.map((report) => (
-              <div key={report.name} className="bg-[#fffdf8] border border-[#173d2f]/12 p-6 sm:p-8 rounded-[16px] flex flex-col justify-between hover:shadow-md transition-shadow">
-                <div>
-                  <h3 className="text-lg font-black text-[#173d2f]">{report.name}</h3>
-                  <p className="mt-2 text-sm text-[#5c6a60]">{report.desc}</p>
+          <div className="grid gap-10 md:grid-cols-2">
+            {certificates.map((cert) => (
+              <div
+                key={cert.id}
+                className="group overflow-hidden rounded-[20px] border border-[#173d2f]/10 bg-white shadow-sm transition hover:shadow-xl"
+              >
+                {/* Real certificate image — full width on top */}
+                <div className="relative aspect-[3/2] overflow-hidden bg-[#f5f0e8]">
+                  <Image
+                    src={cert.realImage}
+                    alt={cert.imageAlt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                  />
+                  {/* Badge overlay */}
+                  <div className="absolute left-4 top-4">
+                    <span className={`inline-block rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] shadow-sm ${cert.badgeBg}`}>
+                      {cert.badge}
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-6 border-t border-[#173d2f]/10 pt-4 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase text-[#b8752a] tracking-wider">Kết quả:</span>
-                  <strong className="text-lg font-black text-[#173d2f]">{report.value}</strong>
+
+                {/* Info below */}
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-xl font-black text-[#173d2f]">
+                    {cert.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[#5c6a60]">
+                    {cert.subtitle}
+                  </p>
+                  <ul className="mt-5 grid gap-2 border-t border-[#173d2f]/8 pt-5">
+                    {cert.points.map((pt) => (
+                      <li
+                        key={pt}
+                        className="flex items-start gap-2 text-sm leading-6 text-[#5c6a60]"
+                      >
+                        <svg
+                          className={`mt-0.5 h-4 w-4 shrink-0 ${cert.accentClass}`}
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
@@ -94,39 +206,128 @@ export default function CertificatesPage() {
         </div>
       </section>
 
-      {/* QR Smart-Tag explanation */}
-      <section className="bg-[#fff7e8] border-t border-b border-[#e2d1b2] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-5xl grid gap-10 md:grid-cols-[1fr_240px] md:items-center">
-          <div>
-            <h2 className="text-2xl font-black text-[#173d2f] sm:text-3xl">
-              Nhãn QR Smart-Tag truy xuất nguồn gốc lô hàng
+      {/* Lab Results Data */}
+      <section className="border-y border-[#173d2f]/10 bg-[#f3f6ef] px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 text-center">
+            <span className="text-xs font-black uppercase tracking-[0.24em] text-[#b8752a]">
+              Báo cáo kỹ thuật
+            </span>
+            <h2 className="mt-4 text-3xl font-black text-[#173d2f] sm:text-4xl">
+              Kết quả kiểm nghiệm chất lượng
             </h2>
-            <p className="mt-4 text-base leading-7 text-[#5c6a60]">
-              Trên mỗi hũ dầu dừa nguyên chất CoPuree giao tới tay bạn đều được dán một mã QR duy nhất. Khi dùng điện thoại để quét mã này, bạn sẽ nhận được thông tin: Ngày sản xuất, số lô dừa tươi ép lạnh, và giấy kết quả phân tích chất lượng của chính lô sản phẩm đó tại phòng lab.
-            </p>
-            <p className="mt-2 text-base leading-7 text-[#5c6a60]">
-              Đây là minh chứng cho tinh thần kinh doanh tử tế, đặt niềm tin và sự hài lòng của khách hàng sống xanh lên hàng đầu của CoPuree.
+            <p className="mx-auto mt-4 max-w-xl text-base text-[#5c6a60]">
+              CoPuree gửi mẫu kiểm định định kỳ tại các trung tâm đo lường
+              chất lượng uy tín để cam kết sự an toàn tuyệt đối cho người tiêu dùng.
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[#173d2f]/20 bg-white rounded-[16px]">
-            {/* Fake QR code visualization */}
-            <div className="relative w-36 h-36 bg-[#fbfaf6] border border-[#173d2f]/10 flex items-center justify-center rounded-[8px]">
-              <div className="grid grid-cols-3 gap-1 p-2 w-full h-full opacity-60">
-                <div className="bg-[#173d2f] rounded-[2px]" />
-                <div className="bg-[#173d2f] rounded-[2px]" />
-                <div className="bg-transparent" />
-                <div className="bg-[#173d2f] rounded-[2px]" />
-                <div className="bg-transparent" />
-                <div className="bg-[#173d2f] rounded-[2px]" />
-                <div className="bg-transparent" />
-                <div className="bg-[#173d2f] rounded-[2px]" />
-                <div className="bg-[#173d2f] rounded-[2px]" />
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {labResults.map((result) => (
+              <div
+                key={result.name}
+                className="rounded-[16px] border border-[#173d2f]/10 bg-white p-6 shadow-sm"
+              >
+                <h3 className="text-sm font-black text-[#173d2f]">
+                  {result.name}
+                </h3>
+                <p className="mt-2 text-xs leading-5 text-[#5c6a60]">{result.desc}</p>
+                <div className="mt-5 flex flex-col gap-1 border-t border-[#173d2f]/8 pt-4">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#b8752a]">
+                    Kết quả
+                  </span>
+                  <strong className="text-base font-black text-[#173d2f]">
+                    {result.value}
+                  </strong>
+                </div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="bg-[#173d2f] text-white text-[10px] font-bold px-2 py-1 rounded">SCAN QR</span>
-              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QR Smart-Tag + CTA */}
+      <section className="bg-[#fff7e8] border-t border-[#e2d1b2] px-5 py-14 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-5xl grid gap-10 md:grid-cols-[1fr_200px] md:items-center">
+          <div>
+            <span className="text-xs font-black uppercase tracking-[0.24em] text-[#b8752a]">
+              Truy xuất nguồn gốc
+            </span>
+            <h2 className="mt-4 text-2xl font-black text-[#173d2f] sm:text-3xl">
+              Nhãn QR Smart-Tag trên mỗi hũ sản phẩm
+            </h2>
+            <p className="mt-4 text-base leading-7 text-[#5c6a60]">
+              Trên mỗi hũ dầu dừa CoPuree đều được dán một mã QR duy nhất. Quét
+              mã để xem ngay: ngày sản xuất, số lô dừa tươi ép lạnh và giấy
+              kết quả phân tích chất lượng của chính lô sản phẩm đó.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/san-pham"
+                className="inline-flex rounded-[6px] bg-[#173d2f] px-6 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#b8752a]"
+              >
+                Mua sản phẩm →
+              </Link>
+              <a
+                href={brand.facebook}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-[6px] border border-[#173d2f]/25 px-6 py-3 text-sm font-black text-[#173d2f] transition hover:border-[#b8752a] hover:text-[#b8752a]"
+              >
+                Liên hệ tư vấn
+              </a>
             </div>
-            <span className="mt-4 text-xs font-black text-[#173d2f] tracking-wide text-center">Smart-Tag CoPuree</span>
+          </div>
+
+          <div className="flex flex-col items-center justify-center gap-4 rounded-[20px] border-2 border-dashed border-[#173d2f]/20 bg-white p-8">
+            {/* Simple QR visual */}
+            <div className="h-28 w-28 overflow-hidden rounded-[10px] border border-[#173d2f]/10 bg-[#fbfaf6] p-3">
+              <svg viewBox="0 0 29 29" className="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Top-left finder pattern */}
+                <rect x="0" y="0" width="7" height="7" rx="1" fill="#173d2f" />
+                <rect x="1" y="1" width="5" height="5" rx="0.5" fill="#fbfaf6" />
+                <rect x="2" y="2" width="3" height="3" fill="#173d2f" />
+                {/* Top-right finder pattern */}
+                <rect x="22" y="0" width="7" height="7" rx="1" fill="#173d2f" />
+                <rect x="23" y="1" width="5" height="5" rx="0.5" fill="#fbfaf6" />
+                <rect x="24" y="2" width="3" height="3" fill="#173d2f" />
+                {/* Bottom-left finder pattern */}
+                <rect x="0" y="22" width="7" height="7" rx="1" fill="#173d2f" />
+                <rect x="1" y="23" width="5" height="5" rx="0.5" fill="#fbfaf6" />
+                <rect x="2" y="24" width="3" height="3" fill="#173d2f" />
+                {/* Data dots */}
+                <rect x="9" y="1" width="2" height="2" fill="#173d2f" />
+                <rect x="12" y="1" width="2" height="2" fill="#173d2f" />
+                <rect x="9" y="4" width="2" height="2" fill="#173d2f" />
+                <rect x="14" y="3" width="2" height="2" fill="#173d2f" />
+                <rect x="9" y="9" width="2" height="2" fill="#173d2f" />
+                <rect x="12" y="9" width="2" height="2" fill="#173d2f" />
+                <rect x="16" y="9" width="2" height="2" fill="#173d2f" />
+                <rect x="9" y="13" width="2" height="2" fill="#173d2f" />
+                <rect x="12" y="12" width="2" height="2" fill="#173d2f" />
+                <rect x="18" y="12" width="2" height="2" fill="#173d2f" />
+                <rect x="20" y="9" width="2" height="2" fill="#173d2f" />
+                <rect x="23" y="9" width="2" height="2" fill="#173d2f" />
+                <rect x="25" y="12" width="2" height="2" fill="#173d2f" />
+                <rect x="20" y="16" width="2" height="2" fill="#173d2f" />
+                <rect x="9" y="16" width="2" height="2" fill="#173d2f" />
+                <rect x="12" y="18" width="2" height="2" fill="#173d2f" />
+                <rect x="16" y="16" width="2" height="2" fill="#173d2f" />
+                <rect x="9" y="22" width="2" height="2" fill="#173d2f" />
+                <rect x="12" y="24" width="2" height="2" fill="#173d2f" />
+                <rect x="16" y="22" width="2" height="2" fill="#173d2f" />
+                <rect x="18" y="24" width="2" height="2" fill="#173d2f" />
+                <rect x="20" y="22" width="2" height="2" fill="#173d2f" />
+                <rect x="23" y="24" width="2" height="2" fill="#173d2f" />
+                <rect x="25" y="22" width="2" height="2" fill="#173d2f" />
+              </svg>
+            </div>
+            <p className="text-center text-xs font-black text-[#173d2f]">
+              Smart-Tag CoPuree
+            </p>
+            <p className="text-center text-[11px] text-[#5c6a60]">
+              Quét để xem kết quả lab test lô hàng của bạn
+            </p>
           </div>
         </div>
       </section>
