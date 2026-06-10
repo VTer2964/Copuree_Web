@@ -7,7 +7,8 @@ const exploreLinks = [
   { label: "Sản phẩm", href: "/#san-pham" },
   { label: "Ứng dụng", href: "/#ung-dung" },
   { label: "Câu chuyện", href: "/#cau-chuyen" },
-  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Chứng nhận", href: "/chung-nhan" },
+  { label: "FAQ", href: "/faq" },
   { label: "Liên hệ", href: "/#lien-he" },
 ];
 

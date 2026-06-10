@@ -54,10 +54,12 @@ function getDesktopTarget(offset: number) {
 }
 
 export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[] }) {
-  const featured = useMemo(
-    () => articles.filter((article) => article.isFeatured).slice(0, 8),
-    [articles]
-  );
+  const featured = useMemo(() => {
+    const highlighted = articles.filter((article) => article.isFeatured);
+    const supplemental = articles.filter((article) => !article.isFeatured);
+
+    return [...highlighted, ...supplemental].slice(0, 5);
+  }, [articles]);
   const [activeIndex, setActiveIndex] = useState(0);
   const desktopTrackRef = useRef<HTMLDivElement | null>(null);
   const desktopCardRefs = useRef<Array<HTMLAnchorElement | null>>([]);

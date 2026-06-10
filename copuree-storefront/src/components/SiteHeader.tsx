@@ -8,15 +8,17 @@ const navItems = [
   { label: "Sản phẩm", href: "/#san-pham" },
   { label: "Ứng dụng", href: "/#ung-dung" },
   { label: "Câu chuyện", href: "/#cau-chuyen" },
-  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Chứng nhận", href: "/chung-nhan" },
+  { label: "FAQ", href: "/faq" },
   { label: "Liên hệ", href: "/#lien-he" },
 ];
 
 const mobileNavItems = [
-  { label: "Đầu trang", href: "/#top" },
+  { label: "Nổi bật", href: "/#noi-bat" },
   { label: "Sản phẩm", href: "/#san-pham" },
   { label: "Cách dùng", href: "/#ung-dung" },
-  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Chứng nhận", href: "/chung-nhan" },
+  { label: "FAQ", href: "/faq" },
   { label: "Liên hệ", href: "/#lien-he" },
 ];
 
@@ -62,7 +64,7 @@ export function SiteHeader() {
         </div>
       </header>
 
-      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-5 gap-1 rounded-[18px] border border-[#173d2f]/10 bg-[#fbfaf6]/96 p-2 shadow-2xl shadow-[#173d2f]/20 backdrop-blur lg:hidden">
+      <nav className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-6 gap-1 rounded-[18px] border border-[#173d2f]/10 bg-[#fbfaf6]/96 p-2 shadow-2xl shadow-[#173d2f]/20 backdrop-blur lg:hidden">
         {mobileNavItems.map((item) => (
           <Link
             key={item.href}

@@ -42,16 +42,8 @@ const ingredientNotes = [
   },
 ];
 
-const articleCategoryLinks = [
-  { label: "Chăm sóc tóc", href: "/tin-tuc?category=cham-soc-toc" },
-  { label: "Chăm sóc da", href: "/tin-tuc?category=cham-soc-da" },
-  { label: "Nấu ăn và làm bánh", href: "/tin-tuc?category=nau-an-lam-banh" },
-  { label: "Hoạt động thương hiệu", href: "/tin-tuc?category=hoat-dong-thuong-hieu" },
-];
-
 export default async function Home() {
   const [products, articles] = await Promise.all([fetchProducts(), fetchArticles()]);
-  const latestArticles = articles.slice(0, 3);
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -267,73 +259,6 @@ export default async function Home() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="tin-tuc" className="scroll-mt-16 bg-[#fffaf0] px-5 py-12 sm:px-8 sm:py-16 lg:px-[3vw]">
-        <div className="mx-auto grid max-w-[1840px] gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#b4762f]">
-              Tin tức & cẩm nang
-            </p>
-            <h2 className="mt-4 max-w-xl text-[34px] font-black leading-[1.06] text-[#12392d] sm:text-[50px]">
-              Dừng ở tổng quan trước khi đọc sâu hơn
-            </h2>
-            <p className="mt-5 max-w-md text-base leading-7 text-[#50645a]">
-              Khu vực này gom các chủ đề chăm sóc, ứng dụng và hoạt động thương hiệu để bạn chọn đúng nội dung cần xem mà không rời khỏi trang chủ quá sớm.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              {articleCategoryLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="inline-flex min-h-10 items-center rounded-full border border-[#12392d]/18 bg-white px-4 text-sm font-black text-[#12392d] transition hover:border-[#b4762f] hover:text-[#b4762f]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-            <Link
-              href="/tin-tuc"
-              className="mt-8 inline-flex rounded-[6px] bg-[#064737] px-6 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#b4762f]"
-            >
-              Xem tất cả bài viết
-            </Link>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {latestArticles.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/tin-tuc/${article.slug}`}
-                className="group overflow-hidden rounded-[8px] border border-[#e2d1b2] bg-[#fffdf8] shadow-[0_18px_44px_rgba(18,57,45,0.08)] transition hover:-translate-y-1 hover:border-[#b4762f]"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={article.imageUrl}
-                    alt={article.imageAlt || article.title}
-                    fill
-                    sizes="(min-width: 768px) 30vw, 92vw"
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-5">
-                  <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#b4762f]">
-                    {article.categoryName}
-                  </p>
-                  <h3 className="mt-3 text-xl font-black leading-tight text-[#12392d]">
-                    {article.title}
-                  </h3>
-                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#5c6a60]">
-                    {article.excerpt}
-                  </p>
-                  <span className="mt-5 inline-flex text-sm font-black text-[#12392d]">
-                    Đọc bài viết
-                  </span>
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
