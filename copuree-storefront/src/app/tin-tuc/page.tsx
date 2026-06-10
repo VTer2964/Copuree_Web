@@ -6,11 +6,11 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { fetchArticleCategories, fetchArticles } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Cáº©m Nang Dáº§u Dá»«a Ã‰p Láº¡nh NguyÃªn Cháº¥t CoPuree | Tin Tá»©c & Chia Sáº»",
-  description: "KhÃ¡m phÃ¡ cÃ¡c bÃ i viáº¿t chia sáº» kiáº¿n thá»©c há»¯u Ã­ch, hÆ°á»›ng dáº«n cÃ¡ch á»§ tÃ³c báº±ng dáº§u dá»«a trá»‹ rá»¥ng tÃ³c, dÆ°á»¡ng da máº·t vÃ  cÃ´ng thá»©c náº¥u Äƒn lÃ nh máº¡nh cÃ¹ng CoPuree.",
+  title: "Cẩm Nang Dầu Dừa Ép Lạnh Nguyên Chất CoPuree | Tin Tức & Chia Sẻ",
+  description: "Khám phá các bài viết chia sẻ kiến thức hữu ích, hướng dẫn cách ủ tóc bằng dầu dừa trị rụng tóc, dưỡng da mặt và công thức nấu ăn lành mạnh cùng CoPuree.",
   openGraph: {
-    title: "Cáº©m Nang Dáº§u Dá»«a Ã‰p Láº¡nh NguyÃªn Cháº¥t CoPuree | Tin Tá»©c & Chia Sáº»",
-    description: "KhÃ¡m phÃ¡ cÃ¡c bÃ i viáº¿t chia sáº» kiáº¿n thá»©c há»¯u Ã­ch, hÆ°á»›ng dáº«n cÃ¡ch á»§ tÃ³c báº±ng dáº§u dá»«a trá»‹ rá»¥ng tÃ³c, dÆ°á»¡ng da máº·t vÃ  cÃ´ng thá»©c náº¥u Äƒn lÃ nh máº¡nh cÃ¹ng CoPuree.",
+    title: "Cẩm Nang Dầu Dừa Ép Lạnh Nguyên Chất CoPuree | Tin Tức & Chia Sẻ",
+    description: "Khám phá các bài viết chia sẻ kiến thức hữu ích, hướng dẫn cách ủ tóc bằng dầu dừa trị rụng tóc, dưỡng da mặt và công thức nấu ăn lành mạnh cùng CoPuree.",
     type: "website",
     locale: "vi_VN",
   },
@@ -39,15 +39,15 @@ export default async function NewsPage({
       <section className="border-b border-[#173d2f]/10 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-[#b8752a]">
-            Cáº©m nang CoPuree
+            Cẩm nang CoPuree
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl font-black leading-[1.02] sm:text-6xl">
-            {currentCategory ? currentCategory.name : "Tin Tá»©c & Kiáº¿n Thá»©c Sá»‘ng Xanh"}
+            {currentCategory ? currentCategory.name : "Tin Tức & Kiến Thức Sống Xanh"}
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-[#5d6b61] sm:text-lg">
             {currentCategory
-              ? `Gá»£i Ã½ sá»­ dá»¥ng dáº§u dá»«a Ã©p láº¡nh CoPuree trong routine ${currentCategory.name.toLowerCase()} háº±ng ngÃ y hiá»‡u quáº£ nháº¥t.`
-              : "Tá»•ng há»£p cÃ¡c bÃ i viáº¿t chia sáº» vá» cÃ¡ch dÃ¹ng dáº§u dá»«a dÆ°á»¡ng tÃ³c, dÆ°á»¡ng da, trá»‹ rá»¥ng tÃ³c vÃ  lá»‘i sá»‘ng tá»‘i giáº£n tá»« thiÃªn nhiÃªn."}
+              ? `Gợi ý sử dụng dầu dừa ép lạnh CoPuree trong routine ${currentCategory.name.toLowerCase()} hằng ngày hiệu quả nhất.`
+              : "Tổng hợp các bài viết chia sẻ về cách dùng dầu dừa dưỡng tóc, dưỡng da, trị rụng tóc và lối sống tối giản từ thiên nhiên."}
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             <Link
@@ -58,7 +58,7 @@ export default async function NewsPage({
                   : "rounded-[6px] border border-[#173d2f]/20 px-4 py-2 text-sm font-black text-[#173d2f] transition hover:border-[#b8752a] hover:text-[#b8752a]"
               }
             >
-              Táº¥t cáº£ bÃ i viáº¿t
+              Tất cả bài viết
             </Link>
             {categories.map((item) => (
               <Link
@@ -104,7 +104,7 @@ export default async function NewsPage({
                         {article.excerpt}
                       </p>
                       <span className="mt-5 inline-flex text-sm font-black text-[#173d2f] group-hover:text-[#b8752a] transition-colors">
-                        Äá»c bÃ i viáº¿t &rarr;
+                        Đọc bài viết &rarr;
                       </span>
                     </div>
                   </Link>
@@ -113,7 +113,7 @@ export default async function NewsPage({
             </div>
           ) : (
             <div className="bg-[#fffdf8] border border-[#173d2f]/10 p-8 text-center text-lg font-black text-[#5d6b61]">
-              ChÆ°a cÃ³ bÃ i viáº¿t nÃ o thuá»™c chuyÃªn má»¥c nÃ y. Quay láº¡i sau nhÃ© báº¡n!
+              Chưa có bài viết nào thuộc chuyên mục này. Quay lại sau nhé bạn!
             </div>
           )}
         </div>

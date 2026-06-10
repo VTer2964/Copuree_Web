@@ -7,11 +7,11 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { brand } from "@/lib/store";
 
 export const metadata: Metadata = {
-  title: "LiÃªn Há»‡ Mua Dáº§u Dá»«a Ã‰p Láº¡nh NguyÃªn Cháº¥t CoPuree",
-  description: "Trang liÃªn há»‡ tÆ° váº¥n mua sáº¯m sáº£n pháº©m dáº§u dá»«a Ã©p láº¡nh vÃ  dáº§u dá»«a nguyÃªn cháº¥t tinh khiáº¿t chÃ­nh hÃ£ng tá»« thÆ°Æ¡ng hiá»‡u CoPuree. Äiá»n form Ä‘á»ƒ nháº­n há»— trá»£ ngay.",
+  title: "Liên Hệ Mua Dầu Dừa Ép Lạnh Nguyên Chất CoPuree",
+  description: "Trang liên hệ tư vấn mua sắm sản phẩm dầu dừa ép lạnh và dầu dừa nguyên chất tinh khiết chính hãng từ thương hiệu CoPuree. Điền form để nhận hỗ trợ ngay.",
   openGraph: {
-    title: "LiÃªn Há»‡ Mua Dáº§u Dá»«a Ã‰p Láº¡nh NguyÃªn Cháº¥t CoPuree",
-    description: "Trang liÃªn há»‡ tÆ° váº¥n mua sáº¯m sáº£n pháº©m dáº§u dá»«a Ã©p láº¡nh vÃ  dáº§u dá»«a nguyÃªn cháº¥t tinh khiáº¿t chÃ­nh hÃ£ng tá»« thÆ°Æ¡ng hiá»‡u CoPuree. Äiá»n form Ä‘á»ƒ nháº­n há»— trá»£ ngay.",
+    title: "Liên Hệ Mua Dầu Dừa Ép Lạnh Nguyên Chất CoPuree",
+    description: "Trang liên hệ tư vấn mua sắm sản phẩm dầu dừa ép lạnh và dầu dừa nguyên chất tinh khiết chính hãng từ thương hiệu CoPuree. Điền form để nhận hỗ trợ ngay.",
     images: [{ url: "/images/copuree-pdf/pdf-page6-image1.png" }],
     type: "website",
     locale: "vi_VN",
@@ -27,7 +27,7 @@ export default function ContactPage() {
       <section className="relative min-h-[460px] overflow-hidden border-b border-[#173d2f]/10">
         <Image
           src="/images/copuree-pdf/pdf-page6-image1.png"
-          alt="Trang liÃªn há»‡ tÆ° váº¥n mua sáº¯m sáº£n pháº©m dáº§u dá»«a Ã©p láº¡nh vÃ  dáº§u dá»«a nguyÃªn cháº¥t tinh khiáº¿t chÃ­nh hÃ£ng tá»« thÆ°Æ¡ng hiá»‡u CoPuree."
+          alt="Trang liên hệ tư vấn mua sắm sản phẩm dầu dừa ép lạnh và dầu dừa nguyên chất tinh khiết chính hãng từ thương hiệu CoPuree."
           fill
           priority
           sizes="100vw"
@@ -37,13 +37,13 @@ export default function ContactPage() {
         <div className="relative mx-auto flex min-h-[460px] max-w-7xl items-center px-5 py-16 sm:px-8">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.18em] text-[#b8752a]">
-              ThÃ´ng tin liÃªn há»‡
+              Thông tin liên hệ
             </p>
             <h1 className="mt-6 text-4xl font-black leading-[1.02] text-[#173d2f] sm:text-5xl">
-              LiÃªn Há»‡ Mua Dáº§u Dá»«a Ã‰p Láº¡nh NguyÃªn Cháº¥t CoPuree.
+              Liên Hệ Mua Dầu Dừa Ép Lạnh Nguyên Chất CoPuree.
             </h1>
             <p className="mt-6 text-base leading-7 text-[#445447] sm:text-lg sm:leading-8">
-              Äiá»n form Ä‘á»ƒ nháº­n tÆ° váº¥n vá» cÃ¡c dÃ²ng sáº£n pháº©m dáº§u dá»«a tinh khiáº¿t vÃ  chÃ­nh sÃ¡ch.
+              Điền form để nhận tư vấn về các dòng sản phẩm dầu dừa tinh khiết và chính sách.
             </p>
           </div>
         </div>
@@ -56,19 +56,19 @@ export default function ContactPage() {
           <div className="flex flex-col justify-between gap-10">
             <div>
               <span className="text-xs font-black uppercase tracking-[0.24em] text-[#b8752a]">
-                CoPuree Viá»‡t Nam
+                CoPuree Việt Nam
               </span>
               <h2 className="mt-4 text-3xl font-black text-[#173d2f]">
-                Káº¿t ná»‘i vá»›i chÃºng tÃ´i
+                Kết nối với chúng tôi
               </h2>
               <p className="mt-4 text-base text-[#5c6a60] leading-7">
-                ChÃºng tÃ´i luÃ´n sáºµn sÃ ng láº¯ng nghe má»i tháº¯c máº¯c vÃ  Ä‘Ã³ng gÃ³p Ã½ kiáº¿n tá»« báº¡n.
-                HÃ£y káº¿t ná»‘i qua Hotline hoáº·c Ä‘iá»n vÃ o form Ä‘á»ƒ nháº­n pháº£n há»“i nhanh nháº¥t.
+                Chúng tôi luôn sẵn sàng lắng nghe mọi thắc mắc và đóng góp ý kiến từ bạn.
+                Hãy kết nối qua Hotline hoặc điền vào form để nhận phản hồi nhanh nhất.
               </p>
 
               <div className="mt-8 grid gap-4 text-sm text-[#173d2f]">
                 <div className="flex items-center gap-3">
-                  <span className="font-bold text-[#b8752a]">Äá»‹a chá»‰:</span>
+                  <span className="font-bold text-[#b8752a]">Địa chỉ:</span>
                   <span>{brand.address}</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -90,7 +90,7 @@ export default function ContactPage() {
                   href="/"
                   className="inline-flex rounded-[6px] border border-[#173d2f]/25 px-5 py-2.5 text-sm font-black text-[#173d2f] transition hover:border-[#b8752a] hover:text-[#b8752a]"
                 >
-                  &larr; quay láº¡i trang chá»§
+                  &larr; quay lại trang chủ
                 </Link>
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function ContactPage() {
             {/* Google Map Embedded */}
             <div className="relative min-h-[300px] w-full bg-[#f0dfc0] rounded-[16px] overflow-hidden border border-[#173d2f]/10 shadow-sm">
               <iframe
-                title="Báº£n Ä‘á»“ CoPuree Viá»‡t Nam"
+                title="Bản đồ CoPuree Việt Nam"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.517865766299!2d106.83733077590656!3d10.848140457866385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175211a76bbd5b9%3A0xc4a3a60db8c253d1!2sVinhomes%20Grand%20Park%20District%209!5e0!3m2!1sen!2svn!4v1717961234567!5m2!1sen!2svn"
                 className="absolute inset-0 w-full h-full border-0"
                 allowFullScreen={true}

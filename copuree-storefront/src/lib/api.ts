@@ -166,7 +166,8 @@ export async function fetchProducts() {
       return localProducts.map(toApiProduct);
     }
 
-    return (await response.json()) as ApiProduct[];
+    const products = (await response.json()) as ApiProduct[];
+    return products.map(normalizeProduct);
   } catch {
     return localProducts.map(toApiProduct);
   }
@@ -189,7 +190,7 @@ export async function fetchProduct(slug: string) {
       return localProduct ? toApiProduct(localProduct) : null;
     }
 
-    return (await response.json()) as ApiProduct;
+    return normalizeProduct((await response.json()) as ApiProduct);
   } catch {
     const localProduct = getProductBySlug(slug);
     return localProduct ? toApiProduct(localProduct) : null;
@@ -210,7 +211,8 @@ export async function fetchArticleCategories() {
       return localArticleCategories;
     }
 
-    return (await response.json()) as ArticleCategory[];
+    const categories = (await response.json()) as ArticleCategory[];
+    return categories.map(normalizeArticleCategory);
   } catch {
     return localArticleCategories;
   }
@@ -236,7 +238,7 @@ export async function fetchArticles(category?: string) {
     }
 
     const articles = (await response.json()) as ArticleSummary[];
-    return articles.map(withResolvedArticleImage);
+    return articles.map(normalizeArticle).map(withResolvedArticleImage);
   } catch {
     return localArticles
       .filter((article) => !category || article.categorySlug === category)
@@ -258,7 +260,7 @@ export async function fetchArticle(slug: string) {
       return localArticles.find((article) => article.slug === slug) ?? null;
     }
 
-    return withResolvedArticleImage((await response.json()) as ArticleDetail);
+    return withResolvedArticleImage(normalizeArticle((await response.json()) as ArticleDetail));
   } catch {
     return localArticles.find((article) => article.slug === slug) ?? null;
   }
@@ -427,6 +429,92 @@ function withResolvedArticleImage<T extends ArticleSummary | ArticleDetail>(arti
   };
 }
 
+const mojibakePattern = /Ã|áº|á»|Ä|Æ|Å|â€/;
+const cp1252Overrides = new Map<string, number>([
+  ["€", 0x80],
+  ["‚", 0x82],
+  ["ƒ", 0x83],
+  ["„", 0x84],
+  ["…", 0x85],
+  ["†", 0x86],
+  ["‡", 0x87],
+  ["ˆ", 0x88],
+  ["‰", 0x89],
+  ["Š", 0x8a],
+  ["‹", 0x8b],
+  ["Œ", 0x8c],
+  ["Ž", 0x8e],
+  ["‘", 0x91],
+  ["’", 0x92],
+  ["“", 0x93],
+  ["”", 0x94],
+  ["•", 0x95],
+  ["–", 0x96],
+  ["—", 0x97],
+  ["˜", 0x98],
+  ["™", 0x99],
+  ["š", 0x9a],
+  ["›", 0x9b],
+  ["œ", 0x9c],
+  ["ž", 0x9e],
+  ["Ÿ", 0x9f],
+]);
+
+function repairMojibake(value: string) {
+  if (!mojibakePattern.test(value)) {
+    return value;
+  }
+
+  const bytes: number[] = [];
+  for (const char of value) {
+    const code = char.codePointAt(0) ?? 0;
+    if (code <= 0xff) {
+      bytes.push(code);
+    } else if (cp1252Overrides.has(char)) {
+      bytes.push(cp1252Overrides.get(char)!);
+    } else {
+      return value;
+    }
+  }
+
+  return new TextDecoder().decode(new Uint8Array(bytes));
+}
+
+function normalizeImagePath(value: string) {
+  return repairMojibake(value).replace("/images/Ảnh Blog/", "/images/blog/");
+}
+
+function normalizeProduct(product: ApiProduct): ApiProduct {
+  return {
+    ...product,
+    name: repairMojibake(product.name),
+    shortDescription: repairMojibake(product.shortDescription),
+    description: repairMojibake(product.description),
+    size: repairMojibake(product.size),
+    imageUrl: normalizeImagePath(product.imageUrl),
+    badge: repairMojibake(product.badge),
+  };
+}
+
+function normalizeArticleCategory(category: ArticleCategory): ArticleCategory {
+  return {
+    ...category,
+    name: repairMojibake(category.name),
+  };
+}
+
+function normalizeArticle<T extends ArticleSummary | ArticleDetail>(article: T): T {
+  return {
+    ...article,
+    title: repairMojibake(article.title),
+    categoryName: repairMojibake(article.categoryName),
+    excerpt: repairMojibake(article.excerpt),
+    imageUrl: normalizeImagePath(article.imageUrl),
+    imageAlt: repairMojibake(article.imageAlt),
+    ...("content" in article ? { content: repairMojibake(article.content) } : {}),
+  };
+}
+
 const localArticleCategories: ArticleCategory[] = [
   { slug: "cham-soc-toc", name: "Chăm sóc tóc", count: 3 },
   { slug: "cham-soc-da", name: "Chăm sóc da", count: 1 },
@@ -443,8 +531,8 @@ const localArticles: ArticleDetail[] = [
     categorySlug: "cham-soc-toc",
     categoryName: "Chăm sóc tóc",
     excerpt: "Hướng dẫn chi tiết cách ủ tóc bằng dầu dừa trị rụng tóc hiệu quả tại nhà, giúp nang tóc chắc khỏe, giảm gãy rụng và nuôi dưỡng da đầu từ sâu bên trong.",
-    content: "## Vì sao rụng tóc là nỗi lo hàng đầu?\n\nRụng tóc sau sinh hoặc do căng thẳng công việc là nỗi ám ảnh lớn của nhiều chị em phụ nữ. Nhiều người thường tìm đến các sản phẩm hóa chất đắt tiền nhưng lại vô tình gây hại thêm cho da đầu nhạy cảm. Để giải quyết tận gốc, chúng ta cần một phương pháp tự nhiên và an sau.\n\n## Hướng dẫn ủ tóc bằng dầu dừa phục hồi nang tóc\n\nDầu dừa chứa hàm lượng lớn Axit Lauric có khả năng thẩm thấu sâu vào lõi tóc, bảo vệ protein tóc và kích thích nang tóc phát triển. Dưới đây là quy trình trị liệu rụng tóc chuyên sâu:\n\n### Bước 1: Chuẩn bị dầu dừa sạch\n\nSử dụng dầu dừa ép lạnh tinh khiết. Cho một lượng khoảng 10-15ml dầu dừa ra chén nhỏ. Làm ấm dầu dừa bằng cách ngâm chén vào nước ấm khoảng 2 phút giúp dầu tăng khả năng thẩm thấu.\n\n### Bước 2: Thoa dầu dừa lên chân tóc và da đầu\n\nTách tóc thành từng phần nhỏ, dùng tăm bông hoặc thìa lấy dầu thoa trực tiếp lên chân tóc và da đầu. Massage nhẹ nhàng bằng đầu ngón tay (không dùng móng tay) trong 5 phút để kích thích tuần hoàn máu.\n\n### Bước 3: Ủ tóc trong 20 phút\n\nDùng mũ tắm hoặc khăn ấm quấn quanh đầu và ủ trong vòng 20 phút. Tránh ủ quá lâu hoặc để qua đêm vì có thể làm bít tắc nang lông gây gãy rụng.\n\n![Cách ủ tóc bằng dầu dừa trị rụng tóc hiệu quả](/images/Ảnh Blog/1.2.jpg)\n\n## Cách ủ tóc bằng dầu dừa chuẩn và không bị bết\n\nNhiều người gặp tình trạng bết tóc sau khi ủ. Bí quyết nằm ở bước gội sạch: sau khi ủ, hãy thoa trực tiếp dầu gội lên tóc khô khi chưa xịt nước, xoa đều rồi mới xả nước ấm. Gội lại lần 2 để đảm bảo dầu thừa được loại bỏ hoàn toàn.\n\nĐể biết thêm các mẹo chăm sóc tóc tối ưu khác, hãy [tham khảo cẩm nang dùng dầu dừa](/tin-tuc/cach-dung-dau-dua-duong-toc) để có mái tóc bồng bềnh khỏe mạnh.",
-    imageUrl: "/images/Ảnh Blog/1.1.png",
+    content: "## Vì sao rụng tóc là nỗi lo hàng đầu?\n\nRụng tóc sau sinh hoặc do căng thẳng công việc là nỗi ám ảnh lớn của nhiều chị em phụ nữ. Nhiều người thường tìm đến các sản phẩm hóa chất đắt tiền nhưng lại vô tình gây hại thêm cho da đầu nhạy cảm. Để giải quyết tận gốc, chúng ta cần một phương pháp tự nhiên và an sau.\n\n## Hướng dẫn ủ tóc bằng dầu dừa phục hồi nang tóc\n\nDầu dừa chứa hàm lượng lớn Axit Lauric có khả năng thẩm thấu sâu vào lõi tóc, bảo vệ protein tóc và kích thích nang tóc phát triển. Dưới đây là quy trình trị liệu rụng tóc chuyên sâu:\n\n### Bước 1: Chuẩn bị dầu dừa sạch\n\nSử dụng dầu dừa ép lạnh tinh khiết. Cho một lượng khoảng 10-15ml dầu dừa ra chén nhỏ. Làm ấm dầu dừa bằng cách ngâm chén vào nước ấm khoảng 2 phút giúp dầu tăng khả năng thẩm thấu.\n\n### Bước 2: Thoa dầu dừa lên chân tóc và da đầu\n\nTách tóc thành từng phần nhỏ, dùng tăm bông hoặc thìa lấy dầu thoa trực tiếp lên chân tóc và da đầu. Massage nhẹ nhàng bằng đầu ngón tay (không dùng móng tay) trong 5 phút để kích thích tuần hoàn máu.\n\n### Bước 3: Ủ tóc trong 20 phút\n\nDùng mũ tắm hoặc khăn ấm quấn quanh đầu và ủ trong vòng 20 phút. Tránh ủ quá lâu hoặc để qua đêm vì có thể làm bít tắc nang lông gây gãy rụng.\n\n![Cách ủ tóc bằng dầu dừa trị rụng tóc hiệu quả](/images/blog/1.2.jpg)\n\n## Cách ủ tóc bằng dầu dừa chuẩn và không bị bết\n\nNhiều người gặp tình trạng bết tóc sau khi ủ. Bí quyết nằm ở bước gội sạch: sau khi ủ, hãy thoa trực tiếp dầu gội lên tóc khô khi chưa xịt nước, xoa đều rồi mới xả nước ấm. Gội lại lần 2 để đảm bảo dầu thừa được loại bỏ hoàn toàn.\n\nĐể biết thêm các mẹo chăm sóc tóc tối ưu khác, hãy [tham khảo cẩm nang dùng dầu dừa](/tin-tuc/cach-dung-dau-dua-duong-toc) để có mái tóc bồng bềnh khỏe mạnh.",
+    imageUrl: "/images/blog/1.1.png",
     imageAlt: "Cách ủ tóc bằng dầu dừa trị rụng tóc hiệu quả tại nhà cùng CoPuree",
     isFeatured: true,
     createdAtUtc: "2026-06-10T04:00:00Z",
@@ -457,8 +545,8 @@ const localArticles: ArticleDetail[] = [
     categorySlug: "cham-soc-toc",
     categoryName: "Chăm sóc tóc",
     excerpt: "Cẩm nang hướng dẫn toàn diện nhất về cách dùng dầu dừa dưỡng tóc và cách dưỡng tóc bằng dầu dừa an toàn, nuôi dưỡng sợi tóc suôn mượt chuẩn khoa học.",
-    content: "## Dưỡng tóc bằng dầu dừa: Lựa chọn tự nhiên thông minh\n\nTóc khô xơ, chẻ ngọn do uốn nhuộm liên tục là vấn đề phổ biến. Sử dụng dầu dừa nguyên chất ép lạnh là liệu pháp phục hồi tự nhiên vừa tiết kiệm lại cực kỳ hiệu quả nếu áp dụng đúng cách.\n\n## Cách dưỡng tóc bằng dầu dừa\n\nTùy theo tình trạng tóc, bạn có thể áp dụng 2 cách dưỡng tóc bằng dầu dừa sau:\n\n### Cách 1: Dưỡng xả khô (Leaving-in conditioner)\n\nSau khi gội đầu sạch và sấy tóc khô khoảng 80%, lấy 1-2 giọt dầu dừa ép lạnh xoa đều trong lòng bàn tay rồi vuốt nhẹ lên phần đuôi tóc khô xơ. Cách này giúp giữ ẩm và bảo vệ tóc khỏi tia UV, nhiệt độ cao.\n\n### Cách 2: Ủ tóc chuyên sâu trước khi gội\n\nÁp dụng phương pháp Pre-shampoo: Thoa dầu dừa lên tóc khô, massage da đầu và ủ trong 20 phút trước khi bước vào bồn gội. Phương pháp này giúp tóc không bị mất nước khi tiếp xúc với hóa chất tẩy rửa mạnh trong dầu gội.\n\n![Ủ tóc bằng dầu dừa dưỡng tóc suôn mượt](/images/Ảnh Blog/2.2.png)\n\n## Cách sử dụng dầu dừa cho tóc an toàn nhất\n\nTránh thoa quá nhiều dầu dừa trực tiếp lên da đầu nếu bạn có tuyến bã nhờn hoạt động mạnh. Hãy tập trung dưỡng phần thân và đuôi tóc - nơi chịu nhiều hư tổn nhất.\n\nLayout [tìm hiểu tác dụng của dầu dừa](/tin-tuc/tac-dung-cua-dau-dua-voi-toc) để hiểu rõ hơn về mặt khoa học tại sao dầu dừa lại có công dụng vượt trội so với các loại dầu thực vật khác.",
-    imageUrl: "/images/Ảnh Blog/2.1.png",
+    content: "## Dưỡng tóc bằng dầu dừa: Lựa chọn tự nhiên thông minh\n\nTóc khô xơ, chẻ ngọn do uốn nhuộm liên tục là vấn đề phổ biến. Sử dụng dầu dừa nguyên chất ép lạnh là liệu pháp phục hồi tự nhiên vừa tiết kiệm lại cực kỳ hiệu quả nếu áp dụng đúng cách.\n\n## Cách dưỡng tóc bằng dầu dừa\n\nTùy theo tình trạng tóc, bạn có thể áp dụng 2 cách dưỡng tóc bằng dầu dừa sau:\n\n### Cách 1: Dưỡng xả khô (Leaving-in conditioner)\n\nSau khi gội đầu sạch và sấy tóc khô khoảng 80%, lấy 1-2 giọt dầu dừa ép lạnh xoa đều trong lòng bàn tay rồi vuốt nhẹ lên phần đuôi tóc khô xơ. Cách này giúp giữ ẩm và bảo vệ tóc khỏi tia UV, nhiệt độ cao.\n\n### Cách 2: Ủ tóc chuyên sâu trước khi gội\n\nÁp dụng phương pháp Pre-shampoo: Thoa dầu dừa lên tóc khô, massage da đầu và ủ trong 20 phút trước khi bước vào bồn gội. Phương pháp này giúp tóc không bị mất nước khi tiếp xúc với hóa chất tẩy rửa mạnh trong dầu gội.\n\n![Ủ tóc bằng dầu dừa dưỡng tóc suôn mượt](/images/blog/2.2.png)\n\n## Cách sử dụng dầu dừa cho tóc an toàn nhất\n\nTránh thoa quá nhiều dầu dừa trực tiếp lên da đầu nếu bạn có tuyến bã nhờn hoạt động mạnh. Hãy tập trung dưỡng phần thân và đuôi tóc - nơi chịu nhiều hư tổn nhất.\n\nLayout [tìm hiểu tác dụng của dầu dừa](/tin-tuc/tac-dung-cua-dau-dua-voi-toc) để hiểu rõ hơn về mặt khoa học tại sao dầu dừa lại có công dụng vượt trội so với các loại dầu thực vật khác.",
+    imageUrl: "/images/blog/2.1.png",
     imageAlt: "Cẩm nang cách dùng dầu dừa dưỡng tóc chuyên sâu CoPuree",
     isFeatured: true,
     createdAtUtc: "2026-06-10T04:05:00Z",
@@ -471,8 +559,8 @@ const localArticles: ArticleDetail[] = [
     categorySlug: "cham-soc-toc",
     categoryName: "Chăm sóc tóc",
     excerpt: "Phân tích khoa học chuyên sâu về tác dụng của dầu dừa với tóc và cơ chế phục hồi lõi tóc từ Axit Lauric tự nhiên khi duy trì thói quen ủ tóc thường xuyên.",
-    content: "## Khoa học đằng sau tác dụng của dầu dừa với tóc\n\nKhông phải ngẫu nhiên mà dầu dừa được xem là thần dược cho mái tóc. Các nghiên cứu sinh học chỉ ra rằng dầu dừa có cấu trúc hóa học độc đáo giúp nó vượt trội hơn các loại dầu khoáng hay dầu hạt khác trong việc bảo vệ tóc khỏi hư tổn.\n\n![Tác dụng của dầu dừa phục hồi lõi tóc](/images/Ảnh Blog/3.2.png)\n\n## Cơ chế Axit Lauric phục hồi lõi tóc khi ủ tóc với dầu dừa\n\nDầu dừa rất giàu Axit Lauric (một loại axit béo chuỗi trung bình). Nhờ phân tử lượng thấp và cấu trúc dạng chuỗi thẳng, Axit Lauric dễ dàng xuyên qua lớp biểu bì tóc bên ngoài để đi sâu vào trong lõi tóc (cortex).\n\nỦ tóc với dầu dừa thường xuyên sẽ tạo một lớp màng lipid bảo vệ lõi tóc, hạn chế sự trương nở của sợi tóc khi gặp nước (hygral fatigue) - nguyên nhân chính gây gãy rụng tóc khi gội đầu. Đồng thời ngăn chặn việc thất thoát protein tự nhiên của sợi tóc.\n\nĐể sở hữu mái tóc chắc khỏe từ gốc tới ngọn, hãy [xem các sản phẩm dầu dừa ủ tóc](/san-pham) ép lạnh nguyên chất CoPuree với thiết kế hũ miệng rộng thông minh chống đông đặc hiệu quả.",
-    imageUrl: "/images/Ảnh Blog/3.1.png",
+    content: "## Khoa học đằng sau tác dụng của dầu dừa với tóc\n\nKhông phải ngẫu nhiên mà dầu dừa được xem là thần dược cho mái tóc. Các nghiên cứu sinh học chỉ ra rằng dầu dừa có cấu trúc hóa học độc đáo giúp nó vượt trội hơn các loại dầu khoáng hay dầu hạt khác trong việc bảo vệ tóc khỏi hư tổn.\n\n![Tác dụng của dầu dừa phục hồi lõi tóc](/images/blog/3.2.png)\n\n## Cơ chế Axit Lauric phục hồi lõi tóc khi ủ tóc với dầu dừa\n\nDầu dừa rất giàu Axit Lauric (một loại axit béo chuỗi trung bình). Nhờ phân tử lượng thấp và cấu trúc dạng chuỗi thẳng, Axit Lauric dễ dàng xuyên qua lớp biểu bì tóc bên ngoài để đi sâu vào trong lõi tóc (cortex).\n\nỦ tóc với dầu dừa thường xuyên sẽ tạo một lớp màng lipid bảo vệ lõi tóc, hạn chế sự trương nở của sợi tóc khi gặp nước (hygral fatigue) - nguyên nhân chính gây gãy rụng tóc khi gội đầu. Đồng thời ngăn chặn việc thất thoát protein tự nhiên của sợi tóc.\n\nĐể sở hữu mái tóc chắc khỏe từ gốc tới ngọn, hãy [xem các sản phẩm dầu dừa ủ tóc](/san-pham) ép lạnh nguyên chất CoPuree với thiết kế hũ miệng rộng thông minh chống đông đặc hiệu quả.",
+    imageUrl: "/images/blog/3.1.png",
     imageAlt: "Cơ chế khoa học của tác dụng của dầu dừa với tóc cùng CoPuree",
     isFeatured: false,
     createdAtUtc: "2026-06-10T04:10:00Z",

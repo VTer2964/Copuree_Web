@@ -25,15 +25,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!article) {
     return {
-      title: "BÃ i viáº¿t khÃ´ng tá»“n táº¡i | CoPuree",
+      title: "Bài viết không tồn tại | CoPuree",
     };
   }
 
   return {
-    title: `${article.title} | Cáº©m Nang CoPuree`,
+    title: `${article.title} | Cẩm Nang CoPuree`,
     description: article.excerpt,
     openGraph: {
-      title: `${article.title} | Cáº©m Nang CoPuree`,
+      title: `${article.title} | Cẩm Nang CoPuree`,
       description: article.excerpt,
       images: [{ url: article.imageUrl, alt: article.imageAlt || article.title }],
       type: "article",
@@ -204,13 +204,13 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                 href="/tin-tuc"
                 className="inline-flex rounded-[6px] border border-[#173d2f]/25 px-5 py-3 text-sm font-black text-[#173d2f] transition hover:border-[#b8752a] hover:text-[#b8752a]"
               >
-                &larr; Xem thÃªm cÃ¡c bÃ i viáº¿t khÃ¡c
+                &larr; Xem thêm các bài viết khác
               </Link>
               <Link
                 href="/san-pham"
                 className="inline-flex rounded-[6px] bg-[#173d2f] px-5 py-3 text-sm font-black text-white transition hover:bg-[#b8752a]"
               >
-                KhÃ¡m phÃ¡ sáº£n pháº©m CoPuree &rarr;
+                Khám phá sản phẩm CoPuree &rarr;
               </Link>
             </div>
           </div>

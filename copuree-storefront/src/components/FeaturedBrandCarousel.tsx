@@ -169,32 +169,32 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
     <section id="noi-bat" className="relative isolate overflow-hidden border-b border-[#e2d1b2] bg-[#fffaf1] px-5 py-12 sm:px-8 lg:px-[3vw] lg:py-16">
       <div className="mx-auto max-w-[1840px] text-center">
         <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b4762f]">
-          Äiá»ƒm ná»•i báº­t tá»« CoPuree
+          Điểm nổi bật từ CoPuree
         </p>
         <h2 className="mx-auto mt-3 max-w-4xl text-[30px] font-black leading-[1.05] text-[#12392d] sm:text-[42px] lg:text-[50px]">
-          Nhá»¯ng dáº¥u áº¥n má»›i trÃªn hÃ nh trÃ¬nh CoPuree
+          Những dấu ấn mới trên hành trình CoPuree
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-[#5c6a60] sm:text-base">
-          Chá»n má»™t chá»§ Ä‘á» báº¡n Ä‘ang quan tÃ¢m vÃ  Ä‘á»ƒ CoPuree gá»£i má»Ÿ nhá»¯ng cÃ¡ch dÃ¹ng dáº§u dá»«a Ã©p láº¡nh tháº­t gáº§n vá»›i nhá»‹p sá»‘ng háº±ng ngÃ y.
+          Chọn một chủ đề bạn đang quan tâm và để CoPuree gợi mở những cách dùng dầu dừa ép lạnh thật gần với nhịp sống hằng ngày.
         </p>
       </div>
 
       <div className="relative mx-auto mt-8 max-w-[1840px]">
         <button
           type="button"
-          aria-label="Ná»™i dung trÆ°á»›c"
+          aria-label="Nội dung trước"
           onClick={() => move("prev")}
           className="absolute left-0 top-1/2 z-30 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[#173d2f]/12 bg-white text-3xl font-black text-[#173d2f] shadow-[0_14px_36px_rgba(18,57,45,0.12)] transition hover:border-[#b4762f] hover:text-[#b4762f] md:flex"
         >
-          â€¹
+          ‹
         </button>
         <button
           type="button"
-          aria-label="Ná»™i dung tiáº¿p theo"
+          aria-label="Nội dung tiếp theo"
           onClick={() => move("next")}
           className="absolute right-0 top-1/2 z-30 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[#173d2f]/12 bg-white text-3xl font-black text-[#173d2f] shadow-[0_14px_36px_rgba(18,57,45,0.12)] transition hover:border-[#b4762f] hover:text-[#b4762f] md:flex"
         >
-          â€º
+          ›
         </button>
 
         <div className="md:hidden">
@@ -223,8 +223,8 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
                 {activeArticle.excerpt}
               </p>
               <span className="mt-5 inline-flex items-center gap-3 text-sm font-black text-[#12392d]">
-                Äá»c bÃ i viáº¿t
-                <span aria-hidden="true" className="text-[#b4762f]">â†’</span>
+                Đọc bài viết
+                <span aria-hidden="true" className="text-[#b4762f]">→</span>
               </span>
             </div>
           </Link>
@@ -232,19 +232,19 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
           <div className="mt-4 flex items-center justify-center gap-3">
             <button
               type="button"
-              aria-label="Ná»™i dung trÆ°á»›c"
+              aria-label="Nội dung trước"
               onClick={() => move("prev")}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#173d2f]/12 bg-white text-2xl font-black text-[#173d2f] shadow-sm"
             >
-              â€¹
+              ‹
             </button>
             <button
               type="button"
-              aria-label="Ná»™i dung tiáº¿p theo"
+              aria-label="Nội dung tiếp theo"
               onClick={() => move("next")}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#173d2f]/12 bg-white text-2xl font-black text-[#173d2f] shadow-sm"
             >
-              â€º
+              ›
             </button>
           </div>
 
@@ -272,7 +272,7 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
                     {article.title}
                   </h4>
                   <span className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#173d2f]/20 text-lg font-black text-[#173d2f]">
-                    â†’
+                    →
                   </span>
                 </div>
               </Link>
@@ -318,8 +318,8 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
                     {article.excerpt}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-3 text-sm font-black text-[#12392d]">
-                    Äá»c bÃ i viáº¿t
-                    <span aria-hidden="true" className="text-[#b4762f]">â†’</span>
+                    Đọc bài viết
+                    <span aria-hidden="true" className="text-[#b4762f]">→</span>
                   </span>
                 </div>
               </Link>
@@ -335,7 +335,7 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
             <button
               key={article.slug}
               type="button"
-              aria-label={`Xem ná»™i dung ná»•i báº­t ${index + 1}`}
+              aria-label={`Xem nội dung nổi bật ${index + 1}`}
               onClick={() => {
                 clearAutoAdvance();
                 setActiveIndex(index);
