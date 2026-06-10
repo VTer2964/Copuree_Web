@@ -1,21 +1,22 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { brand } from "@/lib/store";
 
 const exploreLinks = [
-  { label: "Trang chủ", href: "/" },
-  { label: "Nội dung nổi bật", href: "/#noi-bat" },
-  { label: "Sản phẩm", href: "/#san-pham" },
-  { label: "Ứng dụng", href: "/#ung-dung" },
-  { label: "Câu chuyện", href: "/#cau-chuyen" },
+  { label: "Trang chá»§", href: "/" },
+  { label: "Sáº£n pháº©m", href: "/san-pham" },
+  { label: "Vá» CoPuree", href: "/ve-copuree" },
+  { label: "Chá»©ng nháº­n", href: "/chung-nhan" },
+  { label: "FAQ", href: "/faq" },
+  { label: "LiÃªn há»‡", href: "/lien-he" },
 ];
 
 const articleLinks = [
-  { label: "Hoạt động thương hiệu", href: "/bai-viet/hoat-dong-thuong-hieu" },
-  { label: "Chăm sóc tóc", href: "/bai-viet/cham-soc-toc" },
-  { label: "Chăm sóc da", href: "/bai-viet/cham-soc-da" },
-  { label: "Chăm sóc răng miệng", href: "/bai-viet/cham-soc-rang-mieng" },
-  { label: "Nấu ăn và làm bánh", href: "/bai-viet/nau-an-lam-banh" },
+  { label: "Hoáº¡t Ä‘á»™ng thÆ°Æ¡ng hiá»‡u", href: "/tin-tuc?category=hoat-dong-thuong-hieu" },
+  { label: "ChÄƒm sÃ³c tÃ³c", href: "/tin-tuc?category=cham-soc-toc" },
+  { label: "ChÄƒm sÃ³c da", href: "/tin-tuc?category=cham-soc-da" },
+  { label: "ChÄƒm sÃ³c rÄƒng miá»‡ng", href: "/tin-tuc?category=cham-soc-rang-mieng" },
+  { label: "Náº¥u Äƒn vÃ  lÃ m bÃ¡nh", href: "/tin-tuc?category=nau-an-lam-banh" },
 ];
 
 export function SiteFooter() {
@@ -37,10 +38,10 @@ export function SiteFooter() {
           <div className="grid gap-6 border-b border-white/14 pb-7 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[#d9b26f]">
-                CoPuree Việt Nam
+                CoPuree Viá»‡t Nam
               </p>
               <h2 className="mt-3 max-w-3xl text-[28px] font-black leading-[1.08] sm:text-[40px] lg:text-[46px]">
-                Dầu dừa ép lạnh cho lối sống tự nhiên và tinh gọn.
+                Dáº§u dá»«a Ã©p láº¡nh cho lá»‘i sá»‘ng tá»± nhiÃªn vÃ  tinh gá»n.
               </h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:justify-end">
@@ -48,7 +49,7 @@ export function SiteFooter() {
                 href={brand.hotlineHref}
                 className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#d9b26f] px-6 text-sm font-black text-[#12392d] transition hover:-translate-y-0.5 hover:bg-white lg:min-w-56"
               >
-                Gọi {brand.hotline}
+                Gá»i {brand.hotline}
               </a>
               <a
                 href={brand.facebook}
@@ -56,7 +57,7 @@ export function SiteFooter() {
                 rel="noreferrer"
                 className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/25 px-6 text-sm font-black text-white transition hover:border-[#d9b26f] hover:text-[#d9b26f] lg:min-w-56"
               >
-                Nhắn Facebook
+                Nháº¯n Facebook
               </a>
             </div>
           </div>
@@ -71,16 +72,16 @@ export function SiteFooter() {
                 className="h-12 w-auto rounded-[10px] bg-white object-contain p-2"
               />
               <p className="mt-5 max-w-md text-sm leading-7 text-white/72">
-                CoPuree giới thiệu dầu dừa ép lạnh từ trái dừa Việt Nam, dành cho chăm sóc tóc, da, răng miệng, căn bếp và những khoảnh khắc sống lành mạnh hằng ngày.
+                CoPuree giá»›i thiá»‡u dáº§u dá»«a Ã©p láº¡nh tá»« trÃ¡i dá»«a Viá»‡t Nam, dÃ nh cho chÄƒm sÃ³c tÃ³c, da, rÄƒng miá»‡ng, cÄƒn báº¿p vÃ  nhá»¯ng khoáº£nh kháº¯c sá»‘ng lÃ nh máº¡nh háº±ng ngÃ y.
               </p>
             </div>
 
-            <FooterGroup title="Khám phá" links={exploreLinks} />
-            <FooterGroup title="Bài viết" links={articleLinks} />
+            <FooterGroup title="KhÃ¡m phÃ¡" links={exploreLinks} />
+            <FooterGroup title="BÃ i viáº¿t" links={articleLinks} />
 
             <div className="grid content-start gap-4 text-sm text-white/76">
               <p className="font-black uppercase tracking-[0.16em] text-[#d9b26f]">
-                Liên hệ tư vấn
+                LiÃªn há»‡ tÆ° váº¥n
               </p>
               <a href={brand.hotlineHref} className="font-black text-white transition hover:text-[#d9b26f]">
                 Hotline: {brand.hotline}
@@ -91,13 +92,13 @@ export function SiteFooter() {
               <a href={brand.facebook} target="_blank" rel="noreferrer" className="transition hover:text-[#d9b26f]">
                 Facebook CoPuree
               </a>
-              <p className="leading-6">Địa chỉ: {brand.address}</p>
+              <p className="leading-6">Äá»‹a chá»‰: {brand.address}</p>
             </div>
           </div>
 
           <div className="flex flex-col gap-3 border-t border-white/14 pt-5 text-xs text-white/52 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 CoPuree. All rights reserved.</p>
-            <p>Dầu dừa ép lạnh CoPuree - tự nhiên trong từng thói quen nhỏ.</p>
+            <p>Â© 2026 CoPuree. All rights reserved.</p>
+            <p>Dáº§u dá»«a Ã©p láº¡nh CoPuree - tá»± nhiÃªn trong tá»«ng routine.</p>
           </div>
         </div>
       </div>

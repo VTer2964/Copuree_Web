@@ -1,20 +1,61 @@
+import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { fetchProducts } from "@/lib/api";
 import { brand, proofPoints } from "@/lib/store";
 
+export const metadata: Metadata = {
+  title: "Dầu Dừa Ủ Tóc Ép Lạnh CoPuree | Các Dung Tích Lựa Chọn",
+  description: "Bảng giá và các dung tích dầu dừa ủ tóc ép lạnh CoPuree. Giải pháp dưỡng tóc chuyên sâu chuẩn y khoa, thiết kế hũ họng rộng tiện dụng chống đông đặc.",
+  openGraph: {
+    title: "Dầu Dừa Ủ Tóc Ép Lạnh CoPuree | Các Dung Tích Lựa Chọn",
+    description: "Bảng giá và các dung tích dầu dừa ủ tóc ép lạnh CoPuree. Giải pháp dưỡng tóc chuyên sâu chuẩn y khoa, thiết kế hũ họng rộng tiện dụng chống đông đặc.",
+    images: [{ url: "/images/copuree-pdf/pdf-page5-image2.png" }],
+    type: "website",
+    locale: "vi_VN",
+  },
+};
+
 export default async function ProductsPage() {
   const products = await fetchProducts();
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": products.map((prod, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "item": {
+        "@type": "Product",
+        "name": prod.name,
+        "image": `https://copuree.vn${prod.imageUrl}`,
+        "description": prod.description,
+        "sku": prod.slug,
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "VND",
+          "price": prod.price,
+          "availability": "https://schema.org/InStock",
+          "url": `https://copuree.vn/san-pham/${prod.slug}`
+        }
+      }
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <SiteHeader />
       <section className="relative min-h-[520px] overflow-hidden border-b border-[#173d2f]/10">
         <Image
           src="/images/copuree-pdf/pdf-page5-image2.png"
-          alt="Các dung tích dầu dừa ép lạnh CoPuree"
+          alt="Danh mục sản phẩm dầu dừa ủ tóc và dầu dừa ép lạnh tinh khiết CoPuree với thiết kế hũ họng rộng chống đông đặc tiện dụng."
           fill
           priority
           sizes="100vw"
@@ -31,10 +72,10 @@ export default async function ProductsPage() {
               className="h-auto w-32"
             />
             <h1 className="mt-8 text-4xl font-black leading-[1.02] text-[#173d2f] sm:text-6xl">
-              Chọn dung tích hợp với nhịp chăm sóc của bạn
+              Dầu Dừa Ủ Tóc Ép Lạnh CoPuree.
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-[#445447] sm:text-lg sm:leading-8">
-              Từ chai nhỏ để bắt đầu đến chai lớn dùng lâu hơn, CoPuree giữ cùng một tinh thần: dầu dừa ép lạnh trong, hương dịu và dễ dùng mỗi ngày.
+              Giải pháp dưỡng tóc chuyên sâu chuẩn y khoa. Thiết kế hũ họng rộng tiện dụng dễ dàng lấy dầu khi đông đặc.
             </p>
             <a
               href="#product-list"
@@ -58,7 +99,14 @@ export default async function ProductsPage() {
               </h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-[#5d6b61]">
-              Giá hiển thị để tham khảo định vị sản phẩm. CoPuree hiện ưu tiên tư vấn trực tiếp để bạn chọn dung tích và cách dùng phù hợp.
+              Giá hiển thị để tham khảo định vị sản phẩm. CoPuree hiện ưu tiên tư vấn trực tiếp để bạn chọn dung tích và cách dùng phù hợp, hoặc bạn có thể{" "}
+              <Link
+                href="/tin-tuc/cach-u-toc-bang-dau-dua-tri-rung-toc"
+                className="font-bold text-[#b8752a] underline hover:text-[#173d2f] transition-colors"
+              >
+                đọc thêm hướng dẫn ủ tóc trị rụng
+              </Link>
+              .
             </p>
           </div>
           <div className="grid gap-x-9 gap-y-14 md:grid-cols-2 xl:grid-cols-3">

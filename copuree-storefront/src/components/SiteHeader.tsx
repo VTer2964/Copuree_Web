@@ -4,14 +4,21 @@ import { brand } from "@/lib/store";
 
 const navItems = [
   { label: "Trang chủ", href: "/" },
-  { label: "Nổi bật", href: "/#noi-bat" },
-  { label: "Sản phẩm", href: "/#san-pham" },
-  { label: "Ứng dụng", href: "/#ung-dung" },
-  { label: "Câu chuyện", href: "/#cau-chuyen" },
-  { label: "Liên hệ", href: "/#lien-he" },
+  { label: "Sản phẩm", href: "/san-pham" },
+  { label: "Về CoPuree", href: "/ve-copuree" },
+  { label: "Chứng nhận", href: "/chung-nhan" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Tin tức", href: "/tin-tuc" },
+  { label: "Liên hệ", href: "/lien-he" },
 ];
 
-const mobileNavItems = navItems.filter((item) => item.label !== "Câu chuyện");
+const mobileNavItems = [
+  { label: "Trang chủ", href: "/" },
+  { label: "Sản phẩm", href: "/san-pham" },
+  { label: "Về CoPuree", href: "/ve-copuree" },
+  { label: "Tin tức", href: "/tin-tuc" },
+  { label: "Liên hệ", href: "/lien-he" },
+];
 
 export function SiteHeader() {
   return (

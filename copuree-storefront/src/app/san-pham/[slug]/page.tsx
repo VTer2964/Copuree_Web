@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,7 +10,7 @@ import { brand, formatVnd, getProductBySlug } from "@/lib/store";
 const usageSteps = [
   "Bơm một lượng nhỏ ra lòng bàn tay",
   "Xoa nhẹ để làm ấm dầu",
-  "Thoa lên tóc, da khô hoặc vùng cần dưỡng",
+  "Thoa lên tóc, da khô hoặc vùng cần dùng",
   "Đậy kín và để nơi khô mát sau khi dùng",
 ];
 
@@ -18,11 +19,37 @@ export async function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
 
-export default async function ProductDetailPage({
-  params,
-}: {
+interface PageProps {
   params: Promise<{ slug: string }>;
-}) {
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await fetchProduct(slug);
+
+  if (!product) {
+    return {
+      title: "Sản phẩm không tồn tại | CoPuree",
+    };
+  }
+
+  const title = `${product.name} | Dầu Dừa Ép Lạnh Nguyên Chất CoPuree`;
+  const description = `Mua ${product.name} chính hãng CoPuree. Dầu dừa ép lạnh tinh khiết giữ trọn dưỡng chất, thiết kế hũ họng rộng chống đông đặc tiện lợi. Quét QR kiểm định lab.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: product.imageUrl, alt: product.name }],
+      type: "website",
+      locale: "vi_VN",
+    },
+  };
+}
+
+export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const product = await fetchProduct(slug);
   const localProduct = getProductBySlug(slug);
@@ -34,12 +61,33 @@ export default async function ProductDetailPage({
   const benefits = localProduct?.benefits ?? [
     "Ép lạnh để giữ hương dừa dịu tự nhiên",
     "Không pha trộn, không hương liệu",
-    "Dễ dùng cho tóc, da khô và massage nhẹ",
+    "Dễ dàng cho tóc, da khô và massage nhẹ",
     "Vòi bơm sạch tay, lấy lượng dầu vừa đủ",
   ];
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.imageUrl.startsWith("http") ? product.imageUrl : `https://copuree.vn${product.imageUrl}`,
+    "description": product.description || product.shortDescription,
+    "sku": product.slug,
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "VND",
+      "price": product.price,
+      "availability": "https://schema.org/InStock",
+      "url": `https://copuree.vn/san-pham/${product.slug}`
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#18271f]">
+      {/* Schema Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <SiteHeader />
       <section className="relative overflow-hidden border-b border-[#173d2f]/10">
         <Image
@@ -122,7 +170,7 @@ export default async function ProductDetailPage({
               Vì sao dễ dùng
             </p>
             <h2 className="mt-4 text-4xl font-black leading-tight text-[#173d2f]">
-              Đủ tự nhiên để an tâm, đủ gọn để dùng đều
+              Đủ tự nhiên để an tâm, đủ gọn để dễ dùng đều
             </h2>
           </div>
           <ul className="grid gap-0 border-y border-[#173d2f]/15">
