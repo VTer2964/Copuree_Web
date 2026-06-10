@@ -50,7 +50,7 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              href="/bai-viet/hoat-dong-thuong-hieu"
+              href="/tin-tuc?category=hoat-dong-thuong-hieu"
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#064737] px-7 text-sm font-black text-white shadow-lg shadow-[#12392d]/15 transition hover:-translate-y-0.5 hover:bg-[#b4762f]"
             >
               Xem hoạt động thương hiệu
@@ -77,7 +77,7 @@ export function FeaturedBrandCarousel({ articles }: { articles: ArticleSummary[]
         </div>
 
         <Link
-          href={`/bai-viet/${activeArticle.categorySlug}/${activeArticle.slug}`}
+          href={`/tin-tuc/${activeArticle.slug}`}
           className="group grid min-h-[520px] overflow-hidden rounded-[8px] border border-[#d8c7a7] bg-[#fffdf8] shadow-[0_28px_80px_rgba(18,57,45,0.12)] md:grid-cols-[1.05fr_0.95fr]"
         >
           <div className="relative min-h-[320px] overflow-hidden md:min-h-[520px]">

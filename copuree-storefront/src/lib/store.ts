@@ -81,28 +81,28 @@ export const productUseCases = [
     subtitle: "Mềm mượt và dễ chải hơn",
     text: "Dùng một lượng nhỏ trên thân tóc hoặc ủ trước khi gội để hỗ trợ giảm khô xơ.",
     image: "/images/copuree-pdf/pdf-page9-image1.png",
-    href: "/bai-viet/cham-soc-toc",
+    href: "/tin-tuc?category=cham-soc-toc",
   },
   {
     title: "Chăm sóc da",
     subtitle: "Dưỡng ẩm vùng da khô",
     text: "Thoa mỏng lên khuỷu tay, gót chân hoặc vùng da cần cảm giác mềm mại hơn.",
     image: "/images/copuree-pdf/pdf-page6-image1.png",
-    href: "/bai-viet/cham-soc-da",
+    href: "/tin-tuc?category=cham-soc-da",
   },
   {
     title: "Chăm sóc răng miệng",
     subtitle: "Routine oil pulling tối giản",
     text: "Dùng theo thói quen cá nhân để tạo cảm giác sạch miệng và hơi thở dễ chịu.",
     image: "/images/copuree-pdf/pdf-page8-image1.png",
-    href: "/bai-viet/cham-soc-rang-mieng",
+    href: "/tin-tuc?category=cham-soc-rang-mieng",
   },
   {
     title: "Nấu ăn và làm bánh",
     subtitle: "Hương dừa dịu cho căn bếp",
     text: "Phù hợp các món cần hương béo nhẹ, tự nhiên và dễ kết hợp.",
     image: "/images/copuree-pdf/pdf-page5-image2.png",
-    href: "/bai-viet/nau-an-lam-banh",
+    href: "/tin-tuc?category=nau-an-lam-banh",
   },
 ];
 

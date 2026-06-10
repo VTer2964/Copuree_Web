@@ -4,17 +4,17 @@ import { brand } from "@/lib/store";
 
 const exploreLinks = [
   { label: "Trang chủ", href: "/" },
-  { label: "Nội dung nổi bật", href: "/#noi-bat" },
-  { label: "Sản phẩm", href: "/#san-pham" },
-  { label: "Ứng dụng", href: "/#ung-dung" },
-  { label: "Câu chuyện", href: "/#cau-chuyen" },
+  { label: "Sản phẩm", href: "/san-pham" },
+  { label: "Về CoPuree", href: "/ve-copuree" },
+  { label: "Chứng nhận", href: "/chung-nhan" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Liên hệ", href: "/lien-he" },
 ];
 
 const articleLinks = [
-  { label: "Hoạt động thương hiệu", href: "/bai-viet/hoat-dong-thuong-hieu" },
-  { label: "Chăm sóc tóc", href: "/bai-viet/cham-soc-toc" },
-  { label: "Chăm sóc da", href: "/bai-viet/cham-soc-da" },
-  { label: "Nấu ăn và làm bánh", href: "/bai-viet/nau-an-lam-banh" },
+  { label: "Chăm sóc tóc", href: "/tin-tuc?category=cham-soc-toc" },
+  { label: "Chăm sóc da", href: "/tin-tuc?category=cham-soc-da" },
+  { label: "Nấu ăn và làm bánh", href: "/tin-tuc?category=nau-an-lam-banh" },
 ];
 
 export function SiteFooter() {

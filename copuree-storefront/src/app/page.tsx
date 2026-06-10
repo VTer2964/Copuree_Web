@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { FeaturedBrandCarousel } from "@/components/FeaturedBrandCarousel";
@@ -7,6 +8,18 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { fetchArticles, fetchProducts } from "@/lib/api";
 import { brand, productUseCases, proofPoints } from "@/lib/store";
+
+export const metadata: Metadata = {
+  title: "CoPuree | Dầu Dừa Nguyên Chất Ép Lạnh 100% Từ Thiên Nhiên",
+  description: "Dầu dừa ép lạnh tinh khiết giữ trọn dưỡng chất CoPuree. Cam kết minh bạch tuyệt đối qua mã QR lab test. Khám phá các dòng sản phẩm dầu dừa ủ tóc ngay!",
+  openGraph: {
+    title: "CoPuree | Dầu Dừa Nguyên Chất Ép Lạnh 100% Từ Thiên Nhiên",
+    description: "Dầu dừa ép lạnh tinh khiết giữ trọn dưỡng chất CoPuree. Cam kết minh bạch tuyệt đối qua mã QR lab test. Khám phá các dòng sản phẩm dầu dừa ủ tóc ngay!",
+    images: [{ url: "/images/copuree-pdf/pdf-page5-image2.png" }],
+    type: "website",
+    locale: "vi_VN",
+  },
+};
 
 const asset = {
   hero: "/images/copuree-pdf/pdf-page5-image2.png",
@@ -32,14 +45,50 @@ const ingredientNotes = [
 export default async function Home() {
   const [products, articles] = await Promise.all([fetchProducts(), fetchArticles()]);
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "CoPuree Việt Nam",
+    "image": "https://copuree.vn/images/brand/logo-copuree.png",
+    "@id": "https://copuree.vn/#localbusiness",
+    "url": "https://copuree.vn/",
+    "telephone": brand.hotline,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": brand.address,
+      "addressLocality": "Thủ Đức",
+      "addressRegion": "TP. Hồ Chí Minh",
+      "addressCountry": "VN"
+    },
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "21:00"
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#fbfaf6] text-[#12392d]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
       <SiteHeader />
 
       <section className="relative isolate min-h-[620px] overflow-hidden bg-[#fff7e8]">
         <Image
           src={asset.hero}
-          alt="CoPuree dầu dừa ép lạnh trong không gian tự nhiên"
+          alt="Trang chủ CoPuree giới thiệu chi tiết sản phẩm dầu dừa nguyên chất và dầu dừa ép lạnh 100% tự nhiên minh bạch tuyệt đối."
           fill
           priority
           className="object-cover object-[62%_center]"
@@ -57,10 +106,10 @@ export default async function Home() {
               className="mb-5 h-11 w-auto object-contain"
             />
             <h1 className="text-[42px] font-black leading-[0.98] text-[#12392d] sm:text-[56px] lg:text-[68px]">
-              Dầu dừa ép lạnh cho nhịp chăm sóc tự nhiên
+              Dầu Dừa Nguyên Chất Ép Lạnh 100% Từ Thiên Nhiên.
             </h1>
             <p className="mt-5 max-w-md text-base leading-7 text-[#324b40] sm:text-lg">
-              CoPuree giữ lại độ trong, hương dịu và cảm giác nguyên bản của trái dừa Việt cho tóc, da, căn bếp và những phút chăm mình.
+              Dầu dừa ép lạnh tinh khiết giữ trọn dưỡng chất. Cam kết minh bạch qua mã QR lab test.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -68,7 +117,7 @@ export default async function Home() {
                 href="/san-pham"
                 className="inline-flex items-center justify-center rounded-[6px] bg-[#064737] px-6 py-3 text-sm font-black text-white shadow-lg shadow-[#12392d]/15 transition hover:-translate-y-0.5 hover:bg-[#b4762f]"
               >
-                Khám phá sản phẩm
+                khám phá các dòng sản phẩm dầu dừa ủ tóc
               </Link>
               <a
                 href={brand.facebook}
@@ -96,15 +145,6 @@ export default async function Home() {
       <FeaturedBrandCarousel articles={articles} />
 
       <section id="san-pham" className="relative isolate overflow-hidden bg-[#f3f6ef] px-5 py-12 sm:px-8 sm:py-16 lg:px-[3vw]">
-        <div className="pointer-events-none absolute -right-16 top-0 h-[360px] w-[520px] opacity-20">
-          <Image
-            src="/images/copuree-pdf/pdf-page5-image1.png"
-            alt=""
-            fill
-            sizes="520px"
-            className="object-contain"
-          />
-        </div>
         <div className="relative mx-auto grid max-w-[1840px] gap-8 lg:grid-cols-[0.82fr_1.75fr] lg:items-start">
           <div className="relative min-h-[520px] overflow-hidden rounded-[24px] p-6 text-white sm:p-8 lg:p-10">
             <Image
@@ -158,7 +198,7 @@ export default async function Home() {
               Nội dung chăm sóc được chia theo từng nhu cầu cụ thể để khách truy cập đi thẳng đến bài viết họ quan tâm: tóc, da, răng miệng hoặc nấu ăn.
             </p>
             <Link
-              href="/bai-viet/cham-soc-toc"
+              href="/tin-tuc?category=cham-soc-toc"
               className="mt-7 inline-flex rounded-[6px] bg-[#064737] px-6 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#b4762f]"
             >
               Khám phá cách dùng
@@ -169,15 +209,6 @@ export default async function Home() {
       </section>
 
       <section id="cau-chuyen" className="relative isolate overflow-hidden bg-[#f3f6ef] px-5 py-12 sm:px-8 sm:py-16 lg:px-[3vw]">
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-[460px] w-[640px] opacity-18">
-          <Image
-            src="/images/copuree-pdf/pdf-page5-image1.png"
-            alt=""
-            fill
-            sizes="640px"
-            className="object-contain"
-          />
-        </div>
         <div className="relative mx-auto grid max-w-[1840px] gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <div className="relative min-h-[520px] overflow-hidden rounded-[24px] lg:min-h-[640px]">
             <Image
