@@ -24,8 +24,8 @@ const ingredientNotes = [
     text: "Quy trình hạn chế tác động nhiệt giúp giữ độ trong, mùi dừa nhẹ và cảm giác nguyên bản khi chạm lên da, tóc hoặc món ăn.",
   },
   {
-    title: "Đơn giản hóa routine",
-    text: "Một chai dầu dừa sạch, tinh gọn và dễ phối hợp với nhiều khoảnh khắc chăm sóc trong ngày.",
+    title: "Một chai, nhiều khoảnh khắc",
+    text: "Từ ngọn tóc, vùng da khô đến mùi thơm trong căn bếp, CoPuree hiện diện như một thói quen nhỏ nhưng đáng giữ lại.",
   },
 ];
 
@@ -109,7 +109,7 @@ export default async function Home() {
           <div className="relative min-h-[520px] overflow-hidden rounded-[24px] p-6 text-white sm:p-8 lg:p-10">
             <Image
               src={asset.productScene}
-              alt="CoPuree dầu dừa ép lạnh trong routine hằng ngày"
+              alt="CoPuree dầu dừa ép lạnh trong nhịp chăm sóc hằng ngày"
               fill
               className="object-cover opacity-40"
               sizes="(min-width: 1024px) 36vw, 100vw"
@@ -124,7 +124,7 @@ export default async function Home() {
                   Chọn dung tích đúng với nhịp sống của bạn
                 </h2>
                 <p className="mt-5 max-w-md text-base leading-7 text-white/82">
-                  Từ chai nhỏ để bắt đầu, chai 300ml cho routine hằng ngày đến dung tích lớn cho căn bếp và gia đình, CoPuree giữ mọi lựa chọn gọn gàng và dễ dùng.
+                  Từ chai nhỏ để làm quen, chai 300ml cho nhịp chăm sóc thường ngày đến dung tích lớn cho căn bếp và gia đình, CoPuree giữ mọi lựa chọn tinh gọn và dễ dùng.
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
@@ -155,7 +155,7 @@ export default async function Home() {
               Từ phòng tắm đến căn bếp, một chai mở ra bốn cách dùng
             </h2>
             <p className="mt-5 max-w-md text-base leading-7 text-[#50645a]">
-              Nội dung chăm sóc được chia theo từng nhu cầu cụ thể để khách truy cập đi thẳng đến bài viết họ quan tâm: tóc, da, răng miệng hoặc nấu ăn.
+              Mỗi chủ đề là một gợi ý thực tế để bạn dùng dầu dừa đúng lượng, đúng lúc và tận hưởng mùi hương dừa nhẹ theo cách tự nhiên hơn.
             </p>
             <Link
               href="/bai-viet/cham-soc-toc"
@@ -169,15 +169,6 @@ export default async function Home() {
       </section>
 
       <section id="cau-chuyen" className="relative isolate overflow-hidden bg-[#f3f6ef] px-5 py-12 sm:px-8 sm:py-16 lg:px-[3vw]">
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-[460px] w-[640px] opacity-18">
-          <Image
-            src="/images/copuree-pdf/pdf-page5-image1.png"
-            alt=""
-            fill
-            sizes="640px"
-            className="object-contain"
-          />
-        </div>
         <div className="relative mx-auto grid max-w-[1840px] gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
           <div className="relative min-h-[520px] overflow-hidden rounded-[24px] lg:min-h-[640px]">
             <Image

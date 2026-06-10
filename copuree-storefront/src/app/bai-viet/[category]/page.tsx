@@ -39,7 +39,7 @@ export default async function ArticleCategoryPage({
             {currentCategory.name}
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-[#5d6b61] sm:text-lg">
-            Gợi ý sử dụng dầu dừa ép lạnh CoPuree trong routine hằng ngày, được nhóm theo từng nhu cầu chăm sóc.
+            Những cách dùng dầu dừa ép lạnh được biên tập theo từng nhu cầu: chăm tóc, làm mềm da khô, chăm sóc răng miệng có cân nhắc và thêm hương dừa nhẹ cho căn bếp.
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             {categories.map((item) => (

@@ -14,6 +14,7 @@ const articleLinks = [
   { label: "Hoạt động thương hiệu", href: "/bai-viet/hoat-dong-thuong-hieu" },
   { label: "Chăm sóc tóc", href: "/bai-viet/cham-soc-toc" },
   { label: "Chăm sóc da", href: "/bai-viet/cham-soc-da" },
+  { label: "Chăm sóc răng miệng", href: "/bai-viet/cham-soc-rang-mieng" },
   { label: "Nấu ăn và làm bánh", href: "/bai-viet/nau-an-lam-banh" },
 ];
 
@@ -96,7 +97,7 @@ export function SiteFooter() {
 
           <div className="flex flex-col gap-3 border-t border-white/14 pt-5 text-xs text-white/52 sm:flex-row sm:items-center sm:justify-between">
             <p>© 2026 CoPuree. All rights reserved.</p>
-            <p>Dầu dừa ép lạnh CoPuree - tự nhiên trong từng routine.</p>
+            <p>Dầu dừa ép lạnh CoPuree - tự nhiên trong từng thói quen nhỏ.</p>
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@ export default async function ProductsPage() {
       <section className="bg-[#fbfaf6] px-5 py-14 sm:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <h2 className="max-w-xl text-3xl font-black leading-tight text-[#173d2f]">
-            Cần tư vấn cách dùng CoPuree trong routine hằng ngày?
+            Cần tư vấn cách dùng CoPuree trong thói quen hằng ngày?
           </h2>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
             <a href={brand.hotlineHref} className="inline-flex justify-center rounded-[6px] bg-[#173d2f] px-6 py-3 text-sm font-black text-white">

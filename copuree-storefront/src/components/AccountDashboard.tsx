@@ -108,7 +108,7 @@ export function AccountDashboard() {
       setDevOtp(result.devOtp);
       setOtp("");
       setStep("otp");
-      setNotice("Mã OTP đã được tạo. Bản demo dùng mã hiển thị bên dưới.");
+      setNotice("Mã OTP đã được tạo. Vui lòng dùng mã hiển thị bên dưới để tiếp tục.");
       window.localStorage.setItem(phoneStorageKey, result.phone);
     } catch (error) {
       setError(
@@ -169,9 +169,8 @@ export function AccountDashboard() {
           Đăng nhập bằng số điện thoại
         </h2>
         <p className="mt-3 text-sm leading-6 text-[#5d675f]">
-          Khách hàng xác minh bằng OTP để xem lịch sử mua hàng, địa chỉ giao
-          hàng và điểm tích lũy. Hiện tại OTP là bản demo, sẵn sàng thay bằng
-          SMS hoặc Zalo ZNS khi triển khai thật.
+          Xác minh bằng OTP để xem lịch sử mua hàng, địa chỉ giao hàng và điểm
+          tích lũy trong không gian khách hàng riêng của CoPuree.
         </p>
 
         {step === "otp" ? (
@@ -197,7 +196,7 @@ export function AccountDashboard() {
             </label>
             {devOtp ? (
               <div className="border border-[#173d2f]/15 bg-[#eef2e7] px-4 py-3 text-sm font-bold text-[#173d2f]">
-                OTP demo: {devOtp}
+                Mã OTP của bạn: {devOtp}
               </div>
             ) : null}
             <FormMessage notice={notice} error={error} />

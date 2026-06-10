@@ -41,10 +41,10 @@ export const products = [
     image: "/images/catalog/catalog-page2-image2.png",
     heroImage: "/images/catalog/catalog-page2-image2.png",
     description:
-      "Dung tích chính cho routine hằng ngày: đủ đều đặn, đủ đẹp để đặt cạnh bàn trang điểm hoặc góc phòng tắm.",
+      "Dung tích chính cho nhịp chăm sóc hằng ngày: đủ đều đặn, đủ đẹp để đặt cạnh bàn trang điểm hoặc góc phòng tắm.",
     displayDescription:
       "Dầu dừa ép lạnh từ trái dừa Việt Nam, giữ độ trong, hương thơm dịu và cảm giác nguyên bản.",
-    tags: ["Routine hằng ngày", "300ml", "Nguyên chất", "Không hóa chất"],
+    tags: ["Dùng hằng ngày", "300ml", "Nguyên chất", "Không hóa chất"],
     benefits: [
       "Ép lạnh để giữ hương dừa tự nhiên",
       "Không pha trộn, không hương liệu",
@@ -92,8 +92,8 @@ export const productUseCases = [
   },
   {
     title: "Chăm sóc răng miệng",
-    subtitle: "Routine oil pulling tối giản",
-    text: "Dùng theo thói quen cá nhân để tạo cảm giác sạch miệng và hơi thở dễ chịu.",
+    subtitle: "Nghi thức súc dầu buổi sáng",
+    text: "Dùng có cân nhắc để thêm cảm giác sạch miệng, không thay thế đánh răng và chăm sóc nha khoa.",
     image: "/images/copuree-pdf/pdf-page8-image1.png",
     href: "/bai-viet/cham-soc-rang-mieng",
   },

@@ -260,43 +260,43 @@ public static class SeedData
         {
             new
             {
-                Title = "Cách dùng dầu dừa ép lạnh cho tóc khô xơ",
+                Title = "Ủ tóc khô xơ với dầu dừa ép lạnh sao cho tóc mềm mà không bết",
                 Slug = "cach-dung-dau-dua-ep-lanh-cho-toc-kho-xo",
                 CategorySlug = "cham-soc-toc",
                 CategoryName = "Chăm sóc tóc",
-                Excerpt = "Một routine đơn giản với dầu dừa ép lạnh để tóc mềm hơn mà không tạo cảm giác nặng.",
+                Excerpt = "Bí quyết dùng dầu dừa như một bước ủ trước khi gội để tóc khô xơ có cảm giác mềm, bóng và dễ vào nếp hơn.",
                 ImageUrl = "/images/copuree-pdf/pdf-page9-image1.png",
-                Content = "Dầu dừa ép lạnh phù hợp nhất khi dùng với lượng nhỏ. Bạn có thể làm ấm dầu trong lòng bàn tay, thoa lên thân tóc trước khi gội hoặc dùng rất ít ở phần ngọn tóc sau khi tóc gần khô.\n\nVới tóc mỏng, nên bắt đầu từ một đến hai giọt để tránh cảm giác bết."
+                Content = "Dầu dừa được yêu thích trong chăm sóc tóc vì kết cấu giàu acid béo, dễ bám lên thân tóc và giúp sợi tóc có cảm giác mềm mượt hơn sau khi gội. Với tóc khô xơ, phần cần chăm nhất thường không phải da đầu mà là thân tóc và ngọn tóc - nơi dễ mất độ bóng, dễ rối và dễ gãy khi chải.\n\nCách dùng đẹp nhất là ủ trước khi gội. Lấy một lượng nhỏ dầu dừa CoPuree, làm ấm giữa hai lòng bàn tay rồi vuốt từ giữa thân tóc xuống ngọn tóc. Nếu tóc dày hoặc tẩy nhuộm, có thể tăng lượng từng chút; nếu tóc mỏng, hãy bắt đầu thật ít để tránh nặng tóc. Ủ trong 15-30 phút, sau đó gội sạch bằng dầu gội dịu nhẹ. Với phần ngọn tóc rất khô, bạn có thể xoa một giọt dầu cực mỏng khi tóc gần khô để tạo độ bóng nhẹ.\n\nTần suất phù hợp là 1-2 lần mỗi tuần. Không cần dùng nhiều trong một lần; hiệu quả nằm ở việc dùng đều, đúng vùng tóc cần chăm và xả sạch sau khi ủ. Nếu da đầu dễ dầu hoặc dễ nổi mụn ở viền tóc, hãy tránh thoa sát chân tóc. Một chai dầu dừa ép lạnh nhỏ gọn có thể trở thành bước chăm tóc cuối tuần: không cầu kỳ, không nặng mùi, chỉ vừa đủ để mái tóc nhìn mềm và có sức sống hơn."
             },
             new
             {
-                Title = "Dưỡng ẩm vùng da khô bằng dầu dừa như thế nào",
+                Title = "Làm mềm vùng da khô bằng dầu dừa: ít thôi nhưng đúng lúc",
                 Slug = "duong-am-vung-da-kho-bang-dau-dua",
                 CategorySlug = "cham-soc-da",
                 CategoryName = "Chăm sóc da",
-                Excerpt = "Gợi ý dùng dầu dừa cho khuỷu tay, gót chân và những vùng da cần cảm giác mềm mại hơn.",
+                Excerpt = "Một cách dùng tinh gọn cho khuỷu tay, gót chân, đầu gối và những vùng da thường khô ráp khi thời tiết thay đổi.",
                 ImageUrl = "/images/copuree-pdf/pdf-page6-image1.png",
-                Content = "Sau khi tắm hoặc rửa tay, khi da còn hơi ẩm, lấy một lượng dầu nhỏ và thoa mỏng lên vùng da khô. Không cần dùng nhiều.\n\nCách dùng đều đặn với lượng vừa phải giúp bề mặt da có cảm giác mềm hơn và dễ chịu hơn trong routine tối giản."
+                Content = "Dầu dừa không cần xuất hiện như một bước chăm da phức tạp. Khi dùng đúng lượng, dầu dừa hoạt động như một lớp làm mềm và khóa ẩm nhẹ trên bề mặt, đặc biệt phù hợp với những vùng da dày, dễ khô như khuỷu tay, đầu gối, gót chân hoặc mu bàn tay.\n\nThời điểm lý tưởng là sau khi tắm hoặc rửa tay, khi da còn hơi ẩm. Lấy một lượng rất nhỏ dầu dừa CoPuree, xoa đều trong lòng bàn tay rồi massage mỏng lên vùng da khô trong 30-60 giây. Với gót chân, có thể thoa trước khi ngủ và mang vớ mỏng để dầu có thời gian thấm vào lớp da khô. Với tay, chỉ cần một lớp thật mỏng để da mềm hơn mà không để lại cảm giác trơn nặng.\n\nDầu dừa có thể không phù hợp với mọi loại da mặt, đặc biệt là da dễ bít tắc hoặc đang có mụn. Vì vậy, CoPuree khuyên bạn bắt đầu ở vùng da cơ thể trước, thử trên một vùng nhỏ và quan sát phản ứng của da. Khi dùng đúng chỗ, đúng lượng, dầu dừa trở thành một chi tiết nhỏ nhưng dễ thương trong góc chăm sóc cá nhân: vừa đủ mềm, vừa đủ thơm, vừa đủ tự nhiên."
             },
             new
             {
-                Title = "Oil pulling với dầu dừa ép lạnh cho người mới bắt đầu",
+                Title = "Oil pulling với dầu dừa: thói quen buổi sáng cần hiểu đúng",
                 Slug = "oil-pulling-voi-dau-dua-ep-lanh",
                 CategorySlug = "cham-soc-rang-mieng",
                 CategoryName = "Chăm sóc răng miệng",
-                Excerpt = "Những lưu ý cơ bản khi đưa oil pulling vào thói quen chăm sóc răng miệng buổi sáng.",
+                Excerpt = "Oil pulling có thể là một nghi thức chăm sóc cá nhân, nhưng không thay thế đánh răng, dùng chỉ nha khoa hay khám răng định kỳ.",
                 ImageUrl = "/images/copuree-pdf/pdf-page8-image1.png",
-                Content = "Oil pulling là thói quen súc dầu trong khoang miệng theo routine cá nhân. Với người mới bắt đầu, nên dùng lượng nhỏ, thực hiện trong thời gian ngắn rồi tăng dần nếu thấy phù hợp.\n\nKhông nuốt dầu sau khi dùng và vẫn duy trì đánh răng, vệ sinh răng miệng như bình thường."
+                Content = "Oil pulling là thói quen súc một lượng nhỏ dầu ăn được trong khoang miệng trong vài phút. Nhiều người chọn dầu dừa vì hương dễ chịu và cảm giác sạch miệng sau khi súc. Tuy vậy, các khuyến nghị nha khoa hiện nay vẫn nhấn mạnh rằng oil pulling không thay thế việc đánh răng hai lần mỗi ngày với kem đánh răng có fluoride, làm sạch kẽ răng và khám nha khoa định kỳ.\n\nNếu muốn thử, hãy bắt đầu nhẹ nhàng. Dùng khoảng 1 thìa cà phê dầu dừa CoPuree, súc chậm trong 3-5 phút rồi nhổ vào khăn giấy hoặc thùng rác, không nhổ xuống bồn rửa vì dầu có thể gây bám đường ống. Sau đó súc miệng lại bằng nước và đánh răng như bình thường. Khi đã quen, bạn có thể tăng thời gian, nhưng không cần ép bản thân phải súc quá lâu.\n\nĐiều quan trọng nhất là không nuốt dầu sau khi súc và không dùng oil pulling để xử lý đau răng, viêm nướu, sâu răng hoặc hơi thở có mùi kéo dài. Những trường hợp đó cần được nha sĩ kiểm tra. Hãy xem oil pulling như một nghi thức chậm rãi vào buổi sáng: thêm cảm giác tươi mới, thêm mùi dừa dịu, nhưng vẫn đứng sau các bước chăm sóc răng miệng đã được chứng minh."
             },
             new
             {
-                Title = "Dùng dầu dừa trong nấu ăn và làm bánh hằng ngày",
+                Title = "Dầu dừa trong căn bếp: thêm hương béo nhẹ cho món quen",
                 Slug = "dung-dau-dua-trong-nau-an-va-lam-banh",
                 CategorySlug = "nau-an-lam-banh",
                 CategoryName = "Nấu ăn và làm bánh",
-                Excerpt = "Cách dùng dầu dừa để tạo hương béo nhẹ trong các món đơn giản tại nhà.",
+                Excerpt = "Từ bánh chuối, granola đến món áp chảo nhẹ, dầu dừa giúp căn bếp có thêm một lớp hương thơm ấm và tự nhiên.",
                 ImageUrl = "/images/copuree-pdf/pdf-page5-image2.png",
-                Content = "Dầu dừa có hương béo nhẹ, phù hợp với một số món bánh, granola, món áp chảo nhẹ hoặc công thức cần mùi dừa tự nhiên.\n\nKhi dùng trong căn bếp, hãy bắt đầu với lượng nhỏ để kiểm soát hương vị và kết hợp với nguyên liệu có độ ngọt hoặc béo tự nhiên."
+                Content = "Trong nấu ăn, dầu dừa hấp dẫn nhất ở hương thơm. Chỉ một lượng nhỏ cũng có thể làm món bánh, granola, khoai lang nướng, pancake hoặc món áp chảo nhẹ có cảm giác béo ấm và gần gũi hơn. Với những công thức có chuối, yến mạch, cacao, mè, đậu phộng hoặc trái cây nhiệt đới, hương dừa thường hòa vào rất tự nhiên.\n\nBạn có thể dùng dầu dừa CoPuree để thay một phần chất béo trong bánh hoặc dùng một lớp mỏng khi áp chảo ở nhiệt độ vừa. Với món nướng, hãy làm tan dầu dừa trước nếu công thức cần chất béo dạng lỏng; với granola, trộn dầu cùng mật ong hoặc đường nâu để yến mạch áo đều và thơm hơn. Vì dầu dừa có hương riêng, hãy bắt đầu bằng lượng nhỏ, nếm và điều chỉnh theo khẩu vị gia đình.\n\nDầu dừa nguyên chất thường phù hợp hơn với nướng bánh, trộn granola hoặc áp chảo nhẹ, không phải lựa chọn tối ưu cho chiên ngập dầu hay nhiệt quá cao trong thời gian dài. Khi được dùng đúng món, dầu dừa không lấn át nguyên liệu mà chỉ để lại một hậu vị mềm, thơm và có chút gợi nhớ đến căn bếp nhiệt đới."
             },
             new
             {
@@ -306,7 +306,7 @@ public static class SeedData
                 CategoryName = "Hoạt động thương hiệu",
                 Excerpt = "Một cột mốc mới khi CoPuree bắt đầu được trưng bày trực tiếp tại các điểm bán chọn lọc.",
                 ImageUrl = "/images/copuree-pdf/pdf-page11-image1.png",
-                Content = "CoPuree đang mở rộng sự hiện diện tại các cửa hàng đối tác để khách hàng có thể nhìn, cầm và tìm hiểu sản phẩm trực tiếp.\n\nĐây là bước đi quan trọng trong hành trình đưa dầu dừa ép lạnh đến gần hơn với những routine chăm sóc hằng ngày. Admin có thể thay nội dung mẫu này bằng danh sách cửa hàng cụ thể như cửa hàng A, cửa hàng B, cửa hàng C, hình ảnh trưng bày và các hoạt động nổi bật vừa diễn ra."
+                Content = "CoPuree bắt đầu xuất hiện tại những điểm bán đối tác đầu tiên để khách hàng có thể nhìn bao bì, cầm sản phẩm trên tay và cảm nhận trực tiếp tinh thần của thương hiệu: sạch, tinh gọn và gần gũi với đời sống hằng ngày.\n\nVới CoPuree, mỗi điểm bán không chỉ là nơi trưng bày một chai dầu dừa ép lạnh. Đó còn là cơ hội để khách hàng hỏi thêm về cách dùng cho tóc, da, răng miệng hoặc căn bếp; là nơi sản phẩm bước ra khỏi màn hình và trở thành một lựa chọn thật trong nhịp mua sắm thường ngày.\n\nSự hiện diện đầu tiên này là một cột mốc nhỏ nhưng có ý nghĩa. CoPuree sẽ tiếp tục chọn lọc các đối tác phù hợp, ưu tiên không gian bán hàng chỉn chu và có khả năng tư vấn đúng tinh thần sản phẩm, để dầu dừa ép lạnh đến gần hơn với những người yêu lối sống tự nhiên."
             }
         };
 
